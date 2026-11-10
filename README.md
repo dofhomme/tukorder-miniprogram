@@ -6,6 +6,10 @@
 - 语言：TypeScript
 - 当前源码版本：2.0.17（构建 166）
 
+## 演示
+
+[https://imageok.cn](https://imageok.cn)
+
 ## 打开
 
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)

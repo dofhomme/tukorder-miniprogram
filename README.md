@@ -10,6 +10,8 @@
 
 [https://imageok.cn](https://imageok.cn)
 
+本仓库是微信小程序。图可开单打印同时有 App 版、桌面版和 Web 端，可在演示站查看和使用。
+
 ## 打开
 
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)

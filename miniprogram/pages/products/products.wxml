@@ -1,0 +1,131 @@
+<wxs src="../../utils/media.wxs" module="media" /><view class="page {{rtl ? 'rtl' : ''}} {{agentMode ? 'agent-skin' : ''}}"><network-tip /><view class="page-head {{agentMode ? 'with-brand' : ''}}"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view class="capsule-gap" style="height: {{navBarHeight}}px;"></view><view class="agent-brand-row" wx:if="{{agentMode}}"><image class="agent-brand-logo" src="{{media.url('imageok-logo-agent.png')}}" mode="aspectFit" /><view class="agent-brand-info"><text class="agent-brand-title">{{i18n.agentHello}}</text><text class="agent-brand-sub" wx:if="{{agentShopName}}">{{agentShopName}}{{agentCustomerName ? ' · ' + agentCustomerName : ''}}</text></view></view></view><block wx:if="{{agentMode}}"><view class="agent-cat {{agentMerchantExpired ? 'is-expired' : ''}}"><view class="agent-plaza-entry" bindtap="onOpenPlaza" hover-class="agent-plaza-entry-hover"><text class="agent-plaza-entry-t">{{i18n.plazaTitle}}</text><text class="agent-plaza-entry-s">{{i18n.plazaEntry}}</text><text class="agent-plaza-entry-a">›</text></view><view class="agent-expire" wx:if="{{agentMerchantExpired}}"><text class="agent-expire-t">{{i18n.merchantExpiredTitle}}</text><text class="agent-expire-s">{{i18n.merchantExpiredHint}}</text><button class="agent-expire-btn" open-type="share">{{i18n.merchantRenewForward}}</button></view><text class="agent-closed" wx:if="{{agentClosed && !agentMerchantExpired}}">{{i18n.ordersClosedLook}}</text><view class="agent-tabs"><view class="agent-tab {{agentTab === 'all' ? 'on' : ''}}" data-tab="all" bindtap="onAgentTab">{{i18n.catalogAll}}</view><view class="agent-tab {{agentTab === 'new' ? 'on' : ''}}" data-tab="new" bindtap="onAgentTab">{{i18n.catalogNew}}</view><view class="agent-tab link" bindtap="onOpenFolders">{{i18n.lookFolder}}</view></view><view class="agent-search"><input placeholder="{{i18n.searchGoods}}" value="{{keyword}}" bindinput="onAgentKeyword" /><text class="agent-who-link" bindtap="onSearchByImage">{{searchingImage ? i18n.searchingImage : i18n.searchByImage}}</text><text class="agent-who-link" bindtap="onWhoHas">{{i18n.whoHas}}</text></view><scroll-view
+        scroll-y
+        class="agent-list-scroll"
+        enhanced
+        show-scrollbar="{{false}}"
+        lower-threshold="80"
+        bindscrolltolower="onAgentReachBottom"
+      ><view class="agent-empty" wx:if="{{loading}}">{{i18n.loadingCatalog}}</view><view class="agent-empty" wx:elif="{{!agentShown.length}}">{{imageSearchOn ? i18n.searchByImageEmpty : i18n.noMatchGoods}}</view><view class="agent-grid" wx:else><view class="agent-card" wx:for="{{agentShown}}" wx:key="rowKey"><text class="agent-shop-tag" wx:if="{{agentAllShops && item.shopName}}">{{item.shopName}}</text><view
+              class="agent-cover-wrap"
+              data-code="{{item.code}}"
+              catchtap="onAgentPreviewImage"
+              catchlongpress="onAgentRestock"
+            ><image
+                class="agent-cover"
+                src="{{item.coverUrl}}"
+                mode="aspectFill"
+                wx:if="{{item.coverUrl}}"
+                data-code="{{item.code}}"
+                data-full="{{item.coverFullUrl}}"
+                binderror="onCoverError"
+              /><view class="agent-cover-ph" wx:else>{{item.code}}</view><text class="agent-new" wx:if="{{item.isNewArrival}}">{{i18n.newArrival}}</text><text class="agent-watch" wx:if="{{item.watching}}">{{i18n.restockWatchOn}}</text><text class="agent-thumb-n" wx:if="{{item.imageCount > 1}}">{{item.imageCount}}</text><text class="agent-stock {{item.stockLevel}}">{{item.stockLabel}}</text><view class="agent-play" wx:if="{{item.hasVideo}}" data-code="{{item.code}}" catchtap="onPlayVideo">▶</view></view><view class="agent-card-main"><text class="agent-code">{{item.code}}</text><text class="agent-price">{{i18n.priceAgent}} ¥{{item.priceLabel}}</text></view><view class="agent-card-acts"><text class="agent-act" data-code="{{item.code}}" catchtap="onAgentShare">{{i18n.shareLook}}</text><text class="agent-act" data-code="{{item.code}}" catchtap="onAgentWish">{{i18n.wishList}}</text><text class="agent-act" data-code="{{item.code}}" catchtap="onAgentAddFolder">{{i18n.addToFolder}}</text><text class="agent-act primary" data-code="{{item.code}}" catchtap="onAgentTapProduct">{{i18n.addToCart}}</text></view></view></view><view class="load-more" wx:if="{{agentShown.length}}"><text wx:if="{{agentHasMore}}">{{i18n.loadMoreHint}}</text><text wx:else>{{i18n.shownAll}} {{agentCount}}</text></view></scroll-view><view class="agent-cart" wx:if="{{agentCart.length}}"><view class="agent-cline" wx:for="{{agentCart}}" wx:key="key"><view class="agent-cline-t"><text>{{item.code}} {{item.spec}}</text><text class="agent-muted">¥{{item.subLabel}}</text></view><view class="agent-spin"><text class="agent-spin-btn" data-key="{{item.key}}" data-dir="-1" catchtap="onAgentCartQty">−</text><text class="agent-spin-n">{{item.qty}}</text><text class="agent-spin-btn" data-key="{{item.key}}" data-dir="1" catchtap="onAgentCartQty">＋</text></view></view></view></view><view class="agent-bar" wx:if="{{!agentClosed}}"><text>{{i18n.selectedCount}} {{agentCartCount}} {{i18n.unitPiece}} · ¥{{agentCartAmt}}</text><view class="agent-btn {{!agentCartCount || submitting ? 'off' : ''}}" bindtap="onAgentSubmit">
+        {{submitting ? i18n.submitting : i18n.submitToShop}}
+      </view></view><view class="mask" wx:if="{{pickOn}}" catchtap="onPickClose"><view class="sheet" catchtap="noop"><text class="title">{{pickName}}</text><scroll-view wx:if="{{pickImages.length}}" scroll-x class="pick-imgs"><image
+            wx:for="{{pickImages}}"
+            wx:key="*this"
+            class="pick-img"
+            src="{{item}}"
+            mode="aspectFill"
+            data-url="{{item}}"
+            catchtap="onAgentPreviewPick"
+          /></scroll-view><text class="hint">{{i18n.skuColor}}</text><view class="chips"><text
+            class="chip {{pickColor === item ? 'on' : ''}}"
+            wx:for="{{pickColors}}"
+            wx:key="*this"
+            data-v="{{item}}"
+            catchtap="onPickColor"
+          >{{item}}</text></view><text class="hint">{{i18n.skuSize}}</text><view class="chips"><text
+            class="chip {{pickSize === item ? 'on' : ''}}"
+            wx:for="{{pickSizes}}"
+            wx:key="*this"
+            data-v="{{item}}"
+            catchtap="onPickSize"
+          >{{item}}</text></view><view class="agent-spin big"><text class="agent-spin-btn" data-dir="-1" catchtap="onPickQty">−</text><text class="agent-spin-n">{{pickQty}}</text><text class="agent-spin-btn" data-dir="1" catchtap="onPickQty">＋</text></view><view class="agent-btn sheet-btn" bindtap="onPickAdd">{{i18n.addToCart}}</view></view></view><view class="mask" wx:if="{{shipOn}}" catchtap="onShipClose"><view class="sheet" catchtap="noop"><text class="title">{{i18n.fillShipTo}}</text><textarea
+          class="ship-ipt ship-one"
+          placeholder="{{i18n.shipToOnePh}}"
+          placeholder-class="ship-ph"
+          value="{{shipText}}"
+          bindinput="onShipText"
+          maxlength="200"
+          auto-height="{{false}}"
+          show-confirm-bar="{{false}}"
+          adjust-position="{{true}}"
+        /><view class="switch-row ship-urg"><text>{{i18n.urgentShip}}</text><switch checked="{{shipUrgent}}" color="#0f766e" bindchange="onShipUrgent" /></view><view class="agent-btn sheet-btn {{submitting ? 'off' : ''}}" bindtap="onShipConfirm">{{i18n.confirmShip}}</view></view></view><view class="mask" wx:if="{{folderPickOn}}" catchtap="onFolderPickClose"><view class="sheet" catchtap="noop"><text class="title">{{i18n.addToFolder}}</text><view class="folder-row" wx:for="{{folderList}}" wx:key="id" data-id="{{item.id}}" bindtap="onPickFolder"><text>{{item.kind === 'wish' ? i18n.wishList : item.title}}</text><text class="folder-n">{{item.itemCount || 0}}</text></view><view class="agent-btn sheet-btn ghost" bindtap="onCreateFolderFromPick">{{i18n.newFolder}}</view></view></view></block><view class="guest-empty" wx:elif="{{guestMode}}"><text class="guest-empty-t">{{i18n.prodNeedLogin}}</text><text class="guest-empty-d">{{i18n.prodNeedLoginD}}</text><button class="guest-empty-btn" bindtap="onGuestBind">{{i18n.goBind}}</button></view><block wx:else><view class="merchant-body"><view class="tool-row"><view class="tool-link" bindtap="onAdd" wx:if="{{isOwner}}" hover-stay-time="50" hover-start-time="0"><text class="tool-ico add">＋</text><text>{{i18n.add}}</text></view><view class="tool-link" bindtap="onRefresh" hover-stay-time="50" hover-start-time="0"><image class="tool-ico-img" src="/assets/icons/import-data.svg" mode="aspectFit" /><text>{{i18n.syncData}}</text></view><tutorial-link scene="goods" /><view class="search-box"><text class="search-ico">🔍</text><input
+        class="search"
+        placeholder="{{i18n.searchCode}}"
+        placeholder-class="search-ph"
+        value="{{keyword}}"
+        bindinput="onKeyword"
+        confirm-type="search"
+        hold-keyboard="{{true}}"
+      /><text class="search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword" hover-stay-time="50" hover-start-time="0">✕</text></view></view><view class="filter-row"><view class="outline-btn" bindtap="onPickSort" hover-stay-time="50" hover-start-time="0"><text class="ob-ico">⇅</text><text>{{i18n.sort}}</text></view><view class="cat-select" bindtap="onPickCategory" hover-stay-time="50" hover-start-time="0"><text class="cat-txt">{{categoryLabel}}</text><text class="cat-arrow">▼</text></view><view class="outline-btn" bindtap="onManageCategory" wx:if="{{isOwner}}" hover-stay-time="50" hover-start-time="0"><image class="ob-ico-img" src="/assets/icons/edit-outlined.svg" mode="aspectFit" /><text>{{i18n.category}}</text></view><view class="view-switch"><view class="vs {{viewMode === 'table' ? 'on' : ''}}" data-mode="table" bindtap="onViewMode" hover-stay-time="50" hover-start-time="0"><image class="vs-ico" src="{{viewMode === 'table' ? '/assets/icons/view-table-on.svg' : '/assets/icons/view-table.svg'}}" mode="aspectFit" /></view><view class="vs {{viewMode === 'thumb' ? 'on' : ''}}" data-mode="thumb" bindtap="onViewMode" hover-stay-time="50" hover-start-time="0"><image class="vs-ico" src="{{viewMode === 'thumb' ? '/assets/icons/view-thumb-on.svg' : '/assets/icons/view-thumb.svg'}}" mode="aspectFit" /></view></view></view><view class="summary"><text class="sum-styles">{{i18n.styleCount}}: {{styleCountLabel}}</text><text>{{i18n.stockTotal}}: {{totalStockLabel}}</text><text class="sum-amt">{{i18n.amountTotal}}: {{totalAmountLabel}}</text></view><scroll-view
+    scroll-y
+    class="list-scroll"
+    enhanced
+    show-scrollbar="{{true}}"
+    lower-threshold="100"
+    bindscrolltolower="onListReachBottom"
+  ><view wx:if="{{viewMode === 'thumb'}}" class="thumb-grid"><view
+        class="thumb-card"
+        wx:for="{{list}}"
+        wx:key="code"
+        data-code="{{item.code}}"
+        bindtap="onEdit"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><view class="thumb-cover"><image
+            wx:if="{{item.coverCardUrl}}"
+            class="thumb-img"
+            src="{{item.coverCardUrl}}"
+            mode="aspectFill"
+            data-code="{{item.code}}"
+            data-full="{{item.coverFullUrl}}"
+            data-field="coverCardUrl"
+            binderror="onCoverError"
+            catchtap="onPreviewGallery"
+          /><view class="thumb-ph" wx:else>ImageOk</view></view><view class="thumb-code-row"><image wx:if="{{item.linked}}" class="link-mark" src="/assets/icons/pe-link.svg" mode="aspectFit" /><text class="thumb-code">{{item.code}}</text></view><view class="thumb-foot"><text class="thumb-meta">¥{{item.priceLabel}} · {{item.salesLabel}}</text><image
+            wx:if="{{isOwner}}"
+            class="edit-ico"
+            src="/assets/icons/edit-outlined.svg"
+            mode="aspectFit"
+            data-code="{{item.code}}"
+            catchtap="onEdit"
+          /></view></view></view><scroll-view
+      wx:else
+      scroll-x
+      class="table-h-scroll"
+      enhanced
+      show-scrollbar="{{true}}"
+      enable-flex="{{true}}"
+    ><view class="table {{indexFolded ? 'index-fold' : ''}}"><view class="thead"><view class="c idx"><view class="fold-no" catchtap="onToggleIndexCol" hover-class="fold-no-on" hover-stay-time="50" hover-start-time="0"><view class="fold-chev {{indexFolded ? 'out' : ''}}"></view></view></view><view class="c code"><text>{{i18n.colCode}}({{count}})</text></view><view class="c unit"><text>{{i18n.colUnit}}</text></view><view class="c price"><text>{{i18n.colPrice}}</text></view><view class="c sales" catchtap="onSalesSort" hover-class="sales-head-on" hover-stay-time="50" hover-start-time="0"><text>{{i18n.colSales}}</text><view class="sales-sort {{sort === 'salesDesc' ? 'up' : ''}}"><view class="sales-tri"></view></view></view><view class="c stock"><text>{{i18n.colStock}}</text></view></view><view
+          class="trow {{index % 2 === 1 ? 'alt' : ''}} {{item.hasSku ? 'has-sku' : ''}}"
+          wx:for="{{list}}"
+          wx:key="code"
+          data-code="{{item.code}}"
+          bindtap="onEdit"
+         hover-stay-time="50" hover-start-time="0"><view class="c idx"><text class="idx-num" wx:if="{{!indexFolded}}">{{index + 1}}</text></view><view class="c code"><image
+              wx:if="{{item.coverUrl}}"
+              class="prod-thumb"
+              src="{{item.coverUrl}}"
+              mode="aspectFill"
+              data-code="{{item.code}}"
+              data-full="{{item.coverFullUrl}}"
+              binderror="onCoverError"
+              catchtap="onPreviewGallery"
+            /><block wx:if="{{item.hasSku}}"><image wx:if="{{item.linked}}" class="link-mark" src="/assets/icons/pe-link.svg" mode="aspectFit" /><text class="code-t">{{item.code}}</text><text class="sku-tag">{{item.skuHint}}</text></block><block wx:else><view
+                class="stk-btn minus {{item.stockNum <= 0 ? 'disabled' : ''}}"
+                wx:if="{{isOwner}}"
+                data-code="{{item.code}}"
+                data-op="minus"
+                catchtap="onAdjustStock"
+               hover-stay-time="50" hover-start-time="0">−</view><image wx:if="{{item.linked}}" class="link-mark" src="/assets/icons/pe-link.svg" mode="aspectFit" /><text class="code-t">{{item.code}}</text><view
+                class="stk-btn plus"
+                wx:if="{{isOwner}}"
+                data-code="{{item.code}}"
+                data-op="plus"
+                catchtap="onAdjustStock"
+               hover-stay-time="50" hover-start-time="0">＋</view></block></view><view class="c unit"><text>{{item.unit || i18n.unitPiece}}</text></view><view class="c price"><text class="price-t">{{item.priceLabel}}</text></view><view class="c sales"><text>{{item.salesLabel}}</text></view><view class="c stock"><text
+              class="stock-t {{isOwner ? 'link' : ''}}"
+              data-code="{{item.code}}"
+              catchtap="onEditStock"
+             hover-stay-time="50" hover-start-time="0">{{item.stockLabel}}            </text></view></view></view></scroll-view><view wx:if="{{!list.length}}" class="empty"><text>{{loading ? i18n.loading : i18n.noProducts}}</text><view class="empty-btn" wx:if="{{!loading && isOwner}}" bindtap="onAdd" hover-stay-time="50" hover-start-time="0">{{i18n.addProduct}}</view></view><view class="load-more" wx:if="{{list.length}}"><text wx:if="{{hasMore}}">{{i18n.loadMoreHint}}</text><text wx:else>{{i18n.shownAll}} {{count}}</text></view></scroll-view></view></block><view class="mask import-mask" wx:if="{{importOn}}" catchtap="onImportClose"><view class="sheet import-sheet" catchtap="noop"><text class="title">{{importCanSend ? '导出数据' : '导入数据'}}</text><scroll-view wx:if="{{!(importStep === 'result' && importCanSend)}}" scroll-y class="import-body" style="{{importStep === 'menu' ? 'height:200rpx;' : importStep === 'result' ? 'height:auto;max-height:46vh;' : 'height:46vh;'}}" enhanced show-scrollbar="{{false}}"><block wx:if="{{importStep === 'menu'}}"><text class="hint">点「导入文件」后，从微信聊天记录或手机本地存储选择 Excel、CSV。导入不会删除文件里没有的货号。</text></block><block wx:elif="{{importStep === 'header'}}"><text class="hint">第一行不像表头。请点一下表头那一行，上面的行会丢掉。{{importSheetName}}</text><view class="import-line" wx:for="{{importHeaderRows}}" wx:key="index" data-index="{{index}}" bindtap="onPickHeaderRow"><text>第 {{index + 1}} 行</text><text class="import-sample">{{item}}</text></view></block><block wx:elif="{{importStep === 'map'}}"><text class="hint">{{importSheetName}} · 把表格的列对到系统字段。货号必须对应。颜色和尺码要一起选，或都选不导入。</text><view class="import-line" wx:for="{{importCols}}" wx:key="index"><view class="import-meta"><text>{{item.header}}</text><text class="import-sample">{{item.samples}}</text></view><picker mode="selector" range="{{importChoiceLabels}}" data-index="{{item.index}}" bindchange="onMapField"><view class="import-pick">{{item.fieldLabel}}</view></picker></view></block><block wx:elif="{{importStep === 'preview'}}"><text class="hint">新增 {{importAdd}} · 更新 {{importUpdate}}</text><text class="hint">将新建分类：{{importCatText}}</text><text class="hint">跳过：{{importSkipText}}</text><text class="hint" wx:if="{{importNoteText}}">{{importNoteText}}</text></block><block wx:else><text class="hint">{{importResult}}</text></block></scroll-view><block wx:if="{{importStep === 'result' && importCanSend}}"><text class="hint">{{importResult}}</text><scroll-view scroll-y class="export-preview" enhanced show-scrollbar="{{true}}"><scroll-view scroll-x enable-flex class="export-x" style="height: {{exportXHeight}}rpx; flex-direction: row;" enhanced show-scrollbar="{{false}}"><view class="export-table"><view class="export-row head"><text class="export-cell" wx:for="{{exportHead}}" wx:key="index">{{item}}</text></view><view class="export-row {{index % 2 === 1 ? 'alt' : ''}}" wx:for="{{exportRows}}" wx:for-item="row" wx:key="index"><text class="export-cell" wx:for="{{row}}" wx:for-item="cell" wx:for-index="ci" wx:key="ci">{{cell}}</text></view></view></scroll-view></scroll-view></block><view class="import-actions"><block wx:if="{{importStep === 'menu'}}"><view class="import-btn" bindtap="onImportFile">导入文件</view><view class="import-btn ghost" bindtap="onExportAsk">导出商品</view></block><block wx:elif="{{importStep === 'map'}}"><view class="import-btn" bindtap="onImportNext">下一步</view></block><block wx:elif="{{importStep === 'preview'}}"><view class="import-btn ghost" bindtap="onToggleImportMode">{{importModeLabel}}</view><view class="import-btn" bindtap="onImportCommit">确认写入</view></block><block wx:elif="{{importStep === 'result'}}"><view class="import-btn" wx:if="{{importCanSend}}" bindtap="onSendExport">发送到聊天</view><view class="import-btn ghost" wx:if="{{importCanSend}}" bindtap="onOpenExport">打开文件</view></block></view></view></view></view>

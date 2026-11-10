@@ -1,0 +1,10 @@
+.page{min-height:100vh;background:#f3f6fb}
+.body{height:100vh;padding:28rpx 36rpx 0;box-sizing:border-box}
+.title{display:block;font-size:40rpx;font-weight:700;color:#163a6b;line-height:1.35}
+.updated{display:block;margin-top:10rpx;font-size:22rpx;color:#8a98ab}
+.lead{display:block;margin-top:24rpx;padding:20rpx 22rpx;background:#fff;border-radius:16rpx;font-size:26rpx;line-height:1.7;color:#3d6aa0;box-shadow:0 2rpx 10rpx rgba(22,58,107,0.05)}
+.sec{margin-top:32rpx}
+.h{display:block;font-size:30rpx;font-weight:700;color:#163a6b;margin-bottom:12rpx}
+.p{display:block;font-size:26rpx;line-height:1.75;color:#3a4a5c;margin-bottom:12rpx}
+.contact{margin-top:40rpx;padding:24rpx 22rpx;background:#fff;border-radius:16rpx;box-shadow:0 2rpx 10rpx rgba(22,58,107,0.05)}
+.safe{height:calc(48rpx + env(safe-area-inset-bottom))}

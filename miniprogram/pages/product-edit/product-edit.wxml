@@ -1,0 +1,98 @@
+<wxs src="../../utils/media.wxs" module="media" /><wxs module="cw">
+function width(code) {
+  var s = code == null ? '' : '' + code
+  var n = s.length
+  var w = 0
+  var i = 0
+  var c = 0
+  for (i = 0; i < n; i++) {
+    c = s.charCodeAt(i)
+    w += c > 255 ? 1 : 0.62
+  }
+  if (w < 1.2) w = 1.2
+  return (w + 0.35) + 'em'
+}
+module.exports.width = width
+</wxs><view class="page {{rtl ? 'rtl' : ''}}"><view class="card"><view class="row"><text class="req">*</text><text class="lab">{{i18n.colCode}}</text><image wx:if="{{linkText}}" class="link-mark" src="/assets/icons/pe-link.svg" mode="aspectFit" /><input
+        class="ipt {{linkSide ? 'code-short' : ''}}"
+        style="{{linkSide ? 'width:' + cw.width(code) + ';' : ''}}"
+        value="{{code}}"
+        placeholder="{{i18n.inputCode}}"
+        placeholder-class="ph"
+        bindinput="onCode"
+      /><scroll-view wx:if="{{linkSide}}" class="link-side-scroll" scroll-x="{{true}}" enhanced="{{true}}" show-scrollbar="{{false}}" bounces="{{true}}"><view class="link-side">{{linkSide}}</view></scroll-view></view><view class="row"><text class="req-space"></text><text class="lab">{{i18n.productName}}</text><input
+        class="ipt"
+        value="{{name}}"
+        placeholder="{{i18n.inputProductName}}"
+        placeholder-class="ph"
+        bindinput="onName"
+      /></view><view class="row"><text class="req">*</text><text class="lab">{{i18n.salePrice}}</text><input
+        class="ipt"
+        type="digit"
+        value="{{price}}"
+        placeholder="{{i18n.inputPrice}}"
+        placeholder-class="ph"
+        bindinput="onPrice"
+      /></view><view class="row"><text class="req-space"></text><text class="lab">{{i18n.priceRetail}}</text><input
+        class="ipt"
+        type="digit"
+        value="{{suggestedRetail}}"
+        placeholder="{{i18n.retailHint}}"
+        placeholder-class="ph"
+        bindinput="onRetail"
+      /></view><view class="row"><text class="req-space"></text><text class="lab">{{i18n.category}}</text><view class="picker" bindtap="onPickCategory" hover-stay-time="50" hover-start-time="0"><text class="picker-txt {{category ? '' : 'muted'}}">{{categoryLabel}}</text><text class="chev">▾</text></view><view class="ico-btn" bindtap="onManageCategory" hover-class="ico-btn-hover" hover-stay-time="50" hover-start-time="0"><image class="ico" src="{{media.url('pe-tune.png')}}" mode="aspectFit" /></view></view><view class="row"><text class="req-space"></text><text class="lab">{{i18n.colUnit}}</text><input
+        class="ipt"
+        value="{{unit}}"
+        placeholder="{{i18n.inputUnit}}"
+        placeholder-class="ph"
+        bindinput="onUnit"
+      /></view><view class="row"><text class="req-space"></text><text class="lab">{{i18n.cost}}</text><input
+        class="ipt"
+        type="digit"
+        value="{{cost}}"
+        placeholder="{{i18n.inputCost}}"
+        placeholder-class="ph"
+        bindinput="onCost"
+      /></view><view class="row" wx:if="{{!hasSku}}"><text class="req-space"></text><text class="lab">{{i18n.colStock}}</text><input
+        class="ipt"
+        type="number"
+        value="{{stock}}"
+        placeholder="{{i18n.inputStock}}"
+        placeholder-class="ph"
+        bindinput="onStock"
+      /></view><view class="row" wx:else><text class="req-space"></text><text class="lab">{{i18n.colStock}}</text><text class="ipt sku-sum" wx:if="{{stockPool}}">总数 {{stockPool}}，还没分到尺码</text><text class="ipt sku-sum" wx:else>{{i18n.total}} {{skuSumLabel}}</text></view><view class="row"><text class="req-space"></text><text class="lab">吊牌</text><view class="hangtag-btn" bindtap="onHangtag">拍吊牌建档</view></view><view class="switch-row"><view class="switch-meta"><text class="switch-title">{{i18n.colorSizeStock}}</text><text class="switch-sub">{{i18n.skuFashionHint}}</text></view><switch checked="{{hasSku}}" color="#1E4D8C" bindchange="onToggleSku" /></view><view class="sku-box" wx:if="{{hasSku}}"><text class="sku-lab">{{i18n.skuColor}}</text><view class="chip-row"><view class="chip" wx:for="{{colors}}" wx:key="*this" data-name="{{item}}" bindtap="onRemoveColor">{{item}} ×</view></view><view class="preset-row"><text class="preset" wx:for="{{colorPresets}}" wx:key="*this" data-name="{{item}}" bindtap="onPresetColor">{{item}}</text></view><view class="tag-add"><input class="tag-ipt" value="{{colorDraft}}" placeholder="{{i18n.addColor}}" bindinput="onColorDraft" confirm-type="done" bindconfirm="onAddColor" /><view class="tag-btn" bindtap="onAddColor">{{i18n.add}}</view></view><text class="sku-lab">{{i18n.skuSize}}</text><view class="chip-row"><view class="chip" wx:for="{{sizes}}" wx:key="*this" data-name="{{item}}" bindtap="onRemoveSize">{{item}} ×</view></view><view class="preset-row"><text class="preset" wx:for="{{sizePresets}}" wx:key="*this" data-name="{{item}}" bindtap="onPresetSize">{{item}}</text></view><view class="tag-add"><input class="tag-ipt" value="{{sizeDraft}}" placeholder="{{i18n.addSize}}" bindinput="onSizeDraft" confirm-type="done" bindconfirm="onAddSize" /><view class="tag-btn" bindtap="onAddSize">{{i18n.add}}</view></view><view class="hand-box" wx:if="{{sizes.length}}"><view class="hand-head"><text class="sku-lab">一手配比</text><text class="hand-reset" bindtap="onResetHand">恢复默认</text></view><text class="hand-hint">每个颜色同一套。一手默认每个尺码 1 件。</text><view class="hand-row"><view class="hand-cell" wx:for="{{handRows}}" wx:key="size"><text class="hand-size">{{item.size}}</text><input class="hand-ipt" type="number" value="{{item.qty}}" data-index="{{index}}" bindinput="onHandInput" /></view></view></view><scroll-view scroll-x class="sku-table-wrap" wx:if="{{skuRows.length && skuSizes.length}}"><view class="sku-table"><view class="sku-tr head"><text class="sku-th corner">{{i18n.colorSizeHead}}</text><text class="sku-th" wx:for="{{skuSizes}}" wx:key="*this">{{item}}</text></view><view class="sku-tr" wx:for="{{skuRows}}" wx:key="color" wx:for-item="row"><text class="sku-th corner">{{row.color}}</text><input
+              class="sku-td"
+              wx:for="{{row.cells}}"
+              wx:for-item="cell"
+              wx:key="key"
+              type="number"
+              data-color="{{cell.color}}"
+              data-size="{{cell.size}}"
+              value="{{cell.stockText}}"
+              placeholder="—"
+              bindfocus="onSkuFocus"
+              bindblur="onSkuBlur"
+              bindinput="onSkuStock"
+            /></view></view></scroll-view><text class="sku-tip pool" wx:if="{{stockPool}}">原来只记了总数 {{stockPool}}，没有各尺码的数量。请在格子里填写。只要写了数，库存就改按格子合计，没写的尺码不算。没填之前仍按总数算。</text><text class="sku-tip" wx:else>{{i18n.skuGridTip}}</text></view><view class="row barcode-row"><text class="barcode-lab">{{i18n.barcode}}</text><input
+        class="ipt barcode-ipt"
+        value="{{barcode}}"
+        placeholder="{{i18n.scanBarcodeHint}}"
+        placeholder-class="barcode-ph"
+        bindinput="onBarcode"
+      /><view class="ico-btn" bindtap="onScanBarcode" hover-class="ico-btn-hover" hover-stay-time="50" hover-start-time="0"><image class="ico" src="{{media.url('pe-scan.png')}}" mode="aspectFit" /></view></view><view class="switch-row"><view class="switch-meta"><text class="switch-title">{{i18n.countInStats}}</text><text class="switch-sub">{{i18n.countInStatsD}}</text></view><switch checked="{{countInStats}}" color="#1E4D8C" bindchange="onToggleStats" /></view><view class="media-block"><text class="media-title">{{i18n.productImages}}</text><text class="media-sub">{{i18n.productImagesHint}}</text><view class="media-grid"><view class="media-item" wx:for="{{images}}" wx:key="key"><image class="media-img" src="{{item.preview}}" mode="aspectFill" data-url="{{item.preview}}" bindtap="onPreviewImage" /><view class="media-del" data-key="{{item.key}}" catchtap="onRemoveImage">×</view></view><view class="media-add" wx:if="{{images.length < 9}}" bindtap="onAddImage"><text class="media-add-plus">＋</text><text class="media-add-t">{{checkingImage ? i18n.checkingImage : (uploadingImage ? i18n.uploading : i18n.addImage)}}</text></view></view></view><view class="media-block" wx:if="{{canUploadImage || videoUrl || videoLocal}}"><text class="media-title">{{i18n.productVideo}}</text><text class="media-sub">{{i18n.productVideoHint}}</text><view class="media-grid"><view class="media-item" wx:if="{{videoThumb || videoUrl || videoLocal}}"><image class="media-img" src="{{videoThumb}}" mode="aspectFill" wx:if="{{videoThumb}}" bindtap="onPreviewVideo" /><view class="media-img media-video-ph" wx:else bindtap="onPreviewVideo">{{i18n.playVideo}}</view><view class="media-play" catchtap="onPreviewVideo">▶</view><view class="media-del" catchtap="onRemoveVideo">×</view></view><view class="media-add" wx:elif="{{canUploadImage}}" bindtap="onAddVideo"><text class="media-add-plus">＋</text><text class="media-add-t">{{checkingVideo ? i18n.checkingImage : (uploadingVideo ? i18n.uploading : i18n.addVideo)}}</text></view></view></view><view class="switch-row"><view class="switch-meta"><text class="switch-title">{{i18n.newArrival}}</text><text class="switch-sub">{{i18n.newArrivalHint}}</text></view><switch checked="{{isNewArrival}}" color="#1E4D8C" bindchange="onToggleArrival" /></view></view><view class="btns"><view
+        class="btn danger {{saving ? 'disabled' : ''}}"
+        wx:if="{{isEdit}}"
+        bindtap="onDelete"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><image class="btn-del-ico" src="{{media.url('pe-delete.png')}}" mode="aspectFit" /><text>{{i18n.delete}}</text></view><view class="btn ghost" wx:if="{{canLink}}" bindtap="onOpenLink" hover-stay-time="50" hover-start-time="0"><image class="btn-ico" src="/assets/icons/pe-link.svg" mode="aspectFit" /><text>{{i18n.linkCodes}}</text></view><button class="btn primary" loading="{{saving}}" bindtap="onSave" hover-stay-time="50" hover-start-time="0"><image class="btn-ico" src="/assets/icons/pe-save.svg" mode="aspectFit" /><text>{{isEdit ? i18n.save : i18n.add}}</text></button></view><view class="pop-mask" wx:if="{{linkOn}}" catchtouchmove="noop" bindtap="onCloseLink"><view class="pop-sheet tall" catchtap="noop"><view class="pop-handle"></view><text class="pop-title">{{i18n.linkSameTitle}}</text><view class="link-search"><input class="link-input" placeholder="{{i18n.searchCodeShort}}" placeholder-class="ph" value="{{linkQuery}}" bindinput="onLinkQuery" /></view><scroll-view class="pop-body" scroll-y bindscrolltolower="onLinkMore" lower-threshold="120"><view class="link-row" wx:for="{{linkShown}}" wx:key="code" data-code="{{item.code}}" bindtap="onToggleLink"><text class="link-code">{{item.code}}</text><text class="link-check {{item.on ? 'on' : ''}}">{{item.on ? i18n.selectedCount : i18n.linkPick}}</text></view><view class="more-tip" wx:if="{{linkMore}}">{{i18n.loadMorePull}}</view><view class="pop-pad"></view></scroll-view><view class="pop-dock"><view class="link-btn solid" bindtap="onConfirmLink">{{i18n.confirmLink}}</view></view></view></view><view class="mask" wx:if="{{showCatDlg}}" catchtouchmove="noop" bindtap="onCatDlgCancel" hover-stay-time="50" hover-start-time="0"><view class="dlg" catchtap="noop" hover-stay-time="50" hover-start-time="0"><text class="dlg-title">{{catDlgTitle}}</text><view class="dlg-input-wrap"><input
+          class="dlg-input"
+          focus="{{showCatDlg}}"
+          value="{{catDlgValue}}"
+          placeholder="{{i18n.inputCatName}}"
+          placeholder-class="dlg-ph"
+          maxlength="40"
+          bindinput="onCatDlgInput"
+          confirm-type="done"
+          bindconfirm="onCatDlgConfirm"
+        /></view><view class="dlg-acts"><view class="dlg-btn" bindtap="onCatDlgCancel" hover-stay-time="50" hover-start-time="0"><text>{{i18n.cancel}}</text></view><view class="dlg-btn filled" bindtap="onCatDlgConfirm" hover-stay-time="50" hover-start-time="0"><text>{{i18n.confirm}}</text></view></view></view></view></view>

@@ -1,0 +1,1 @@
+Page({data:{partyId:0,role:"fabric"},onLoad(a){const r=a.role||"fabric";this.setData({partyId:Number(a.id||0),role:r})}});

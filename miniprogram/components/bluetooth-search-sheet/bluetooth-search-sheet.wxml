@@ -1,0 +1,12 @@
+<view
+  class="bt-mask"
+  wx:if="{{visible}}"
+  catchtouchmove="noop"
+  bindtap="onCancel"
+  hover-stay-time="50"
+  hover-start-time="0"
+><view class="bt-sheet" catchtap="noop"><view class="bt-head"><text class="bt-title {{searching ? 'searching' : ''}}">{{title}}</text><view class="bt-perm" bindtap="onOpenSettings" hover-stay-time="50" hover-start-time="0">
+        查看权限
+      </view></view><text class="bt-hint" wx:if="{{hint}}">{{hint}}</text><text class="bt-tips-title">温馨提示：</text><view class="bt-tip" wx:for="{{tips}}" wx:key="*this"><text class="bt-tip-text">{{index + 1}}、{{item}}</text></view><view class="bt-acts"><view class="bt-btn ghost" bindtap="onCancel" hover-stay-time="50" hover-start-time="0">取消</view><view class="bt-btn primary" bindtap="onConfirm" hover-stay-time="50" hover-start-time="0">
+        {{confirmText}}
+      </view></view></view></view>

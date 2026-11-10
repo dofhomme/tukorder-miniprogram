@@ -1,0 +1,46 @@
+<wxs src="../../utils/media.wxs" module="media" /><view class="page {{rtl ? 'rtl' : ''}}" wx:if="{{order}}"><scroll-view scroll-y class="body" enhanced show-scrollbar="{{false}}"><view class="hdr"><view class="hdr-left"><view class="hdr-no-row"><text class="ret-badge" wx:if="{{order.isReturn}}">{{i18n.returnShort}}</text><text class="hdr-no">{{order.orderNo}}</text></view><text class="hdr-time">{{order.timeLabel}}</text><text class="hdr-cust" wx:if="{{order.customerName}}">
+          {{order.customerName}}{{order.customerPhone ? ' · ' + order.customerPhone : ''}}
+        </text></view><text class="hdr-amt">¥{{order.amountLabel}}</text></view><view class="divider"></view><view class="agent-banner" wx:if="{{agentPending && canEditOrder}}"><text class="agent-banner-t">{{i18n.agentPendingBanner}}</text><text class="agent-banner-d">{{i18n.agentPendingD}}</text><view class="agent-acts"><view class="agent-ok" bindtap="onConfirmAgent">{{i18n.confirmAgentOrder}}</view><view class="agent-no" bindtap="onRejectAgent">{{i18n.rejectPending}}</view></view></view><view class="agent-banner reject" wx:if="{{agentRejected}}"><text class="agent-banner-t">{{i18n.agentRejected}}</text><text class="agent-banner-d" wx:if="{{rejectReason}}">{{rejectReason}}</text></view><view class="ship-box" wx:if="{{shipVisible}}"><text class="ship-title">{{i18n.shipTo}}</text><text class="ship-line" wx:if="{{shipUrgent}}">{{i18n.urgentShip}}</text><text class="ship-line" wx:if="{{shipName}}">{{i18n.shipToName}} {{shipName}}</text><text class="ship-line" wx:if="{{shipPhone}}">{{i18n.shipToPhone}} {{shipPhone}}</text><text class="ship-line" wx:if="{{shipAddress}}">{{i18n.shipToAddress}} {{shipAddress}}</text><text class="ship-line" wx:if="{{shipNote}}">{{shipNote}}</text></view><view class="fulfill"><text class="fulfill-title">{{i18n.fulfillStatus}}{{canEditOrder ? '' : ' · ' + i18n.orderReadonly}}</text><view class="chip-row"><view
+          class="chip {{order.isPaid ? 'on paid' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+          bindtap="onToggleChip"
+          data-field="isPaid"
+         hover-stay-time="50" hover-start-time="0"><text>{{order.isReturn ? i18n.refunded : i18n.paid}}</text></view><view
+          class="chip {{order.isPickedUp ? 'on picked' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+          bindtap="onToggleChip"
+          data-field="isPickedUp"
+         hover-stay-time="50" hover-start-time="0"><text>{{order.isReturn ? i18n.received : i18n.picked}}</text></view><view
+          wx:if="{{!order.isReturn}}"
+          class="chip ship {{order.isShipped || trackingNos.length ? 'on shipped' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+          bindtap="onToggleShipped"
+         hover-stay-time="50" hover-start-time="0"><text class="chip-ico">{{order.isShipped || trackingNos.length ? '✓' : ''}}</text><text>{{shippedLabel}}</text></view><view
+          wx:if="{{!order.isReturn}}"
+          class="chip deliv {{order.isDelivered || deliveryPhotoPath ? 'on delivered' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+          bindtap="onToggleDelivered"
+         hover-stay-time="50" hover-start-time="0"><text class="chip-ico">{{order.isDelivered || deliveryPhotoPath ? '✓' : ''}}</text><text>{{i18n.delivered}}</text></view></view><view class="trk-wrap" wx:if="{{!order.isReturn && (trackingNos.length || deliveryPhotoPath)}}"><view
+          class="deliv-thumb"
+          wx:if="{{deliveryPhotoPath}}"
+          bindtap="onPreviewDeliveryPhoto"
+          hover-stay-time="50"
+          hover-start-time="0"
+        ><image class="deliv-img" src="{{deliveryPhotoPath}}" mode="aspectFill" /></view><view class="trk-chip" wx:for="{{trackingNos}}" wx:key="*this"><text class="trk-txt">{{item}}</text><text class="trk-x" wx:if="{{canEditOrder}}" catchtap="onRemoveTracking" data-no="{{item}}">✕</text></view></view></view><view class="items"><view class="item" wx:for="{{items}}" wx:key="productCode"><view class="item-main"><text class="item-name">{{item.title}}</text><text class="item-sub">{{item.subLine}}</text></view><view class="item-qty" wx:if="{{agentPending && canEditOrder}}"><text class="qty-btn" data-i="{{index}}" data-d="-1" catchtap="onQty">−</text><text class="qty-n">{{item.quantity}}</text><text class="qty-btn" data-i="{{index}}" data-d="1" catchtap="onQty">＋</text></view><text class="item-amt">¥{{item.subtotalLabel}}</text></view><view class="item-empty" wx:if="{{!items.length}}"><text>{{i18n.noItems}}</text></view></view></scroll-view><view class="actions"><view class="act-row"><view class="act-btn print {{printing ? 'disabled' : ''}}" bindtap="onPrint" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-print.png')}}" mode="aspectFit" /><text class="act-txt">{{i18n.printBill}}</text></view><view class="act-btn download" bindtap="onDownload" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-download.png')}}" mode="aspectFit" /><text class="act-txt">{{i18n.downloadBill}}</text></view></view><view class="act-row"><view class="act-btn delete {{canEditOrder ? '' : 'locked'}}" bindtap="onDelete" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-delete.png')}}" mode="aspectFit" /><text class="act-txt">{{i18n.deleteOrder}}</text></view><view class="act-btn edit {{canEditOrder ? '' : 'locked'}}" bindtap="onLoadToHome" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-edit.png')}}" mode="aspectFit" /><text class="act-txt">{{i18n.editOrder}}</text></view></view></view></view><view class="empty {{rtl ? 'rtl' : ''}}" wx:else><text>{{error || i18n.orderNotFound}}</text></view><view class="exp-mask" wx:if="{{expVisible}}" catchtouchmove="noop" bindtap="onExportClose" hover-stay-time="50" hover-start-time="0"><view class="exp-dialog" catchtap="noop" hover-stay-time="50" hover-start-time="0"><text class="exp-title">{{expTitle}}</text><scroll-view scroll-y class="exp-scroll"><view class="exp-card"><receipt-body model="{{expReceiptModel}}" fontScale="{{expFontScale}}" /></view></scroll-view><view class="exp-actions"><text class="exp-btn" bindtap="onExportClose" hover-stay-time="50" hover-start-time="0">{{i18n.close}}</text><view class="exp-btn primary {{expSaving ? 'disabled' : ''}}" bindtap="onExportSave" hover-stay-time="50" hover-start-time="0">
+        {{expSaving ? i18n.savingImage : i18n.saveImage}}
+      </view></view></view></view><canvas
+  type="2d"
+  id="expCanvas"
+  class="exp-canvas"
+  style="width: 360px; height: {{expCanvasH}}px;"
+></canvas><view
+  class="deliv-mask"
+  wx:if="{{delivSheetVisible}}"
+  catchtouchmove="noop"
+  bindtap="onDelivSheetClose"
+  hover-stay-time="50"
+  hover-start-time="0"
+><view class="deliv-sheet" catchtap="noop"><view class="deliv-item" data-action="camera" bindtap="onDelivPick" hover-stay-time="50" hover-start-time="0"><view class="deliv-item-ico">📷</view><text class="deliv-item-txt">{{i18n.photoDeliver}}</text></view><view class="deliv-item" data-action="album" bindtap="onDelivPick" hover-stay-time="50" hover-start-time="0"><view class="deliv-item-ico">🖼</view><text class="deliv-item-txt">{{i18n.pickAlbum}}</text></view><view
+      class="deliv-item danger"
+      wx:if="{{deliveryPhotoPath}}"
+      data-action="clear"
+      bindtap="onDelivPick"
+      hover-stay-time="50"
+      hover-start-time="0"
+    ><view class="deliv-item-ico">🗑</view><text class="deliv-item-txt danger">{{i18n.clearPhoto}}</text></view><view class="deliv-cancel" bindtap="onDelivSheetClose" hover-stay-time="50" hover-start-time="0"><text>{{i18n.cancel}}</text></view></view></view><bluetooth-search-sheet id="btSheet" />

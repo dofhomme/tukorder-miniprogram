@@ -1,0 +1,13 @@
+.page{min-height:100vh;background:#eef6f4;padding:24rpx 24rpx calc(48rpx + env(safe-area-inset-bottom));box-sizing:border-box}
+.hint,.state{display:block;color:#5f7a74;font-size:26rpx;margin-bottom:20rpx}
+.list{display:flex;flex-direction:column;gap:12rpx}
+.row{display:flex;align-items:center;padding:20rpx 22rpx;background:#fff;border-radius:14rpx}
+.row.on{background:#e7f6f2}
+.main{flex:1}
+.code{display:block;font-size:28rpx;font-weight:700;color:#134e4a}
+.name{display:block;margin-top:4rpx;font-size:22rpx;color:#5f7a74}
+.qty{display:flex;align-items:center;gap:12rpx;font-size:30rpx;color:#0f766e}
+.n{min-width:40rpx;text-align:center}
+.ipt{margin-top:20rpx;background:#fff;border-radius:12rpx;padding:20rpx;font-size:28rpx}
+.btn{margin-top:24rpx;height:80rpx;border-radius:16rpx;background:#0f766e;color:#fff;font-size:28rpx;font-weight:600;display:flex;align-items:center;justify-content:center}
+.btn.off{opacity:0.5}

@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#e7f0ff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "全部记录",
+  "usingComponents": {
+    "accept-sheet": "./accept-sheet/accept-sheet",
+    "supply-bench": "./bench/bench"
+  }
+}

@@ -1,0 +1,14 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view wx:if="{{loading}}" class="state">{{i18n.loading}}</view><view wx:elif="{{error}}" class="state-wrap"><text class="state">{{error}}</text><view class="btn ghost" bindtap="refresh">{{i18n.retry}}</view></view><view wx:else class="wrap"><text class="shop">{{shopName}}</text><text class="who">{{i18n.agentEditProfile}}</text><text class="hint">{{gate ? i18n.agentProfileGateHint : i18n.agentEditProfileHint}}</text><view class="card"><text class="label">{{i18n.agentEditName}}</text><input
+        class="ipt"
+        maxlength="32"
+        placeholder="{{i18n.plazaNamePh}}"
+        value="{{customerName}}"
+        bindinput="onName"
+      /></view><view class="card"><text class="label">{{i18n.agentEditPhone}}</text><input
+        class="ipt"
+        type="number"
+        maxlength="20"
+        placeholder="{{i18n.plazaPhonePh}}"
+        value="{{phone}}"
+        bindinput="onPhone"
+      /></view><view class="btn {{saving ? 'off' : ''}}" bindtap="onSave"><image class="btn-ico" src="/assets/icons/pe-save.svg" mode="aspectFit" /><text>{{i18n.save}}</text></view></view></view>

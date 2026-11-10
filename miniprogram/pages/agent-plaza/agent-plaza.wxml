@@ -1,0 +1,10 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><text class="hint">{{i18n.plazaEntry}}</text><view
+    class="row"
+    wx:for="{{shops}}"
+    wx:key="ownerUserId"
+    data-id="{{item.ownerUserId}}"
+    data-status="{{item.applyStatus}}"
+    data-name="{{item.shopName}}"
+    bindtap="onEnter"
+    hover-class="row-hover"
+  ><image wx:if="{{item.logoSrc}}" class="logo" src="{{item.logoSrc}}" mode="aspectFill" /><view wx:else class="mark">{{item.shopMark}}</view><view class="mid"><text class="name">{{item.shopName}}</text><text class="sub">{{item.arrivalText}}</text></view><text class="btn">{{item.btnText}}</text></view><text class="empty" wx:if="{{error && !shops.length}}">{{error}}</text><text class="empty" wx:elif="{{!shops.length && !loading}}">{{i18n.plazaEmpty}}</text><view class="more" wx:if="{{hasMore}}" bindtap="onMore">{{loading ? i18n.loading : i18n.loadMoreHint}}</view><view class="empty" wx:if="{{loading && !shops.length}}">{{i18n.loading}}</view><view class="mask" wx:if="{{applyOpen}}" catchtouchmove="noop"><view class="card" catchtap="noop"><text class="title">{{i18n.plazaApplyTitle}}</text><text class="sub">{{applyShopName}}</text><input class="ipt" placeholder="{{i18n.plazaNamePh}}" value="{{applyName}}" bindinput="onApplyName" /><input class="ipt" type="number" maxlength="11" placeholder="{{i18n.plazaPhonePh}}" value="{{applyPhone}}" bindinput="onApplyPhone" /><input class="ipt" placeholder="{{i18n.plazaNotePh}}" value="{{applyNote}}" bindinput="onApplyNote" /><view class="go {{applyBusy ? 'off' : ''}}" bindtap="onSubmitApply">{{applyBusy ? i18n.loading : i18n.plazaSubmit}}</view><text class="cancel" bindtap="onCloseApply">{{i18n.cancel}}</text></view></view></view>

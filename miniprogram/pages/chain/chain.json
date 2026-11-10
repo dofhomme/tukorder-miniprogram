@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#d7e7ff",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "tutorial-link": "/components/tutorial-link/tutorial-link"
+  }
+}

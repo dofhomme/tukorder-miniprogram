@@ -1,0 +1,6 @@
+@import "../common.wxss";.std{display:block;margin:12rpx 0 20rpx}
+.price-seg .seg-item{font-size:26rpx}
+.btn.ghost-blue{background:#fff;color:#1e4d8c;border:2rpx solid #1e4d8c}
+.link-search{padding:0 28rpx 12rpx;flex-shrink:0}
+.link-row{display:flex;align-items:center;justify-content:space-between;padding:20rpx 0;border-bottom:1rpx solid #e2e8f0}
+.link-code{font-size:30rpx;color:#111827}

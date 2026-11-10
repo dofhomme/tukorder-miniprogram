@@ -1,0 +1,50 @@
+<view class="page">
+  <scroll-view class="list" scroll-y enhanced show-scrollbar="{{false}}">
+    <text class="hint">{{i18n.tutorialHint}}</text>
+    <text class="hint sub">点一条帮助文件，步骤在下方。也可以直接问。</text>
+    <view class="group" wx:for="{{groups}}" wx:key="key">
+      <text class="group-title" wx:if="{{groups.length > 1}}">{{item.title}}</text>
+      <view
+        class="card {{lesson.id === selectedId ? 'on' : ''}} {{lesson.ready ? '' : 'off'}}"
+        wx:for="{{item.items}}"
+        wx:for-item="lesson"
+        wx:key="id"
+        data-id="{{lesson.id}}"
+        data-ready="{{lesson.ready}}"
+        bindtap="onOpen"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >
+        <view class="play"><view class="play-mark"></view></view>
+        <view class="meta">
+          <text class="title">{{lesson.title}}</text>
+          <text class="sub">帮助文件</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="desk">
+    <scroll-view class="desk-log" scroll-y scroll-into-view="{{deskTail}}" scroll-with-animation enhanced show-scrollbar="{{false}}">
+      <view class="msg {{item.role}}" wx:for="{{desk}}" wx:key="id" id="m{{item.id}}">
+        <text class="who">{{item.role === 'me' ? '我' : '帮助'}}</text>
+        <text class="body">{{item.text}}</text>
+        <view wx:if="{{item.playId}}" class="play-btn" data-id="{{item.playId}}" catchtap="onPlay">播放</view>
+      </view>
+    </scroll-view>
+    <view class="desk-bar">
+      <input
+        class="desk-input"
+        value="{{draft}}"
+        placeholder="问怎么做"
+        placeholder-class="desk-ph"
+        confirm-type="send"
+        maxlength="200"
+        adjust-position="{{true}}"
+        cursor-spacing="16"
+        bindinput="onDraft"
+        bindconfirm="onAsk"
+      />
+      <view class="send" bindtap="onAsk">发送</view>
+    </view>
+  </view>
+</view>

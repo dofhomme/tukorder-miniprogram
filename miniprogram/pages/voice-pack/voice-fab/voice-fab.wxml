@@ -1,0 +1,7 @@
+<wxs src="../../../utils/media.wxs" module="media" /><wxs src="./wave.wxs" module="ui" /><root-portal wx:if="{{holding}}"><view class="voice-hold-mask"><view class="voice-hold-shade {{cancel ? 'cancel' : ''}}"><view class="voice-hold-fan" style="opacity:{{shadeOpacity}};transform:scale({{shadeScale}});"></view><view class="voice-hold-fan voice-hold-fan-soft" style="opacity:{{shimmer}};transform:scale({{inkScale}});"></view><text class="voice-hold-tip">{{cancel ? '松手取消' : '松手发送，上滑取消'}}</text><view class="voice-hold-bars"><view class="voice-hold-slot" wx:for="{{slots}}" wx:key="*this"><view class="voice-hold-bar" style="height:{{ui.bar(item, tick, loud)}}rpx;"></view></view></view></view><view class="voice-hold-center"><text class="voice-hold-live" wx:if="{{liveText}}">{{liveText}}</text></view></view></root-portal><view
+  class="voice-fab {{iconOnly ? 'icon' : ''}} {{quiet ? 'quiet' : ''}} {{holding ? 'holding' : ''}} {{busy ? 'busy' : ''}}"
+  catchtouchstart="onHoldStart"
+  catchtouchmove="onHoldMove"
+  catchtouchend="onHoldEnd"
+  catchtouchcancel="onHoldCancel"
+><image class="voice-fab-mic-img" src="{{iconOnly ? '/assets/icons/tools/mic.svg' : media.url('mic.png')}}" mode="aspectFit" /><text class="voice-fab-t" wx:if="{{!iconOnly}}">{{busy ? busyText : holdText}}</text><text class="voice-fab-t" wx:elif="{{label}}">{{label}}</text></view>

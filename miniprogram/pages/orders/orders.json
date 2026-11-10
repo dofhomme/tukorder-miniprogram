@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "全部账单",
+  "usingComponents": {
+    "order-detail-sheet": "/components/order-detail-sheet/order-detail-sheet",
+    "network-tip": "/components/network-tip/network-tip",
+    "tutorial-link": "/components/tutorial-link/tutorial-link"
+  },
+  "onReachBottomDistance": 100,
+  "enablePullDownRefresh": true
+}

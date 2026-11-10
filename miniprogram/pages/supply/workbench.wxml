@@ -1,0 +1,1 @@
+<view class="page lock"><supply-bench party-id="{{partyId}}" role="{{role}}" /></view>

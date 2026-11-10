@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "公开对账",
+  "navigationBarBackgroundColor": "#eef3f9",
+  "backgroundColor": "#eef3f9",
+  "usingComponents": {
+    "qr-image": "/components/qr-image/qr-image"
+  }
+}

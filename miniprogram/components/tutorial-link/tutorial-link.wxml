@@ -1,0 +1,1 @@
+<view class="tut {{enabled ? '' : 'off'}}" bindtap="onOpen" hover-stay-time="50" hover-start-time="0"><view class="tut-mark"></view><text class="tut-t">{{label}}</text></view>

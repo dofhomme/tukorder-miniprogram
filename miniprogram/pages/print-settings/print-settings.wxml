@@ -1,0 +1,77 @@
+<view class="page {{rtl ? 'rtl' : ''}}">
+  <scroll-view class="list" scroll-y enhanced show-scrollbar="{{false}}">
+    <view class="tut-row"><tutorial-link scene="print" /></view>
+    <view class="panel">
+      <view class="nav-row" bindtap="onBluetooth" hover-class="nav-row-hover" hover-stay-time="50" hover-start-time="0">
+        <view class="nav-ico"><image class="nav-ico-img" src="/assets/icons/ps-bluetooth.svg" mode="aspectFit" /></view>
+        <text class="nav-title">{{i18n.psBluetooth}}</text>
+        <text class="chev">›</text>
+      </view>
+      <view class="nav-row" bindtap="onWifi" hover-class="nav-row-hover" hover-stay-time="50" hover-start-time="0">
+        <view class="nav-ico"><image class="nav-ico-img" src="/assets/icons/ps-wifi.svg" mode="aspectFit" /></view>
+        <view class="nav-meta">
+          <text class="nav-title">{{i18n.lanTitle}}</text>
+          <text class="nav-sub">{{lanStatus}}</text>
+        </view>
+        <text class="chev">›</text>
+      </view>
+      <view wx:if="{{canEditTemplate}}" class="nav-row" bindtap="onTemplate" hover-class="nav-row-hover" hover-stay-time="50" hover-start-time="0">
+        <view class="nav-ico"><image class="nav-ico-img" src="/assets/icons/ps-template.svg" mode="aspectFit" /></view>
+        <text class="nav-title">{{i18n.psTemplateNav}}</text>
+        <text class="chev">›</text>
+      </view>
+      <view class="nav-row last" bindtap="onCloud" hover-class="nav-row-hover" hover-stay-time="50" hover-start-time="0">
+        <view class="nav-ico"><image class="nav-ico-img" src="/assets/icons/ps-cloud.svg" mode="aspectFit" /></view>
+        <view class="nav-meta">
+          <text class="nav-title">{{i18n.psCloudNav}}</text>
+          <text class="nav-sub">{{cloudStatus}}</text>
+        </view>
+        <text class="chev">›</text>
+      </view>
+    </view>
+    <view class="gap"></view>
+    <view class="sec-label">{{i18n.psAdvanced}}</view>
+    <view class="panel">
+      <view class="row" bindtap="onToggle" hover-class="row-on" data-key="autoSaveOrderAfterPrint" hover-stay-time="50" hover-start-time="0">
+        <view class="meta">
+          <text class="title">{{i18n.psAutoSave}}</text>
+          <text class="sub">{{i18n.psAutoSaveD}}</text>
+        </view>
+        <view class="radio {{s.autoSaveOrderAfterPrint ? 'on' : ''}}"><text wx:if="{{s.autoSaveOrderAfterPrint}}">✓</text></view>
+      </view>
+      <view class="row" bindtap="onPickMode" hover-class="row-on" hover-stay-time="50" hover-start-time="0">
+        <view class="meta">
+          <text class="title">{{i18n.psMode}}</text>
+          <text class="sub red">{{i18n.psModeD}}</text>
+        </view>
+        <text class="link">{{modeLabel}}</text>
+      </view>
+      <view class="row">
+        <view class="meta">
+          <text class="title">{{i18n.psMissing}}</text>
+          <text class="sub red">{{i18n.psMissingD}}</text>
+        </view>
+        <view class="stepper">
+          <view class="step-btn" bindtap="onStepMinus" hover-stay-time="50" hover-start-time="0">−</view>
+          <text class="step-val">{{s.printMissingCorrection}}</text>
+          <view class="step-btn" bindtap="onStepPlus" hover-stay-time="50" hover-start-time="0">＋</view>
+        </view>
+      </view>
+      <view class="row" bindtap="onToggle" hover-class="row-on" data-key="showCostOnInput" hover-stay-time="50" hover-start-time="0">
+        <view class="meta">
+          <text class="title">{{i18n.psShowCost}}</text>
+          <text class="sub">{{i18n.psShowCostD}}</text>
+        </view>
+        <view class="radio {{s.showCostOnInput ? 'on' : ''}}"><text wx:if="{{s.showCostOnInput}}">✓</text></view>
+      </view>
+      <view class="row last" bindtap="onToggle" hover-class="row-on" data-key="autoStockOutOnSave" hover-stay-time="50" hover-start-time="0">
+        <view class="meta">
+          <text class="title">{{i18n.psAutoStock}}</text>
+          <text class="sub red">{{i18n.psAutoStockD}}</text>
+        </view>
+        <view class="radio {{s.autoStockOutOnSave ? 'on' : ''}}"><text wx:if="{{s.autoStockOutOnSave}}">✓</text></view>
+      </view>
+    </view>
+    <view class="list-pad"></view>
+  </scroll-view>
+</view>

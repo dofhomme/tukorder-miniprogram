@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "店铺 / 个人资料",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "backgroundColor": "#f5f6f8",
+  "usingComponents": {}
+}

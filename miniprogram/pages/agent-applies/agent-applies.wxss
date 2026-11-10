@@ -1,0 +1,11 @@
+.page{padding:28rpx 28rpx 48rpx}
+.hint{color:#c62828;font-size:26rpx}
+.empty{margin-top:80rpx;text-align:center;color:#6b7c93}
+.card{margin-top:20rpx;padding:28rpx;background:#fff;border-radius:20rpx}
+.name{display:block;font-size:32rpx;font-weight:700;color:#134e4a}
+.meta{display:block;margin-top:8rpx;font-size:24rpx;color:#6b7c93}
+.row{display:flex;gap:16rpx;margin-top:20rpx}
+.btn{flex:1;text-align:center;padding:16rpx 0;border-radius:12rpx;font-size:28rpx}
+.btn.ok{background:#0f766e;color:#fff}
+.btn.no{background:#f3f6fb;color:#6b7c93}
+.btn.off{opacity:0.5}

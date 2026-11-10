@@ -1,0 +1,15 @@
+<view class="mp-update {{hidden || !updateReady ? 'is-hidden' : ''}}" catchtap="onApplyUpdate"><text class="mp-update-txt">新版本已准备好</text><text class="mp-update-btn">立即更新</text></view><view class="tab-bar {{hidden ? 'is-hidden' : ''}} {{theme === 'agent' ? 'theme-agent' : ''}}"><view
+    class="tab-item {{item.center ? 'is-center' : ''}} {{selected === index ? 'on' : ''}}"
+    wx:for="{{list}}"
+    wx:key="pagePath"
+    data-path="{{item.pagePath}}"
+    data-index="{{index}}"
+    catchtap="onSwitch"
+    hover-class="is-hover"
+    hover-start-time="0"
+    hover-stay-time="50"
+  ><view class="ico-wrap {{selected === index ? 'active' : ''}}"><image
+        class="ico {{item.pagePath == '/pages/chain/chain' ? 'ico-supply' : ''}}"
+        src="{{selected === index ? item.selectedIconPath : item.iconPath}}"
+        mode="aspectFit"
+      /></view><text class="lbl">{{item.text}}</text></view></view>

@@ -1,0 +1,15 @@
+.page{min-height:100vh;background:radial-gradient(ellipse 90% 40% at 8% -6%,rgba(45,158,139,0.18) 0%,transparent 55%),linear-gradient(180deg,#d7efe9 0%,#eef6f4 36%,#f3f7f6 100%);padding:20rpx 28rpx calc(48rpx + env(safe-area-inset-bottom));box-sizing:border-box}
+.state-wrap{padding:48rpx 12rpx}
+.wrap{padding-top:8rpx}
+.shop{display:block;color:#0f766e;font-size:22rpx;font-weight:600;letter-spacing:1rpx}
+.who{display:block;margin-top:8rpx;font-size:40rpx;font-weight:700;color:#134e4a}
+.state,.hint{display:block;color:#6b857f;font-size:26rpx;line-height:1.6}
+.hint{margin-top:12rpx}
+.card{margin-top:28rpx;padding:24rpx 24rpx 8rpx;border-radius:20rpx;background:rgba(255,255,255,0.88)}
+.label{display:block;font-size:22rpx;color:#6b857f;margin-bottom:8rpx}
+.ipt{height:80rpx;font-size:32rpx;color:#134e4a;font-weight:600}
+.ipt.off{color:#8a98ab}
+.btn{margin-top:36rpx;height:80rpx;display:flex;align-items:center;justify-content:center;gap:10rpx;border-radius:16rpx;background:#0f766e;color:#fff;font-weight:600}
+.btn-ico{width:32rpx;height:32rpx;flex-shrink:0}
+.btn.ghost{background:transparent;color:#0f766e;border:2rpx solid #0f766e}
+.btn.off{opacity:0.45}

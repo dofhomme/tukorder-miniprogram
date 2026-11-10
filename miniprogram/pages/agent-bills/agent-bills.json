@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "我的账单",
+  "navigationBarBackgroundColor": "#EEF6F4",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#EEF6F4",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

@@ -1,0 +1,12 @@
+function bar(index, tick, loud) {
+  var phase = ((tick || 0) % 720) / 720
+  var level = loud < 0 ? 0 : loud > 1 ? 1 : loud || 0
+  var local = (phase + index * 0.07) % 1
+  var wave = local < 0.5 ? local * 2 : (1 - local) * 2
+  var wobble = 0.72 + 0.28 * wave
+  return Math.round(108 * (0.12 + 0.88 * level * wobble))
+}
+
+module.exports = {
+  bar: bar,
+}

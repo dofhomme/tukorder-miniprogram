@@ -1,0 +1,1 @@
+"use strict";function mediaUrl(e){const r=String(e||"").replace(/^\/+/,"");return`${exports.MP_MEDIA_BASE}/${r}`}Object.defineProperty(exports,"__esModule",{value:!0}),exports.MP_MEDIA_BASE=void 0,exports.mediaUrl=mediaUrl,exports.MP_MEDIA_BASE="https://api.imageok.cn/downloads/mp-media";

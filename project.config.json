@@ -1,0 +1,112 @@
+{
+  "description": "项目配置文件",
+  "miniprogramRoot": "miniprogram/",
+  "compileType": "miniprogram",
+  "setting": {
+    "useCompilerPlugins": [],
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "coverView": false,
+    "postcss": false,
+    "minified": true,
+    "enhance": true,
+    "showShadowRootInWxmlPanel": false,
+    "packNpmRelationList": [],
+    "ignoreUploadUnusedFiles": true,
+    "ignoreDevUnusedFiles": false,
+    "compileHotReLoad": false,
+    "skylineRenderEnable": false,
+    "es6": true,
+    "uglifyFileName": false,
+    "uploadWithSourceMap": false,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "condition": true,
+    "compileWorklet": false,
+    "disableUseStrict": false,
+    "minifyWXML": true
+  },
+  "watchOptions": {
+    "ignore": [
+      ".local/**/*",
+      "**/.local/**/*",
+      "node_modules/**/*",
+      ".git/**/*",
+      "**/*.log",
+      "**/WeappLog/**/*",
+      "**/WeappCache/**/*",
+      "**/WeappSimulator/**/*"
+    ]
+  },
+  "scripts": {
+    "beforeCompile": "node scripts/voice-plugin.js prepare",
+    "beforePreview": "node scripts/voice-plugin.js inject",
+    "beforeUpload": "node scripts/voice-plugin.js inject"
+  },
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {
+    "wxext14566970e7e9f62": "2.27.3"
+  },
+  "condition": {},
+  "srcMiniprogramRoot": "miniprogram/",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "libVersion": "3.16.2",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": ".local"
+      },
+      {
+        "type": "folder",
+        "value": "node_modules"
+      },
+      {
+        "type": "folder",
+        "value": ".git"
+      },
+      {
+        "type": "suffix",
+        "value": ".log"
+      },
+      {
+        "type": "suffix",
+        "value": ".ts"
+      },
+      {
+        "type": "glob",
+        "value": "**/*.ts"
+      },
+      {
+        "type": "suffix",
+        "value": ".map"
+      },
+      {
+        "type": "folder",
+        "value": "miniprogram/assets/voice"
+      },
+      {
+        "type": "file",
+        "value": "miniprogram/vendor/jsqr.js"
+      },
+      {
+        "type": "folder",
+        "value": "miniprogram/agent-pkg"
+      },
+      {
+        "type": "folder",
+        "value": "agent-pkg"
+      }
+    ]
+  },
+  "appid": "wx2ff1daf57f870590",
+  "projectname": "图可开单打印-可提审",
+  "projectArchitecture": "miniprogram"
+}

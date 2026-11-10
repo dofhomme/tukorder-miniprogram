@@ -1,0 +1,23 @@
+.page{min-height:100vh;background:#eef6f4}
+.state{padding:120rpx 48rpx;text-align:center;color:#5f7a74;font-size:28rpx}
+.hero{width:100%;height:720rpx;background:#d7efe9}
+.hero-wrap{position:relative}
+.hero-play{position:absolute;left:50%;top:50%;width:96rpx;height:96rpx;margin:-48rpx 0 0 -48rpx;border-radius:50%;background:rgba(0,0,0,0.5);color:#fff;font-size:36rpx;display:flex;align-items:center;justify-content:center}
+.hero-ph{height:360rpx;display:flex;align-items:center;justify-content:center;color:#3d5c58;font-size:32rpx}
+.body{padding:32rpx 36rpx 80rpx}
+.shop{display:block;font-size:24rpx;color:#5f7a74}
+.code{display:block;margin-top:8rpx;font-size:44rpx;font-weight:700;color:#134e4a}
+.name{display:block;margin-top:8rpx;font-size:28rpx;color:#3d5c58}
+.price{display:block;margin-top:20rpx;font-size:36rpx;font-weight:600;color:#0f766e}
+.ask{display:block;margin-top:20rpx;font-size:30rpx;color:#0f766e}
+.stock{display:block;margin-top:12rpx;font-size:24rpx;color:#5f7a74}
+.chips{display:flex;flex-wrap:wrap;gap:12rpx;margin-top:20rpx}
+.chip{padding:8rpx 20rpx;border-radius:999rpx;background:#fff;color:#134e4a;font-size:24rpx}
+.thumbs{white-space:nowrap;margin-top:28rpx}
+.thumb{width:160rpx;height:160rpx;border-radius:12rpx;margin-right:12rpx}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:16rpx;padding:0 24rpx 48rpx}
+.fcard{background:#fff;border-radius:16rpx;overflow:hidden}
+.fcover{width:100%;height:280rpx;background:#d7efe9}
+.fcover.ph{display:flex;align-items:center;justify-content:center;color:#3d5c58}
+.fcode{display:block;padding:12rpx 16rpx 0;font-size:26rpx;font-weight:700;color:#134e4a}
+.fprice{display:block;padding:6rpx 16rpx 16rpx;font-size:22rpx;color:#0f766e}

@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.setVoiceJump=setVoiceJump,exports.takeVoiceJump=takeVoiceJump;const KEY="tuk_voice_jump_v1";function setVoiceJump(e){try{wx.setStorageSync(KEY,e)}catch(t){}}function takeVoiceJump(e){try{const t=wx.getStorageSync(KEY);return t&&t.page===e?(wx.removeStorageSync(KEY),t):null}catch(t){return null}}

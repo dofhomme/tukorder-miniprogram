@@ -1,0 +1,7 @@
+<image
+  wx:if="{{drawn}}"
+  class="qr-img"
+  src="{{drawn}}"
+  mode="{{mode}}"
+  catchlongpress="onLongPress"
+/>

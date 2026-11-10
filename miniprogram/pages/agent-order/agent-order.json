@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "代理下单",
+  "navigationBarBackgroundColor": "#EEF3F9",
+  "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

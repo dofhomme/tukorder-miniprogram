@@ -1,0 +1,10 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view wx:if="{{loading}}" class="state">{{i18n.loading}}</view><view wx:elif="{{error && !orderNo}}" class="state">{{error}}</view><view wx:else class="wrap"><view class="chain-badge {{signatureValid ? 'chain-ok' : ''}}" wx:if="{{publicChain || readonly}}"><text class="chain-badge-t">{{signatureValid ? i18n.lookupSigOk : i18n.lookupChainBadge}}</text><text class="chain-badge-d">{{chainHint || i18n.lookupChainHint}}</text><text class="chain-meta" wx:if="{{chainIdShort}}">{{i18n.lookupChainId}} {{chainIdShort}}</text></view><text class="warn" wx:if="{{error}}">{{error}}</text><view class="ship-card" wx:if="{{shipVisible}}"><view class="ship-head"><view class="ship-status"><view class="ship-dot"></view><text class="ship-status-t">{{i18n.shipped}}</text></view><text class="ship-count" wx:if="{{shipParcels.length > 1}}">{{shipParcels.length}} 个包裹</text></view><view class="ship-list"><view
+          class="ship-row"
+          wx:for="{{shipParcels}}"
+          wx:key="no"
+          bindtap="onCopyTracking"
+          data-no="{{item.no}}"
+          hover-class="ship-row-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        ><view class="ship-badge" style="background: {{item.color}};">{{item.courier}}</view><view class="ship-meta"><text class="ship-lab">{{i18n.trackingNo}}</text><text class="ship-no" user-select>{{item.no}}</text></view><text class="ship-copy">复制</text></view></view></view><view class="photo-card" wx:if="{{photoUrl}}" bindtap="onPreviewPhoto" hover-class="photo-hover"><image class="photo" src="{{photoUrl}}" mode="aspectFill" /><text class="photo-t">{{i18n.deliveryPhoto}}</text></view><view class="reject-card" wx:if="{{rejectReason}}"><text class="reject-t">{{i18n.agentRejected}}</text><text class="reject-d">{{rejectReason}}</text></view><view class="receipt-card" wx:if="{{receiptReady}}"><receipt-body model="{{receiptModel}}" fontScale="{{fontScale}}" /></view></view></view>

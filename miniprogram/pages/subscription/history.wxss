@@ -1,0 +1,30 @@
+.page{min-height:100vh;padding:24rpx 36rpx 100rpx;box-sizing:border-box;background:linear-gradient(180deg,#dbe7f5 0%,#eef3f9 36%,#f3f6fb 100%)}
+.hero{padding:12rpx 8rpx 8rpx}
+.hero-k{display:block;font-size:22rpx;color:#5b7aa0;letter-spacing:2rpx}
+.hero-title{display:block;margin-top:8rpx;font-size:48rpx;font-weight:750;color:#16324f}
+.hero-hint{display:block;margin-top:12rpx;font-size:24rpx;line-height:1.5;color:#6b7c8d}
+.login-banner{margin-top:24rpx;background:rgba(255,255,255,0.94);border-radius:28rpx;padding:32rpx;box-shadow:0 12rpx 32rpx rgba(46,107,181,0.08)}
+.login-banner-t{display:block;font-size:32rpx;font-weight:600;color:#1a2b3c}
+.login-banner-d{display:block;margin-top:10rpx;font-size:24rpx;line-height:1.5;color:#5a6b7d}
+.login-banner-act{display:block;margin-top:18rpx;font-size:26rpx;font-weight:600;color:#2e6bb5}
+.empty{margin-top:100rpx;display:flex;flex-direction:column;align-items:center}
+.empty-ring{width:88rpx;height:88rpx;border-radius:50%;border:8rpx solid #d5e4f4;margin-bottom:20rpx}
+.empty-t{font-size:28rpx;color:#8a9aac}
+.empty-btn{margin-top:28rpx;padding:18rpx 40rpx;border-radius:40rpx;background:#2e6bb5;color:#fff;font-size:26rpx;font-weight:600}
+.sum{margin:28rpx 0 24rpx;background:rgba(255,255,255,0.88);border-radius:28rpx;padding:28rpx 12rpx;display:flex;align-items:center;box-shadow:0 12rpx 32rpx rgba(46,107,181,0.07)}
+.sum-item{flex:1;display:flex;flex-direction:column;align-items:center}
+.sum-n{font-size:40rpx;font-weight:750;color:#16324f}
+.sum-l{margin-top:6rpx;font-size:22rpx;color:#7a8b9c}
+.sum-div{width:1rpx;height:56rpx;background:#e3ebf4}
+.ticket{background:#fff;border-radius:28rpx;overflow:hidden;margin-bottom:22rpx;box-shadow:0 14rpx 36rpx rgba(22,50,79,0.07)}
+.ticket-band{height:10rpx;background:linear-gradient(90deg,#1f5ea8 0%,#4d8fd6 55%,#9ec7f2 100%)}
+.ticket-body{padding:28rpx 32rpx 22rpx}
+.ticket-top{display:flex;align-items:center;justify-content:space-between}
+.ticket-plan{font-size:34rpx;font-weight:750;color:#16324f}
+.ticket-ok{font-size:22rpx;color:#0f766e;background:#e7f6f2;padding:6rpx 16rpx;border-radius:999rpx;font-weight:600}
+.ticket-amt-row{display:flex;align-items:baseline;margin-top:18rpx}
+.ticket-yen{font-size:32rpx;font-weight:700;color:#16324f;margin-right:6rpx}
+.ticket-amt{font-size:64rpx;font-weight:750;color:#16324f;letter-spacing:1rpx;line-height:1}
+.ticket-foot{display:flex;align-items:center;margin-top:22rpx;padding-top:18rpx;border-top:1rpx dashed #e4ecf4;font-size:24rpx;color:#6b7c8d}
+.dot{margin:0 10rpx;color:#c5d0dc}
+.ticket-copy{display:block;margin-top:10rpx;font-size:20rpx;color:#b3c0ce}

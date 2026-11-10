@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "代理申请",
+  "navigationBarBackgroundColor": "#EEF6F4",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#EEF6F4",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

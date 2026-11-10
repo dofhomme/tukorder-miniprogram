@@ -1,0 +1,25 @@
+<view class="page {{rtl ? 'rtl' : ''}}">
+  <view class="card" wx:if="{{current}}">
+    <text class="title">{{connected ? i18n.connectedPrefix : i18n.disconnectedLast}}</text>
+    <view class="host" data-ip="{{current}}" data-port="{{currentPort}}" data-name="{{currentName}}" bindtap="onPick" hover-class="tap-hover">
+      <view class="host-main">
+        <text class="host-ip">{{currentName || current}}</text>
+        <text class="host-sub">{{current}}</text>
+      </view>
+      <text class="host-go">{{connected ? i18n.disconnect : i18n.lanConnect}}</text>
+    </view>
+  </view>
+  <view class="card">
+    <text class="title">{{scanning ? i18n.lanScanning : i18n.lanTitle}}</text>
+    <text class="sub">{{i18n.lanSub}}</text>
+    <view wx:if="{{!scanning && !hosts.length}}" class="empty">{{hint || i18n.lanScanEmpty}}</view>
+    <view class="host" wx:for="{{hosts}}" wx:key="host" data-ip="{{item.host}}" data-port="{{item.port}}" data-name="{{item.name}}" bindtap="onPick" hover-class="tap-hover">
+      <view class="host-main">
+        <text class="host-ip">{{item.name}}</text>
+        <text class="host-sub">{{item.host}}</text>
+      </view>
+      <text class="host-go">{{i18n.lanConnect}}</text>
+    </view>
+    <view class="rescan {{scanning ? 'off' : ''}}" bindtap="onRescan">{{scanning ? i18n.lanScanning : i18n.lanScan}}</view>
+  </view>
+</view>

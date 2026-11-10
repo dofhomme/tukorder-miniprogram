@@ -1,0 +1,9 @@
+.page{min-height:100vh;background:#f5f6f8;padding:24rpx;box-sizing:border-box}
+.group{display:block;font-size:28rpx;color:#163A6B;font-weight:700;margin:12rpx 0 8rpx}
+.tip{display:block;font-size:24rpx;color:#5B7390;margin-bottom:20rpx;line-height:1.6}
+.row{display:flex;align-items:center;background:#fff;border-radius:16rpx;padding:28rpx 24rpx;margin-bottom:16rpx;border:2rpx solid transparent}
+.row.on{border-color:#1E4D8C}
+.meta{flex:1;min-width:0;padding-right:16rpx}
+.lab{display:block;font-size:30rpx;color:#163A6B;font-weight:700}
+.hint{display:block;font-size:24rpx;color:#6B7C93;margin-top:8rpx;line-height:1.5}
+.mark{font-size:24rpx;color:#1E4D8C;flex-shrink:0}

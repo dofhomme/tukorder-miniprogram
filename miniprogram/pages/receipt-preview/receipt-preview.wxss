@@ -1,0 +1,58 @@
+.page{height:100vh;display:flex;flex-direction:column;background:#f3f6fb;box-sizing:border-box;overflow:hidden}
+.tap-hover{opacity:0.72}
+.header{background:linear-gradient(180deg,#dbe7f5 0%,#eef3f9 70%,#ffffff 100%);flex-shrink:0;border-bottom:1rpx solid rgba(22,58,107,0.08);z-index:20}
+.status-spacer{width:100%}
+.nav-row{display:flex;align-items:center;padding-left:8rpx;box-sizing:border-box}
+.nav-back{width:72rpx;height:64rpx;line-height:60rpx;text-align:center;color:#163a6b;font-size:48rpx;font-weight:300;flex-shrink:0}
+.nav-title{color:#163a6b;font-size:32rpx;font-weight:600;margin-left:4rpx;max-width:360rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.nav-spacer{flex:1;min-width:0}
+.bt-link{display:flex;align-items:center;gap:6rpx;padding:8rpx 12rpx;flex-shrink:0;max-width:240rpx}
+.bt-ico{width:32rpx;height:32rpx;flex-shrink:0}
+.bt-txt{font-size:24rpx;color:#2e6bb5;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180rpx}
+.bt-link.on .bt-txt{color:#07c160}
+.body{flex:1;height:0;padding:24rpx 12rpx 16rpx;box-sizing:border-box}
+.tpl-pick-row{display:flex;align-items:center;justify-content:space-between;margin:0 8rpx 16rpx;padding:0 8rpx}
+.tpl-pick-name{font-size:28rpx;font-weight:700;color:#163A6B}
+.tpl-pick{flex-shrink:0;padding:8rpx 0 8rpx 16rpx;font-size:26rpx;font-weight:600;color:#1E4D8C}
+.card{background:#fff;border-radius:16rpx;padding:28rpx 0 32rpx;box-shadow:0 4rpx 20rpx rgba(22,58,107,0.06);border:1rpx solid rgba(22,58,107,0.06);overflow:hidden;box-sizing:border-box}
+.shop{font-size:36rpx;font-weight:700;color:#163a6b;text-align:center}
+.line{height:1rpx;background:#e0e6ed;margin:20rpx 0 16rpx}
+.info{display:flex;padding:6rpx 0;font-size:26rpx}
+.info .k{width:72rpx;color:#6b7c93;flex-shrink:0}
+.info .v{flex:1;color:#1a2b3c;word-break:break-all}
+.table{margin-top:16rpx;border:1rpx solid #d0d7de;border-radius:8rpx;overflow:hidden}
+.tr{display:flex;align-items:center;min-height:56rpx;border-bottom:1rpx solid #e8edf2;padding:8rpx 10rpx;box-sizing:border-box}
+.tr:last-child{border-bottom:none}
+.tr.head{background:#e8eef4;min-height:52rpx}
+.tr.head .c{color:#3d6aa0;font-weight:600;font-size:24rpx}
+.c{font-size:24rpx;color:#1a2b3c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.c.code{flex:1.4;min-width:0}
+.c.qty{width:100rpx;text-align:center;flex-shrink:0}
+.c.price{width:110rpx;text-align:right;flex-shrink:0}
+.c.sub{width:120rpx;text-align:right;flex-shrink:0}
+.sum{margin-top:20rpx;display:flex;justify-content:space-between;align-items:baseline;font-size:28rpx;color:#1a2b3c;font-weight:600}
+.sum .amt{color:#e53935;font-size:32rpx}
+.settled{display:block;margin-top:10rpx;color:#e53935;font-size:28rpx;font-weight:700}
+.dash{margin:20rpx 0;border-top:2rpx dashed #b0bec5}
+.qr-hint,.ret-hint{display:block;text-align:center;font-size:30rpx;font-weight:600;color:#1a2b3c;margin-bottom:16rpx}
+.qr-row{display:flex;justify-content:center;gap:36rpx;margin-bottom:12rpx}
+.qr-col{display:flex;flex-direction:column;align-items:center;width:240rpx}
+.qr-img{width:220rpx;height:220rpx;background:#fff}
+.qr-ph{width:220rpx;height:220rpx;border:2rpx solid #cfd8dc;display:flex;align-items:center;justify-content:center;color:#90a4ae;font-size:40rpx;box-sizing:border-box}
+.qr-lab{margin-top:12rpx;font-size:28rpx;color:#1a2b3c;font-weight:600}
+.footer{display:block;text-align:center;font-size:30rpx;font-weight:600;color:#37474f;margin-top:16rpx;line-height:1.55}
+.tpl-tag{display:block;width:fit-content;margin:0 auto 18rpx;padding:4rpx 18rpx;border-radius:999rpx;background:#f3f6fb;text-align:center;font-size:22rpx;color:#5b7390}
+.loading{padding:120rpx 0;text-align:center;color:#6b7c93;font-size:28rpx}
+.actions{flex-shrink:0;background:#fff;padding:20rpx 28rpx calc(20rpx + env(safe-area-inset-bottom));box-shadow:0 -4rpx 20rpx rgba(22,58,107,0.06)}
+.act-row{display:flex;gap:16rpx}
+.act-row-2{margin-top:16rpx}
+.act-btn{flex:1;height:88rpx;border-radius:16rpx;display:flex;align-items:center;justify-content:center;font-size:30rpx;font-weight:600;color:#fff}
+.act-btn.print{background:#1e4d8c}
+.act-btn.share{margin:0;padding:0;background:#163a6b;border:none;line-height:88rpx}
+.act-btn.share::after{border:none}
+.act-btn.download{background:#e53935}
+.act-btn.cloud{background:#e8f1ff;color:#1e4d8c}
+.act-btn.disabled{opacity:0.5}
+.header{z-index:30}
+.actions{position:relative;z-index:30}
+.exp-canvas{position:fixed;left:-9999px;top:0;width:360px;height:600px;z-index:-1}

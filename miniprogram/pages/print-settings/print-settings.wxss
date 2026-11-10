@@ -1,0 +1,33 @@
+.page{height:100vh;background:#f3f6fb;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
+.list{flex:1;height:100%;min-height:0;padding:8rpx 24rpx 0;box-sizing:border-box}
+.tut-row{display:flex;padding:12rpx 4rpx 8rpx}
+.list-pad{height:calc(32rpx + env(safe-area-inset-bottom))}
+.panel{background:#fff;border-radius:24rpx;overflow:hidden;border:1rpx solid rgba(22,58,107,0.05);box-shadow:0 4rpx 20rpx rgba(22,58,107,0.06)}
+.sec-label{padding:22rpx 8rpx 12rpx;font-size:24rpx;font-weight:600;color:#6b7c93;letter-spacing:1rpx}
+.gap{height:20rpx;background:transparent}
+.row{display:flex;align-items:flex-start;padding:26rpx 28rpx;border-bottom:1rpx solid #eef2f6;box-sizing:border-box}
+.row.last{border-bottom:none}
+.row-on{background:#f4f7fb}
+.meta{flex:1;min-width:0;padding-right:20rpx}
+.title{display:block;font-size:30rpx;font-weight:600;color:#163a6b;line-height:1.35}
+.sub{display:block;margin-top:6rpx;font-size:24rpx;color:#6b7c93;line-height:1.4}
+.sub.red{color:#c4564a}
+.radio{position:relative;width:84rpx;height:48rpx;border-radius:24rpx;background:#d7dee8;border:none;box-sizing:border-box;flex-shrink:0;margin-top:4rpx}
+.radio text{display:none}
+.radio::after{content:'';position:absolute;top:4rpx;left:4rpx;width:40rpx;height:40rpx;border-radius:50%;background:#fff;box-shadow:0 2rpx 8rpx rgba(22,58,107,0.18)}
+.radio.on{background:#1e4d8c}
+.radio.on::after{left:40rpx}
+.stepper{display:flex;align-items:center;flex-shrink:0;margin-top:2rpx;background:#eef3f9;border-radius:16rpx;padding:4rpx}
+.step-btn{width:56rpx;height:56rpx;border-radius:12rpx;display:flex;align-items:center;justify-content:center;font-size:34rpx;font-weight:600;color:#1e4d8c;background:#fff;box-sizing:border-box}
+.step-val{width:64rpx;text-align:center;font-size:30rpx;font-weight:700;color:#163a6b}
+.link{flex-shrink:0;font-size:28rpx;color:#1e4d8c;font-weight:600;margin-top:4rpx}
+.nav-row{display:flex;align-items:center;padding:22rpx 24rpx 22rpx 28rpx;border-bottom:1rpx solid #eef2f6;min-height:108rpx;box-sizing:border-box}
+.nav-row.last{border-bottom:none}
+.nav-row-hover{background:#f4f7fb}
+.nav-ico{width:72rpx;height:72rpx;border-radius:16rpx;background:linear-gradient(145deg,#4a7cba 0%,#2e6bb5 100%);margin-right:20rpx;flex-shrink:0;display:flex;align-items:center;justify-content:center;box-shadow:0 6rpx 14rpx rgba(46,107,181,0.22)}
+.nav-ico-img{width:40rpx;height:40rpx}
+.nav-meta{flex:1;min-width:0}
+.nav-title{flex:1;font-size:30rpx;color:#163a6b;font-weight:600}
+.nav-meta .nav-title{display:block;flex:none}
+.nav-sub{display:block;margin-top:6rpx;font-size:22rpx;color:#6b7c93;line-height:1.35}
+.chev{color:#b7c3d4;font-size:36rpx;padding-left:8rpx}

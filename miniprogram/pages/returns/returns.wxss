@@ -1,0 +1,51 @@
+.page{height:100vh;background:#f3f6fb;display:flex;flex-direction:column;box-sizing:border-box;overflow:hidden}
+.tap-hover{opacity:0.72}
+.header{background:linear-gradient(180deg,#dbe7f5 0%,#eef3f9 100%);flex-shrink:0;border-bottom:1rpx solid rgba(22,58,107,0.08)}
+.status-spacer{width:100%}
+.nav-row{display:flex;align-items:center;padding-left:8rpx;box-sizing:border-box}
+.nav-back{width:72rpx;height:64rpx;line-height:60rpx;text-align:center;color:#163a6b;font-size:48rpx;font-weight:300;flex-shrink:0}
+.nav-title{color:#163a6b;font-size:34rpx;font-weight:600;margin-left:4rpx}
+.nav-title.flex{flex:1;min-width:0;margin-right:8rpx}
+.nav-spacer{flex:1;min-width:0}
+.nav-ico-btn{width:64rpx;height:64rpx;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-ico-btn.dim{opacity:0.35}
+.nav-ico{width:40rpx;height:40rpx}
+.nav-txt-btn{padding:0 16rpx;color:#163a6b;font-size:28rpx;font-weight:600;flex-shrink:0}
+.nav-txt-btn.danger{color:#c62828}
+.nav-txt-btn.dim{opacity:0.4}
+.search-wrap{padding:20rpx 24rpx 12rpx;border-bottom:1rpx solid #eee;flex-shrink:0;background:#fff}
+.search-box{display:flex;align-items:center;height:72rpx;padding:0 20rpx;border:1rpx solid #cfd8dc;border-radius:16rpx;box-sizing:border-box}
+.search-ico{font-size:28rpx;margin-right:10rpx;opacity:0.55}
+.search-input{flex:1;min-width:0;height:72rpx;font-size:28rpx;color:#212121}
+.search-ph{color:#9e9e9e;font-size:26rpx}
+.search-clear{padding:8rpx;color:#9e9e9e;font-size:28rpx}
+.filter-row{display:flex;align-items:center;margin-top:16rpx;gap:12rpx}
+.fchip{padding:10rpx 22rpx;border-radius:999rpx;font-size:26rpx;color:#616161;background:#f5f5f5;border:1rpx solid transparent}
+.fchip.on{color:#1e4d8c;background:rgba(30,77,140,0.1);border-color:rgba(30,77,140,0.35);font-weight:600}
+.refresh{margin-left:auto;display:flex;align-items:center;color:#1e4d8c;font-size:26rpx;padding:8rpx 4rpx}
+.refresh-ico{margin-right:4rpx;font-size:28rpx}
+.list{flex:1;height:0;box-sizing:border-box}
+.list-pad{height:200rpx}
+.row{display:flex;align-items:flex-start;padding:24rpx 20rpx 24rpx 28rpx;border-bottom:1rpx solid #eee}
+.row-hover{background:#f5f7fa}
+.check-wrap{padding-right:16rpx;padding-top:6rpx;flex-shrink:0}
+.check{width:40rpx;height:40rpx;border-radius:8rpx;border:2rpx solid #bdbdbd;box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:24rpx;color:#fff;font-weight:700}
+.check.on{background:#1e4d8c;border-color:#1e4d8c}
+.row-main{flex:1;min-width:0;padding-right:12rpx}
+.title-row{display:flex;align-items:center}
+.ship-ico{font-size:28rpx;margin-right:10rpx;flex-shrink:0}
+.title{flex:1;min-width:0;font-size:30rpx;font-weight:600;color:#212121;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub{display:block;margin-top:8rpx;font-size:26rpx;color:#616161;line-height:1.35}
+.time{display:block;margin-top:10rpx;font-size:22rpx;color:#9e9e9e}
+.row-side{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:12rpx}
+.more{width:48rpx;height:40rpx;line-height:32rpx;text-align:center;font-size:36rpx;color:#757575;letter-spacing:2rpx}
+.badge{display:flex;align-items:center;gap:6rpx;padding:8rpx 18rpx;border-radius:999rpx;font-size:24rpx;font-weight:600;border:1rpx solid}
+.badge.ok{color:#2e7d32;background:#e8f5e9;border-color:#66bb6a}
+.badge.wait{color:#e65100;background:#fff3e0;border-color:#ffa726}
+.badge-ico{font-size:22rpx;line-height:1}
+.empty,.loading{padding:120rpx 48rpx;text-align:center;color:#9e9e9e;font-size:28rpx}
+.empty-ico{display:block;font-size:72rpx;margin-bottom:16rpx}
+.empty-txt{display:block;margin-bottom:28rpx;color:#757575}
+.empty-btn{display:inline-block;padding:16rpx 32rpx;border:1rpx solid #1e4d8c;border-radius:12rpx;color:#1e4d8c;font-size:28rpx}
+.fab{position:fixed;right:32rpx;bottom:calc(40rpx + env(safe-area-inset-bottom));height:88rpx;padding:0 32rpx;border-radius:44rpx;background:#1e4d8c;color:#fff;display:flex;align-items:center;gap:8rpx;font-size:28rpx;font-weight:600;box-shadow:0 8rpx 24rpx rgba(30,77,140,0.35);z-index:20}
+.fab-ico{font-size:36rpx;font-weight:700}

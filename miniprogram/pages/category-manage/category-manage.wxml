@@ -1,0 +1,18 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view class="loading" wx:if="{{loading}}"><text>{{i18n.loading}}</text></view><view class="err" wx:elif="{{loadError}}"><text class="err-txt">{{loadError}}</text><button class="retry" bindtap="onReload" hover-stay-time="50" hover-start-time="0">{{i18n.retry}}</button></view><view class="empty" wx:elif="{{!list.length}}"><text>{{i18n.noCategories}}</text><text class="empty-sub">{{i18n.tapAddCategory}}</text></view><scroll-view wx:else class="list" scroll-y enhanced show-scrollbar="{{false}}"><block wx:for="{{list}}" wx:key="key"><view class="divider" wx:if="{{index > 0}}"></view><view class="row {{dragIndex === index ? 'dragging' : ''}}"><view
+          class="drag"
+          data-index="{{index}}"
+          catchtouchstart="onDragStart"
+          catchtouchmove="onDragMove"
+          catchtouchend="onDragEnd"
+          catchtouchcancel="onDragEnd"
+        ><text class="drag-ico">☰</text></view><text class="name">{{item.name}}</text><view class="acts"><view class="act edit" data-index="{{index}}" bindtap="onEdit" catchtap="onEdit" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="/assets/icons/edit-outlined.svg" mode="aspectFit" /></view><view class="act del" data-index="{{index}}" bindtap="onDelete" catchtap="onDelete" hover-stay-time="50" hover-start-time="0"><text class="act-ico">🗑</text></view></view></view></block><view class="list-pad"></view></scroll-view><view class="fab" bindtap="onAdd" wx:if="{{!busy}}" hover-stay-time="50" hover-start-time="0"><text>+ {{i18n.addCategory}}</text></view><view class="busy-mask" wx:if="{{busy}}"><view class="busy-box"><text>{{i18n.processing}}</text></view></view><view class="mask" wx:if="{{showNameDlg}}" catchtouchmove="noop" bindtap="onNameCancel" hover-stay-time="50" hover-start-time="0"><view class="dlg" catchtap="noop" hover-stay-time="50" hover-start-time="0"><text class="dlg-title">{{nameDlgTitle}}</text><view class="dlg-input-wrap"><input
+          class="finput"
+          focus="{{showNameDlg}}"
+          value="{{nameDlgValue}}"
+          placeholder="{{i18n.inputCatName}}"
+          placeholder-class="dlg-ph"
+          maxlength="40"
+          bindinput="onNameInput"
+          confirm-type="done"
+          bindconfirm="onNameConfirm"
+        /></view><view class="dlg-acts"><view class="dlg-btn" bindtap="onNameCancel" hover-stay-time="50" hover-start-time="0"><text>{{i18n.cancel}}</text></view><view class="dlg-btn filled" bindtap="onNameConfirm" hover-stay-time="50" hover-start-time="0"><text>{{i18n.confirm}}</text></view></view></view></view><view class="mask" wx:if="{{showDelDlg}}" catchtouchmove="noop" bindtap="onDelCancel" hover-stay-time="50" hover-start-time="0"><view class="dlg" catchtap="noop" hover-stay-time="50" hover-start-time="0"><text class="dlg-title">{{i18n.deleteCategory}}</text><text class="dlg-body" wx:if="{{delCount === 0}}">{{i18n.confirmDeleteNamed}}「{{delName}}」？</text><block wx:else><text class="dlg-body">{{delCount}} {{i18n.catUsedBy}}</text><text class="dlg-body">{{i18n.confirmDeleteNamed}}「{{delName}}」？</text></block><view class="dlg-acts"><view class="dlg-btn" bindtap="onDelCancel" hover-stay-time="50" hover-start-time="0"><text>{{i18n.cancel}}</text></view><view class="dlg-btn danger" bindtap="onDelConfirm" hover-stay-time="50" hover-start-time="0"><text>{{i18n.delete}}</text></view></view></view></view></view>

@@ -1,0 +1,1 @@
+"use strict";const i18n_1=require("../../services/i18n");Page({data:Object.assign({},(0,i18n_1.i18nState)()),applyLocale(){(0,i18n_1.bindPageI18n)(this,"lookbook")},onLoad(){this.applyLocale(),wx.switchTab({url:"/pages/products/products"})},onShow(){wx.switchTab({url:"/pages/products/products"})}});

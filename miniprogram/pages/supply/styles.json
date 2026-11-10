@@ -1,0 +1,9 @@
+{
+  "navigationBarBackgroundColor": "#e7f0ff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "商品与物料",
+  "usingComponents": {
+    "style-form": "./style-form/style-form",
+    "material-form": "./material-form/material-form"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "客户管理",
+  "navigationBarBackgroundColor": "#F3F6FB",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#F3F6FB",
+  "backgroundColorTop": "#F3F6FB",
+  "backgroundColorBottom": "#F3F6FB",
+  "usingComponents": {},
+  "onReachBottomDistance": 80
+}

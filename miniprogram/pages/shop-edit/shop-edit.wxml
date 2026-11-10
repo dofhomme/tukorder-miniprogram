@@ -1,0 +1,100 @@
+<view class="page {{rtl ? 'rtl' : ''}} {{!readOnly && !loading ? 'has-save' : ''}}"><view class="hint warn" wx:if="{{syncHint}}">{{syncHint}}</view><view class="hint warn" wx:if="{{readOnly}}">{{i18n.shopEditReadonly}}</view><view class="card" wx:if="{{!loading}}"><text class="sec-title">{{i18n.shopLogo}}</text><text class="sec-sub">{{i18n.shopLogoD}}</text><view class="logo-wrap"><view class="logo-box" bindtap="onPickLogo" hover-stay-time="50" hover-start-time="0"><image
+          wx:if="{{logoPath}}"
+          class="logo-img"
+          src="{{logoPath}}"
+          mode="aspectFit"
+        /><text wx:else class="logo-placeholder">＋</text><view
+          class="logo-clear"
+          wx:if="{{logoPath && !readOnly}}"
+          catchtap="onClearLogo"
+         hover-stay-time="50" hover-start-time="0">×</view></view></view><view
+      class="pick-btn {{readOnly?'off':''}}"
+      bindtap="onPickLogo"
+     hover-stay-time="50" hover-start-time="0"><text class="pick-ico">🖼</text><text>{{logoPath ? i18n.changeImage : i18n.pickImage}}</text></view><text class="logo-tip">{{i18n.logoTip}}</text><view class="divider"></view><text class="sec-title">{{i18n.shopInfo}}</text><view class="field"><text class="label">{{i18n.nickname}}</text><text class="sec-sub">{{i18n.nicknameD}}</text><view class="input-row"><text class="prefix">{{i18n.nickPx}}</text><input
+          class="input"
+          placeholder="{{i18n.nickname}}"
+          value="{{nickname}}"
+          maxlength="8"
+          disabled="{{readOnly}}"
+          bindinput="onNickname"
+        /></view></view><view class="field"><text class="label">{{i18n.shopName}}</text><view class="input-row"><text class="prefix">{{i18n.shopPx}}</text><input
+          class="input"
+          placeholder="{{i18n.shopNamePh}}"
+          value="{{shopName}}"
+          disabled="{{readOnly}}"
+          bindinput="onName"
+        /></view></view><view class="field"><text class="label">{{i18n.shopSubtitle}}</text><text class="sec-sub">{{i18n.shopSubtitleD}}</text><view class="input-row input-row-area"><text class="prefix">{{i18n.subPx}}</text><textarea
+          class="sub-input"
+          placeholder="{{i18n.shopSubtitlePh}}"
+          value="{{subtitle}}"
+          disabled="{{readOnly}}"
+          maxlength="200"
+          auto-height
+          bindinput="onSubtitle"
+        /></view></view><view class="field"><text class="label">{{i18n.address}}</text><view class="input-row"><text class="prefix">{{i18n.addrPx}}</text><input
+          class="input"
+          placeholder="{{i18n.addressPh}}"
+          value="{{address}}"
+          disabled="{{readOnly}}"
+          bindinput="onAddress"
+        /></view></view><view class="field"><text class="label">{{i18n.contactPhone}}</text><view class="input-row"><text class="prefix">{{i18n.phonePx}}</text><input
+          class="input"
+          type="number"
+          placeholder="020-12345678"
+          value="{{phone}}"
+          disabled="{{readOnly}}"
+          bindinput="onPhone"
+        /></view></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.acceptAgentOrder}}</text><text class="sec-sub">{{i18n.acceptAgentOrderD}}</text></view><switch
+        checked="{{acceptAgentOrders}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onToggleAgent"
+      /></view><view class="divider"></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.psSuggest}}</text><text class="sec-sub">{{i18n.psSuggestD}}</text></view><switch
+        checked="{{productNameSuggestions}}"
+        color="#1e4d8c"
+        bindchange="onToggleSuggest"
+      /></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.psReturnReason}}</text><text class="sec-sub">{{i18n.psReturnReasonD}}</text></view><switch
+        checked="{{askReturnReason}}"
+        color="#1e4d8c"
+        bindchange="onToggleReturnReason"
+      /></view><view class="divider"></view><text class="sec-title">{{i18n.displaySettings}}</text><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.showHomeQr}}</text><text class="sec-sub">{{i18n.showHomeQrD}}</text></view><switch
+        checked="{{showHomeQr}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onToggleHomeQr"
+      /></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.printLogo}}</text><text class="sec-sub">{{i18n.printLogoD}}</text></view><switch
+        checked="{{printLogo}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onTogglePrintLogo"
+      /></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.showHomeShop}}</text><text class="sec-sub">{{i18n.showHomeShopD}}</text></view><switch
+        checked="{{showHomeShopName}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onToggleHomeShop"
+      /></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.showSubtitle}}</text><text class="sec-sub">{{i18n.showSubtitleD}}</text></view><switch
+        checked="{{showSubtitle}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onToggleSubtitle"
+      /></view><view class="field switch-row"><view class="switch-txt"><text class="label">{{i18n.showSheetIndex}}</text><text class="sec-sub">{{i18n.showSheetIndexD}}</text></view><switch
+        checked="{{showSheetIndex}}"
+        disabled="{{readOnly}}"
+        color="#1e4d8c"
+        bindchange="onToggleSheetIndex"
+      /></view><view class="field"><text class="label">{{i18n.headerTextSize}}</text><text class="sec-sub">{{i18n.headerTextSizeD}}</text><view class="size-row"><view
+          class="size-opt {{headerTextSize === 'sm' ? 'on' : ''}}"
+          data-size="sm"
+          bindtap="onHeaderSize"
+          style="font-size:26rpx;"
+        >{{i18n.sizeSm}}</view><view
+          class="size-opt {{headerTextSize === 'md' ? 'on' : ''}}"
+          data-size="md"
+          bindtap="onHeaderSize"
+          style="font-size:36rpx;"
+        >{{i18n.sizeMd}}</view><view
+          class="size-opt {{headerTextSize === 'lg' ? 'on' : ''}}"
+          data-size="lg"
+          bindtap="onHeaderSize"
+          style="font-size:48rpx;"
+        >{{i18n.sizeLg}}</view></view></view></view><view class="loading" wx:else>{{i18n.loading}}</view></view><view class="save-bar" wx:if="{{!readOnly && !loading}}"><view class="save-big {{saving ? 'off' : ''}}" bindtap="onSave" hover-class="save-hover" hover-stay-time="50" hover-start-time="0"><image class="save-ico" src="/assets/icons/pe-save.svg" mode="aspectFit" /><text>{{i18n.saveSettings}}</text></view></view>

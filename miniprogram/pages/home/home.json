@@ -1,0 +1,15 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "disableScroll": true,
+  "usingComponents": {
+    "bluetooth-search-sheet": "/components/bluetooth-search-sheet/bluetooth-search-sheet",
+    "receipt-body": "/components/receipt-body/receipt-body",
+    "voice-fab": "/pages/voice-pack/voice-fab/voice-fab",
+    "network-tip": "/components/network-tip/network-tip",
+    "tutorial-link": "/components/tutorial-link/tutorial-link"
+  },
+  "componentPlaceholder": {
+    "voice-fab": "view"
+  }
+}

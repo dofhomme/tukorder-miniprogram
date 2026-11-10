@@ -1,0 +1,1 @@
+const ALLOWED=/^https:\/\/([\w-]+\.)?imageok\.cn(\/|$)/i;Page({data:{url:"https://imageok.cn"},onLoad(t){const e=decodeURIComponent(String(t.url||"https://imageok.cn")),o=decodeURIComponent(String(t.title||"图可官网")),n=ALLOWED.test(e)?e:"https://imageok.cn";this.setData({url:n}),wx.setNavigationBarTitle({title:o})}});

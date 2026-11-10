@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "打印模版",
+  "navigationBarBackgroundColor": "#EEF3F9",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "receipt-body": "/components/receipt-body/receipt-body"
+  }
+}

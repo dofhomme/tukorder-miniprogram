@@ -1,0 +1,87 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view class="header"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view class="nav-row" style="height: {{navBarHeight}}px; padding-right: {{capsuleSafeRight}}px;"><block wx:if="{{selectMode}}"><view
+          class="nav-back"
+          bindtap="onExitSelect"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        >✕</view><text class="nav-title flex">{{i18n.selectedN}} {{selectedCount}} {{i18n.itemsUnit}}</text><view
+          class="nav-txt-btn"
+          bindtap="onToggleSelectAll"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        >{{allSelected ? i18n.unselectAll : i18n.selectAll}}</view><view
+          class="nav-txt-btn danger {{selectedCount ? '' : 'dim'}}"
+          bindtap="onDeleteSelected"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        >{{i18n.delete}}</view></block><block wx:else><view
+          class="nav-back"
+          bindtap="onBack"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        >‹</view><text class="nav-title">{{i18n.returnsTitle}}</text><view class="nav-spacer"></view><view
+          class="nav-ico-btn {{display.length ? '' : 'dim'}}"
+          bindtap="onEnterSelect"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        ><image class="nav-ico" src="/assets/icons/rp-checklist.svg" mode="aspectFit" /></view><view
+          class="nav-ico-btn"
+          bindtap="onMoreMenu"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        ><image class="nav-ico" src="/assets/icons/rp-more.svg" mode="aspectFit" /></view><view
+          class="nav-ico-btn"
+          bindtap="onAdd"
+          hover-class="tap-hover"
+          hover-stay-time="50"
+          hover-start-time="0"
+        ><image class="nav-ico" src="/assets/icons/rp-add.svg" mode="aspectFit" /></view></block></view></view><view class="search-wrap"><view class="search-box"><text class="search-ico">🔍</text><input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="{{i18n.searchReturns}}"
+        placeholder-class="search-ph"
+        confirm-type="search"
+        bindinput="onKeyword"
+        bindconfirm="onSearch"
+      /><text class="search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword" hover-stay-time="50" hover-start-time="0">✕</text></view><view class="filter-row"><view
+        class="fchip {{filter === 'all' ? 'on' : ''}}"
+        data-k="all"
+        bindtap="onFilter"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.allStatus}}</view><view
+        class="fchip {{filter === 'pending' ? 'on' : ''}}"
+        data-k="pending"
+        bindtap="onFilter"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.pending}}</view><view
+        class="fchip {{filter === 'handled' ? 'on' : ''}}"
+        data-k="handled"
+        bindtap="onFilter"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.processed}}</view><view class="refresh" bindtap="onRefresh" hover-stay-time="50" hover-start-time="0"><text class="refresh-ico">↻</text><text>{{i18n.refresh}}</text></view></view></view><scroll-view
+    class="list"
+    scroll-y
+    enhanced
+    show-scrollbar="{{false}}"
+    refresher-enabled
+    refresher-triggered="{{refreshing}}"
+    bindrefresherrefresh="onPullRefresh"
+  ><block wx:if="{{display.length}}"><view
+        class="row"
+        wx:for="{{display}}"
+        wx:key="cloudUid"
+        data-uid="{{item.cloudUid}}"
+        bindtap="onOpen"
+        bindlongpress="onLongPress"
+        hover-class="row-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><view class="check-wrap" wx:if="{{selectMode}}"><view class="check {{item.selected ? 'on' : ''}}"><text wx:if="{{item.selected}}">✓</text></view></view><view class="row-main"><view class="title-row"><text class="ship-ico">🚚</text><text class="title">{{item.title}}</text></view><text class="sub">{{item.preview}}</text><text class="time">{{item.timeLabel}}</text></view><view class="row-side" wx:if="{{!selectMode}}"><view class="more" data-uid="{{item.cloudUid}}" catchtap="onRowMore" hover-stay-time="50" hover-start-time="0">⋯</view><view class="badge {{item.isHandled ? 'ok' : 'wait'}}"><text class="badge-ico">{{item.isHandled ? '✓' : '…'}}</text><text>{{item.isHandled ? i18n.processed : i18n.pending}}</text></view></view></view></block><view class="empty" wx:elif="{{!loading}}"><text class="empty-ico">📭</text><text class="empty-txt">{{emptyText}}</text><view class="empty-btn" bindtap="onAdd" hover-stay-time="50" hover-start-time="0">{{i18n.newReturnFirst}}</view></view><view class="loading" wx:else>{{i18n.loading}}</view><view class="list-pad"></view></scroll-view><view class="fab" wx:if="{{!selectMode}}" bindtap="onAdd" hover-stay-time="50" hover-start-time="0"><text class="fab-ico">＋</text><text>{{i18n.newReturn}}</text></view></view>

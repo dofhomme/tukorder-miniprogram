@@ -1,0 +1,2 @@
+@import "./common.wxss";.pick,.on{margin-top:12rpx;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.on{color:#1a6b45;border-color:#1a6b45}

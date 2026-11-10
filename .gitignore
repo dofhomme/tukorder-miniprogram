@@ -1,0 +1,11 @@
+node_modules/
+miniprogram_npm/
+.DS_Store
+*.log
+.idea/
+.local/
+project.private.config.json
+private.wx*.key
+.env
+.env.*
+.voice-plugin-keep

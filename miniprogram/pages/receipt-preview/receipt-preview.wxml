@@ -1,0 +1,42 @@
+<view class="page {{rtl ? 'rtl' : ''}}" wx:if="{{ready}}"><view class="header"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view class="nav-row" style="height: {{navBarHeight}}px; padding-right: {{capsuleSafeRight}}px;"><view class="nav-back" bindtap="onBack" hover-class="tap-hover" hover-stay-time="50" hover-start-time="0">‹</view><text class="nav-title">{{navTitle}}</text><view class="nav-spacer"></view><view
+        class="bt-link {{btConnected ? 'on' : ''}}"
+        bindtap="onBluetoothTap"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><image
+          class="bt-ico"
+          src="{{linkWifi ? (btConnected ? '/assets/icons/stmt-wifi-on.svg' : '/assets/icons/stmt-wifi.svg') : (btConnected ? '/assets/icons/stmt-bluetooth-on.svg' : '/assets/icons/stmt-bluetooth.svg')}}"
+          mode="aspectFit"
+        /><text class="bt-txt">{{btConnecting ? i18n.connecting : btLabel}}</text></view></view></view><scroll-view scroll-y class="body" enhanced show-scrollbar="{{false}}"><view class="tpl-pick-row" wx:if="{{!loading}}"><text class="tpl-pick-name">首页小票</text><view class="tpl-pick" bindtap="onPickTemplate" hover-class="tap-hover" hover-stay-time="50" hover-start-time="0">选择小票模板</view></view><view class="card" wx:if="{{!loading}}"><text class="tpl-tag">{{templateLabel}}</text><receipt-body model="{{receiptModel}}" fontScale="{{fontScale}}" /></view><view class="loading" wx:else>{{i18n.loadingPreview}}</view></scroll-view><view class="actions"><view class="act-row"><view
+        class="act-btn print {{busy || !btConnected ? 'disabled' : ''}}"
+        bindtap="onPrint"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.print}}</view><view
+        class="act-btn cloud {{busy ? 'disabled' : ''}}"
+        wx:if="{{cloudPrintVisible || templateSample}}"
+        bindtap="onCloudPrint"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.cloudPrintToPc}}</view></view><view class="act-row act-row-2" wx:if="{{!templateSample}}"><button
+        class="act-btn share {{shareReady ? '' : 'disabled'}}"
+        open-type="{{shareReady ? 'share' : ''}}"
+        bindtap="onShareTap"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.shareLookup}}</button><view
+        class="act-btn download {{busy ? 'disabled' : ''}}"
+        bindtap="onDownload"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.downloadImage}}</view></view></view></view><canvas
+  type="2d"
+  id="expCanvas"
+  class="exp-canvas"
+  style="position:fixed;left:-9999px;top:0;width:360px;height:{{canvasH}}px;"
+></canvas><bluetooth-search-sheet id="btSheet" />

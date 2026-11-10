@@ -1,0 +1,14 @@
+@import "./common.wxss";.find{width:100%;height:64rpx;margin-top:16rpx;background:#fff;border:2rpx solid #dbe3ee;border-radius:999rpx;box-shadow:0 6rpx 16rpx rgba(22,58,107,0.05);padding:0 24rpx;font-size:28rpx;color:#212121;box-sizing:border-box}
+.pin .checks{margin-top:16rpx}
+.rec-name{flex:1;min-width:0;font-size:30rpx;font-weight:600;color:#212121;word-break:break-all}
+.rec-tools{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:16rpx;margin-left:12rpx}
+.rec-tools .rec-pen{margin-left:0}
+.cut-block{padding-bottom:8rpx;border-left:6rpx solid #1e4d8c}
+.cut-main{margin:-4rpx 0 8rpx}
+.sent{flex-shrink:0;margin-left:12rpx;color:#1e4d8c;font-size:24rpx;font-weight:600}
+.from-factory{display:inline-block;margin-top:8rpx;padding:2rpx 12rpx;border-radius:999rpx;background:#e8f1ff;color:#1e4d8c;font-size:22rpx;font-weight:600}
+.ship{margin-top:12rpx;padding:16rpx;background:#f4f7fb;border-radius:12rpx}
+.ship .when{font-size:24rpx;font-weight:500;color:#64748b}
+.split-head{display:block;margin-bottom:8rpx;color:#1e4d8c;font-size:26rpx;font-weight:600}
+.rec-trash{width:32rpx;height:32rpx}
+.pop-sheet.tall supply-bench{flex:1;height:0;min-height:0}

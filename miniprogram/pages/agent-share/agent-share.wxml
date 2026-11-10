@@ -1,0 +1,23 @@
+<view class="page"><view wx:if="{{loading}}" class="state">{{i18n.loading}}</view><view wx:elif="{{error}}" class="state">{{error}}</view><block wx:elif="{{isFolder}}"><view class="body"><text class="shop">{{shopName}}</text><text class="code">{{folderTitle}}</text><text class="ask">{{isNewArrival ? i18n.newArrivalPublic : i18n.lookFolderHint}}</text></view><view class="fgrid"><view class="fcard" wx:for="{{folderItems}}" wx:key="code"><image
+          class="fcover"
+          src="{{item.coverUrl}}"
+          mode="aspectFill"
+          wx:if="{{item.coverUrl}}"
+          data-url="{{item.coverUrl}}"
+          bindtap="onPreview"
+        /><view class="fcover ph" wx:else>{{item.code}}</view><text class="fcode">{{item.code}}</text><text class="fprice" wx:if="{{item.suggestedRetailPrice}}">{{i18n.priceRetail}} ¥{{item.suggestedRetailPrice}}</text><text class="fprice" wx:else>{{i18n.askAgent}}</text></view></view></block><block wx:else><view class="hero-wrap" wx:if="{{coverUrl || videoUrl}}"><image
+        class="hero"
+        src="{{coverUrl}}"
+        mode="aspectFill"
+        wx:if="{{coverUrl}}"
+        data-url="{{coverUrl}}"
+        bindtap="onPreview"
+      /><view class="hero-ph" wx:else>{{i18n.lookbook}}</view><view class="hero-play" wx:if="{{videoUrl}}" catchtap="onPlayVideo">▶</view></view><view class="hero-ph" wx:else>{{i18n.lookbook}}</view><view class="body"><text class="shop">{{shopName}}</text><text class="code">{{code}}</text><text class="name" wx:if="{{name && name !== code}}">{{name}}</text><text class="price" wx:if="{{!askAgent}}">{{i18n.priceRetail}} ¥{{priceLabel}}</text><text class="ask" wx:else>{{i18n.askAgent}}</text><text class="stock">{{stockLabel}}</text><view class="chips" wx:if="{{colors.length}}"><text class="chip" wx:for="{{colors}}" wx:key="*this">{{item}}</text></view><view class="chips" wx:if="{{sizes.length}}"><text class="chip" wx:for="{{sizes}}" wx:key="*this">{{item}}</text></view><scroll-view wx:if="{{gallery.length > 1}}" scroll-x class="thumbs"><image
+          wx:for="{{gallery}}"
+          wx:key="*this"
+          class="thumb"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          bindtap="onPreview"
+        /></scroll-view></view></block></view>

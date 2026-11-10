@@ -1,0 +1,105 @@
+<wxs src="../../utils/media.wxs" module="media" /><view class="page {{loginMode === 'agent' ? 'theme-agent' : 'theme-merchant'}}"><view class="bg" aria-hidden="true"><view class="bg-wash"></view><view class="bg-orb bg-orb-a"></view><view class="bg-orb bg-orb-b"></view><view class="bg-grid"></view></view><view class="safe-top"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view
+      class="nav-row"
+      style="height: {{navBarHeight}}px; padding-right: {{capsuleSafeRight}}px;"
+    ></view></view><view class="body"><view class="form-wrap"><view class="logout-notice" wx:if="{{logoutNotice}}"><text class="notice-txt">{{logoutNotice}}</text></view><view class="hero" wx:if="{{!showBind}}"><view class="logo-ring"><image
+            class="logo {{loginMode === 'agent' ? 'logo-off' : ''}}"
+            src="{{media.url('imageok-logo.png')}}"
+            mode="aspectFit"
+          /><image
+            class="logo logo-agent {{loginMode === 'agent' ? '' : 'logo-off'}}"
+            src="{{media.url('imageok-logo-agent.png')}}"
+            mode="aspectFit"
+          /></view><view class="hero-copy"><text class="hero-name {{inviteHero ? 'hero-name-invite' : ''}}">{{loginMode === 'agent' ? (inviteHero || '代理工作台') : (inviteHero || '图可开单打印')}}</text><text class="hero-sub {{inviteHero ? 'hero-sub-invite' : ''}}">{{loginMode === 'agent' ? (inviteHero ? '申请通过后可查账对账、销售统计' : '查账对账 · 销售统计') : (inviteHero ? '开通并绑定手机号后，双方可获得云同步天数' : '快速打印 · 云端同步 · 智能语音')}}</text></view></view><view class="hero hero-bind" wx:else><view class="logo-ring logo-ring-sm"><image class="logo logo-sm" src="{{media.url('imageok-logo.png')}}" mode="aspectFit" /></view><text class="hero-name">{{inviteHero ? inviteHero : '绑定开单账号'}}</text><text class="hero-sub">{{inviteHero ? '绑定手机号即开通商家，双方可获得云同步天数' : '手机号用于云端同步与多端登录。也可暂不绑定，先游客浏览。'}}</text></view><view class="mode-tabs" wx:if="{{!showBind}}"><view
+          class="mode-tab {{loginMode === 'merchant' ? 'on' : ''}}"
+          bindtap="onSwitchMode"
+          data-mode="merchant"
+          hover-stay-time="50"
+        >商家登录</view><view
+          class="mode-tab {{loginMode === 'agent' ? 'on' : ''}}"
+          bindtap="onSwitchMode"
+          data-mode="agent"
+          hover-stay-time="50"
+        >代理登录</view></view><block wx:if="{{!showBind}}"><button
+          wx:if="{{loginMode === 'merchant'}}"
+          class="btn-login btn-wx"
+          loading="{{loading}}"
+          disabled="{{loading}}"
+          bindtap="onWechatLogin"
+          hover-class="btn-wx-hover"
+          hover-stay-time="80"
+        >
+          {{loading ? '登录中…' : '微信一键登录'}}
+        </button><button
+          wx:else
+          class="btn-login btn-agent"
+          loading="{{loading}}"
+          disabled="{{loading}}"
+          bindtap="onAgentLogin"
+          hover-class="btn-agent-hover"
+          hover-stay-time="80"
+        >
+          {{loading ? '登录中…' : '微信一键登录'}}
+        </button><text
+          class="browse-link {{loginMode === 'agent' ? 'is-hold' : ''}}"
+          bindtap="onBrowseOnly"
+          hover-stay-time="50"
+        >先逛逛，看看能做什么</text></block><block wx:if="{{showBind}}"><view class="bind-reason"><text class="bind-reason-title">为何需要手机号</text><text class="bind-reason-txt">开单数据需与 ImageOK 账号同步；手机号是账号标识，用于找回与多端共用。您也可先游客浏览，在真正开单时再绑定。</text></view><button
+            wx:if="{{!phoneManual}}"
+            class="field-box field-phone-btn"
+            open-type="getPhoneNumber"
+            bindgetphonenumber="onWxPhone"
+            hover-class="field-phone-hover"
+            disabled="{{phoneLoading || loading}}"
+          ><view class="field-ico phone"></view><text class="field-phone-txt {{bindPhone ? 'got' : ''}}">{{phoneLoading ? '正在获取…' : (bindPhone || '点击通过微信获取手机号')}}</text><text class="sms-btn">{{bindPhone ? '更换' : '获取'}}</text></button><view class="field-box" wx:else><view class="field-ico phone"></view><input
+            class="field-input"
+            type="number"
+            maxlength="11"
+            placeholder="手机号"
+            placeholder-class="ph"
+            value="{{bindPhone}}"
+            bindinput="onBindPhone"
+            hold-keyboard="{{true}}"
+          /></view><view class="field-box"><view class="field-ico lock"></view><input
+            class="field-input"
+            type="number"
+            maxlength="6"
+            placeholder="短信验证码"
+            placeholder-class="ph"
+            value="{{smsCode}}"
+            bindinput="onSmsCode"
+            hold-keyboard="{{true}}"
+          /><view
+            class="sms-btn {{smsCountdown>0 || smsSending ? 'off' : ''}}"
+            bindtap="onSendSms"
+            hover-stay-time="50"
+          >{{smsCountdown>0 ? smsCountdown+'s' : (smsSending ? '发送中' : '获取验证码')}}</view></view><button
+          class="btn-login"
+          loading="{{loading}}"
+          disabled="{{loading}}"
+          bindtap="onBindSubmit"
+          hover-class="btn-hover"
+          hover-stay-time="80"
+        >
+          {{loading ? '绑定中…' : '确认绑定并登录'}}
+        </button><text class="switch-account" bindtap="onCancelBind" hover-stay-time="50">暂不绑定，先游客浏览</text></block><text class="hint" wx:if="{{hint}}">{{hint}}</text><block wx:if="{{!showBind}}"><button
+        wx:if="{{needPrivacyAuth && !agreed}}"
+        id="agree-privacy-btn"
+        class="agree-privacy-btn"
+        open-type="agreePrivacyAuthorization"
+        bindagreeprivacyauthorization="onAgreePrivacyAuthorization"
+        hover-class="agree-privacy-btn-hover"
+        hover-stay-time="50"
+      ><view class="agree-row agree-row-inner"><view class="agree-box" aria-role="checkbox" aria-checked="false"></view><view class="agree-copy"><text class="agree-txt">已阅读并同意</text><text class="legal-link" catchtap="onOpenLegal" data-type="privacy">《用户隐私》</text><text class="agree-txt">和</text><text class="legal-link" catchtap="onOpenLegal" data-type="disclaimer">《免责声明》</text><block wx:if="{{inviteHero}}"><text class="agree-txt">和</text><text class="legal-link" catchtap="onOpenLegal" data-type="invite">《邀请规则》</text></block></view></view></button><view
+        wx:else
+        class="agree-row"
+        bindtap="onToggleAgree"
+        hover-stay-time="50"
+      ><view class="agree-box {{agreed ? 'on' : ''}}" aria-role="checkbox" aria-checked="{{agreed}}"></view><view class="agree-copy"><text class="agree-txt">已阅读并同意</text><text class="legal-link" catchtap="onOpenLegal" data-type="privacy">《用户隐私》</text><text class="agree-txt">和</text><text class="legal-link" catchtap="onOpenLegal" data-type="disclaimer">《免责声明》</text><block wx:if="{{inviteHero}}"><text class="agree-txt">和</text><text class="legal-link" catchtap="onOpenLegal" data-type="invite">《邀请规则》</text></block></view></view></block></view></view><view class="footer"><text class="copyright">© {{year}} 图可科技 · {{versionLabel}}</text></view><view class="scan-mask" wx:if="{{showScanConfirm}}" catchtouchmove="noop"><view class="scan-card"><text class="scan-badge">{{scanDeviceLabel || '设备登录'}}</text><text class="scan-title">{{scanTitle}}</text><text class="scan-desc">{{scanDesc}}</text><view class="scan-acct" wx:if="{{scanPhoneMasked}}"><text class="scan-acct-k">将登录账号</text><text class="scan-acct-p">{{scanPhoneMasked}}</text></view><text class="scan-warn">请确认是你本人正在登录。不要帮陌生人确认。</text><text class="scan-err" wx:if="{{scanError}}">{{scanError}}</text><button
+        class="btn-login btn-wx"
+        loading="{{scanBusy}}"
+        disabled="{{scanBusy}}"
+        bindtap="onConfirmScanLogin"
+        hover-class="btn-wx-hover"
+        hover-stay-time="80"
+      >{{scanBusy ? '确认中…' : '确认登录'}}</button><text class="browse-link" bindtap="onCancelScanLogin">取消</text></view></view></view>
+<human-captcha show="{{captchaShow}}" error="{{captchaError}}" error-seq="{{captchaSeq}}" bind:pass="onCaptchaPass" bind:cancel="onCaptchaCancel" />

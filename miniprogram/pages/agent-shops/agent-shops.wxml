@@ -1,0 +1,11 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view wx:if="{{loading && !rows.length}}" class="state">{{i18n.loading}}</view><view wx:elif="{{error && !rows.length}}" class="state-wrap"><text class="state">{{error}}</text><view class="btn ghost" bindtap="refresh">{{i18n.retry}}</view></view><view wx:else class="wrap"><text class="lead">{{i18n.agentShopsHint}}</text><view wx:if="{{!rows.length}}" class="empty-card"><text class="empty-t">{{i18n.agentShopsEmpty}}</text><view class="btn" bindtap="onOpenPlaza">{{i18n.plazaTitle}}</view></view><view
+      class="shop-card {{item.current ? 'on' : ''}}"
+      wx:for="{{rows}}"
+      wx:key="ownerUserId"
+    ><view class="shop-top"><view class="shop-copy"><text class="shop-name">{{item.shopName}}</text><text class="shop-who">{{item.customerName}}</text></view><view class="role {{item.isAdmin ? 'admin' : 'staff'}}">{{item.roleLabel}}</view></view><view class="shop-meta"><text class="now" wx:if="{{item.current}}">{{i18n.currentShop}}</text><text class="debt" wx:if="{{item.merchantExpired}}">{{i18n.merchantExpiredTitle}}</text><text class="debt" wx:elif="{{item.unpaid}}">{{i18n.unpaidAmount}} ¥{{item.unpaid}}</text></view><view class="shop-act" wx:if="{{item.merchantExpired}}"><button class="renew" open-type="share" data-shop="{{item.shopName}}">{{i18n.merchantRenewForward}}</button></view><view class="shop-act"><view
+          class="unbind {{busyId === item.ownerUserId ? 'off' : ''}}"
+          data-id="{{item.ownerUserId}}"
+          data-name="{{item.shopName}}"
+          bindtap="onUnbind"
+          hover-class="unbind-on"
+        >{{i18n.agentUnbindShop}}</view></view></view><text class="hint" wx:if="{{error}}">{{error}}</text></view></view>

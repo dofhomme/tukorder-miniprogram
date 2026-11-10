@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "连接打印机",
+  "usingComponents": {
+    "bluetooth-search-sheet": "/components/bluetooth-search-sheet/bluetooth-search-sheet"
+  }
+}

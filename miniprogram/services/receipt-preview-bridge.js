@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0}),exports.stageReceiptPreview=stageReceiptPreview,exports.takeReceiptPreview=takeReceiptPreview;let pending=null;function stageReceiptPreview(e){pending=e}function takeReceiptPreview(){const e=pending;return pending=null,e}

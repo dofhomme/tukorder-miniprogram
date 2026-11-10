@@ -1,0 +1,118 @@
+<view class="page {{rtl ? 'rtl' : ''}}">
+  <view class="head">
+    <view class="search-box">
+      <text class="search-ico">⌕</text>
+      <input
+        class="search"
+        placeholder="{{i18n.searchCustomer}}"
+        placeholder-class="search-ph"
+        value="{{keyword}}"
+        bindinput="onKeyword"
+        confirm-type="search"
+      />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="onClearKeyword">×</text>
+    </view>
+    <view class="meta-row">
+      <text class="meta-count">{{i18n.suggestCount}} {{total}} {{i18n.custCountUnit}}</text>
+      <view class="meta-right">
+        <text class="meta-auto" wx:if="{{canManage}}">{{guestMode ? i18n.localOnlyHint : i18n.cloudAutoHint}}</text>
+        <view class="meta-sync" bindtap="onSync">{{i18n.refresh}}</view>
+      </view>
+    </view>
+    <view class="sync-hint" wx:if="{{syncHint}}">
+      <text class="{{syncFail ? 'fail' : 'ok'}}">{{syncHint}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading && !list.length}}" class="state">{{i18n.loading}}</view>
+  <view wx:elif="{{!list.length}}" class="state">
+    <text class="state-title">{{canManage ? i18n.noCustomersFab : i18n.noCustomers}}</text>
+    <view class="empty-btn" wx:if="{{canManage}}" bindtap="onAdd">{{i18n.newCustomer}}</view>
+  </view>
+  <view wx:else class="list">
+    <view
+      class="card"
+      wx:for="{{list}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onRowTap"
+      hover-class="card-on"
+    >
+      <view class="avatar"><text>{{item.avatar}}</text></view>
+      <view class="info">
+        <view class="name-line">
+          <text class="name">{{item.name}}</text>
+          <text
+            wx:if="{{item.arrearsOwed}}"
+            class="arrears"
+            catchtap="onOpenArrears"
+            data-name="{{item.name}}"
+          >{{item.arrearsLabel}}</text>
+        </view>
+        <text class="phone" wx:if="{{item.phone}}">{{item.phone}}</text>
+        <text class="bound" wx:if="{{item.boundHint}}">{{item.boundHint}}</text>
+      </view>
+      <view
+        class="more"
+        wx:if="{{canManage}}"
+        catchtap="onMore"
+        data-id="{{item.id}}"
+        data-idx="{{index}}"
+      >···</view>
+    </view>
+    <view class="load-more">
+      <text wx:if="{{hasMore}}">{{i18n.loadMore}}</text>
+      <text wx:else>{{i18n.shownAll}}</text>
+    </view>
+  </view>
+
+  <view class="fab" wx:if="{{canManage}}" bindtap="onAdd">
+    <text class="fab-plus">＋</text>
+  </view>
+
+  <view class="menu-mask" wx:if="{{menuId}}" catchtap="onCloseMenu" catchtouchmove="noop">
+    <view class="menu-sheet" catchtap="noop">
+      <text class="menu-name">{{menuName}}</text>
+      <view class="menu-item" data-act="prices" bindtap="onMenuAct">历史价格</view>
+      <view class="menu-item" data-act="edit" bindtap="onMenuAct">{{i18n.edit}}</view>
+      <view class="menu-item" wx:if="{{!guestMode && menuWxBound && canDelete}}" data-act="unbind" bindtap="onMenuAct">{{i18n.unbindWechat}}</view>
+      <view class="menu-item" wx:if="{{!guestMode && menuWxBound}}" data-act="nudge" bindtap="onMenuAct">{{i18n.nudgeBill}}</view>
+      <view class="menu-item danger" wx:if="{{canDelete}}" data-act="delete" bindtap="onMenuAct">{{i18n.delete}}</view>
+      <view class="menu-cancel" bindtap="onCloseMenu">{{i18n.cancel}}</view>
+    </view>
+  </view>
+
+  <view class="dlg-mask" wx:if="{{showEdit}}" catchtouchmove="noop">
+    <view class="dlg" catchtap="noop">
+      <text class="dlg-title">{{editTitle}}</text>
+      <view class="dlg-field">
+        <text class="dlg-label">{{i18n.nameRequired}}</text>
+        <input
+          class="dlg-input"
+          placeholder="{{i18n.pleaseInputName}}"
+          placeholder-class="search-ph"
+          value="{{editName}}"
+          bindinput="onEditName"
+          focus="{{showEdit}}"
+        />
+      </view>
+      <view class="dlg-field">
+        <text class="dlg-label">{{i18n.phoneOptional}}</text>
+        <input
+          class="dlg-input"
+          type="number"
+          placeholder="{{i18n.optionalFill}}"
+          placeholder-class="search-ph"
+          value="{{editPhone}}"
+          bindinput="onEditPhone"
+        />
+      </view>
+      <view class="dlg-actions">
+        <view class="dlg-btn ghost" bindtap="onEditCancel">{{i18n.cancel}}</view>
+        <view class="dlg-btn primary {{editSaving ? 'off' : ''}}" bindtap="onEditSave">
+          {{editSaving ? i18n.saving : i18n.save}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

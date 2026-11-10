@@ -1,0 +1,27 @@
+function trim(s) {
+  var start = 0
+  var end = s.length
+  while (start < end) {
+    var c = s.charCodeAt(start)
+    if (c !== 32 && c !== 9 && c !== 10 && c !== 13 && c !== 12288) break
+    start++
+  }
+  while (end > start) {
+    var d = s.charCodeAt(end - 1)
+    if (d !== 32 && d !== 9 && d !== 10 && d !== 13 && d !== 12288) break
+    end--
+  }
+  return s.substring(start, end)
+}
+
+function gap(name) {
+  var raw = name == null ? '' : '' + name
+  var s = trim(raw)
+  if (s.length !== 2) return raw
+  var a = s.charCodeAt(0)
+  var b = s.charCodeAt(1)
+  if (a < 19968 || a > 40959 || b < 19968 || b > 40959) return raw
+  return s.charAt(0) + '　' + s.charAt(1)
+}
+
+module.exports.gap = gap

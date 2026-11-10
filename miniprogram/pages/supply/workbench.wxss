@@ -1,0 +1,10 @@
+@import "./common.wxss";.doc{padding:16rpx 0;border-top:1rpx solid #e2e8f0}
+.card .title{display:block;margin-bottom:16rpx}
+.time-row{display:flex;gap:16rpx}
+.time-row picker{flex:1}
+.btn.slim{flex:1;margin-top:0}
+.amount-bar{display:flex;align-items:baseline;justify-content:space-between;margin:8rpx 0 4rpx}
+.amount-num{font-size:32rpx;font-weight:600;color:#e53935}
+.mask{position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(15,23,42,0.45);display:flex;align-items:flex-end;z-index:200}
+.sheet{width:100%;background:#fff;border-radius:24rpx 24rpx 0 0;padding:32rpx 28rpx calc(28rpx + env(safe-area-inset-bottom));box-sizing:border-box}
+.page.lock supply-bench{flex:1;height:0;min-height:0}

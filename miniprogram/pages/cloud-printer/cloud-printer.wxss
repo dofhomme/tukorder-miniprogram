@@ -1,0 +1,11 @@
+.page{min-height:100vh;padding:24rpx;background:#f3f6fb;box-sizing:border-box}
+.card{background:#fff;border-radius:20rpx;padding:28rpx;margin-bottom:20rpx}
+.title{display:block;font-size:32rpx;font-weight:700;color:#163a6b}
+.sub{display:block;margin-top:10rpx;font-size:24rpx;color:#6b7c93;line-height:1.45}
+.empty{margin-top:20rpx;font-size:26rpx;color:#6b7c93;line-height:1.5}
+.host{display:flex;align-items:center;justify-content:space-between;margin-top:20rpx;padding-top:20rpx;border-top:1rpx solid #eef2f6}
+.host-main{display:flex;flex-direction:column;min-width:0}
+.host-ip{font-size:30rpx;font-weight:600;color:#163a6b}
+.host-sub{margin-top:4rpx;font-size:22rpx;color:#6b7c93}
+.host-go{margin-left:16rpx;font-size:26rpx;font-weight:600;color:#1e4d8c;flex-shrink:0}
+.tap-hover{opacity:0.7}

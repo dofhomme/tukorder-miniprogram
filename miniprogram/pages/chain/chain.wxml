@@ -1,0 +1,13 @@
+<view class="page"><view class="sky"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view class="capsule-gap" style="height: {{navBarHeight}}px;"></view></view><view class="tut-row"><tutorial-link scene="supply" /></view><view wx:if="{{loading}}" class="empty">{{i18n.loading}}</view><view class="stage" wx:if="{{!loading}}"><view class="orbit"></view><view
+        class="hub {{hub.hit ? 'hit' : ''}} {{focus === 'cost' ? 'focus' : ''}}"
+        wx:if="{{hub}}"
+        bindtap="onOpen"
+        data-key="cost"
+      ><image class="hub-ico" src="{{hub.icon}}" mode="aspectFit" /><text class="hub-title">{{hub.title}}</text><text class="hub-meta">{{hub.meta || hub.hint}}</text><view class="dot" wx:if="{{hub.alert}}"></view></view><view
+        class="node {{item.hit ? 'hit' : ''}} {{focus === item.key ? 'focus' : ''}}"
+        wx:for="{{ring}}"
+        wx:key="key"
+        style="{{item.style}}"
+        bindtap="onOpen"
+        data-key="{{item.key}}"
+      ><image class="ico" src="{{item.icon}}" mode="aspectFit" /><text class="name">{{item.title}}</text><text class="meta {{item.amountText ? 'warn' : ''}}">{{item.meta}}</text><view class="dot" wx:if="{{item.alert}}"></view></view></view><view class="purpose-card"><view class="purpose-dot"></view><text class="purpose">{{i18n.chainPurpose}}</text></view><view class="search"><input class="search-input" placeholder="{{i18n.chainSearchPh}}" placeholder-class="ph" value="{{q}}" confirm-type="search" bindinput="onSearch" bindconfirm="onSearchTap" /><view class="search-btn" bindtap="onSearchTap"><image class="search-ico" src="/assets/icons/search-white.svg" mode="aspectFit" /></view></view></view>

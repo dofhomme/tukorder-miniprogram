@@ -1,0 +1,425 @@
+{
+  "entryPagePath": "pages/home/home",
+  "pages": [
+    "pages/home/home",
+    "pages/login/login",
+    "pages/products/products",
+    "pages/orders/orders",
+    "pages/chain/chain",
+    "pages/mine/mine"
+  ],
+  "subPackages": [
+    {
+      "root": "pages/agent-entry",
+      "name": "agent-entry",
+      "pages": [
+        "agent-entry"
+      ]
+    },
+    {
+      "root": "pages/order-lookup",
+      "name": "order-lookup",
+      "pages": [
+        "order-lookup"
+      ]
+    },
+    {
+      "root": "pages/statement-lookup",
+      "name": "statement-lookup",
+      "pages": [
+        "statement-lookup"
+      ]
+    },
+    {
+      "root": "pages/legal",
+      "name": "legal",
+      "pages": [
+        "legal"
+      ]
+    },
+    {
+      "root": "pages/analytics",
+      "name": "analytics",
+      "pages": [
+        "analytics"
+      ]
+    },
+    {
+      "root": "pages/tutorials",
+      "name": "tutorials",
+      "pages": [
+        "tutorials",
+        "play"
+      ]
+    },
+    {
+      "root": "pages/supply",
+      "name": "supply",
+      "pages": [
+        "map",
+        "parties",
+        "records",
+        "party",
+        "styles",
+        "style",
+        "material",
+        "agents",
+        "cost",
+        "margin",
+        "workbench",
+        "doc",
+        "invite",
+        "fill",
+        "agent-orders"
+      ]
+    },
+    {
+      "root": "pages/statement-preview",
+      "name": "statement",
+      "pages": [
+        "statement-preview"
+      ]
+    },
+    {
+      "root": "pages/receipt-preview",
+      "name": "receipt",
+      "pages": [
+        "receipt-preview"
+      ]
+    },
+    {
+      "root": "pages/order-detail",
+      "name": "order-detail",
+      "pages": [
+        "order-detail"
+      ]
+    },
+    {
+      "root": "pages/product-edit",
+      "name": "product-edit",
+      "pages": [
+        "product-edit"
+      ]
+    },
+    {
+      "root": "pages/category-manage",
+      "name": "category",
+      "pages": [
+        "category-manage"
+      ]
+    },
+    {
+      "root": "pages/tracking-scan",
+      "name": "tracking",
+      "pages": [
+        "tracking-scan"
+      ]
+    },
+    {
+      "root": "pages/customers",
+      "name": "customers",
+      "pages": [
+        "customers",
+        "prices"
+      ]
+    },
+    {
+      "root": "pages/agent-bills",
+      "name": "agent-bills",
+      "pages": [
+        "agent-bills"
+      ]
+    },
+    {
+      "root": "pages/agent-profile",
+      "name": "agent-profile",
+      "pages": [
+        "agent-profile"
+      ]
+    },
+    {
+      "root": "pages/agent-plaza",
+      "name": "agent-plaza",
+      "pages": [
+        "agent-plaza"
+      ]
+    },
+    {
+      "root": "pages/agent-shops",
+      "name": "agent-shops",
+      "pages": [
+        "agent-shops"
+      ]
+    },
+    {
+      "root": "pages/agent-applies",
+      "name": "agent-applies",
+      "pages": [
+        "agent-applies"
+      ]
+    },
+    {
+      "root": "pages/agent-share",
+      "name": "agent-share",
+      "pages": [
+        "agent-share"
+      ]
+    },
+    {
+      "root": "pages/agent-folders",
+      "name": "agent-folders",
+      "pages": [
+        "agent-folders"
+      ]
+    },
+    {
+      "root": "pages/agent-return",
+      "name": "agent-return",
+      "pages": [
+        "agent-return"
+      ]
+    },
+    {
+      "root": "pages/agent-who",
+      "name": "agent-who",
+      "pages": [
+        "agent-who"
+      ]
+    },
+    {
+      "root": "pages/agent-order",
+      "name": "agent-order",
+      "pages": [
+        "agent-order"
+      ]
+    },
+    {
+      "root": "pages/web",
+      "name": "web",
+      "pages": [
+        "web"
+      ]
+    },
+    {
+      "root": "pages/returns",
+      "name": "returns",
+      "pages": [
+        "returns"
+      ]
+    },
+    {
+      "root": "pages/return-edit",
+      "name": "return-edit",
+      "pages": [
+        "return-edit"
+      ]
+    },
+    {
+      "root": "pages/recycle-bin",
+      "name": "recycle",
+      "pages": [
+        "recycle-bin"
+      ]
+    },
+    {
+      "root": "pages/stock",
+      "name": "stock",
+      "pages": [
+        "stock"
+      ]
+    },
+    {
+      "root": "pages/team",
+      "name": "team",
+      "pages": [
+        "team"
+      ]
+    },
+    {
+      "root": "pages/team-data",
+      "name": "team-data",
+      "pages": [
+        "team-data"
+      ]
+    },
+    {
+      "root": "pages/admin-users",
+      "name": "admin-users",
+      "pages": [
+        "admin-users"
+      ]
+    },
+    {
+      "root": "pages/admin-feedback",
+      "name": "admin-feedback",
+      "pages": [
+        "admin-feedback"
+      ]
+    },
+    {
+      "root": "pages/admin-print-policy",
+      "name": "admin-print-policy",
+      "pages": [
+        "admin-print-policy"
+      ]
+    },
+    {
+      "root": "pages/admin-voice",
+      "name": "admin-voice",
+      "pages": [
+        "admin-voice"
+      ]
+    },
+    {
+      "root": "pages/shop-edit",
+      "name": "shop",
+      "pages": [
+        "shop-edit"
+      ]
+    },
+    {
+      "root": "pages/print-settings",
+      "name": "print-settings",
+      "pages": [
+        "print-settings"
+      ]
+    },
+    {
+      "root": "pages/printer",
+      "name": "printer",
+      "pages": [
+        "printer",
+        "lan"
+      ]
+    },
+    {
+      "root": "pages/print-template",
+      "name": "print-template",
+      "pages": [
+        "print-template"
+      ]
+    },
+    {
+      "root": "pages/subscription",
+      "name": "subscription",
+      "pages": [
+        "subscription",
+        "history"
+      ]
+    },
+    {
+      "root": "pages/cloud-printer",
+      "name": "cloud-printer",
+      "pages": [
+        "cloud-printer"
+      ]
+    },
+    {
+      "root": "pages/pack-lazy",
+      "name": "pack-lazy",
+      "pages": [
+        "hold"
+      ]
+    },
+    {
+      "root": "pages/voice-pack",
+      "name": "voice",
+      "pages": [
+        "bridge"
+      ],
+      "plugins": {
+        "WechatSI": {
+          "version": "0.3.10",
+          "provider": "wx069ba97219f66d99"
+        }
+      }
+    }
+  ],
+  "preloadRule": {
+    "pages/orders/orders": {
+      "network": "all",
+      "packages": [
+        "order-detail",
+        "receipt",
+        "order-lookup"
+      ]
+    },
+    "pages/mine/mine": {
+      "network": "all",
+      "packages": [
+        "customers",
+        "subscription",
+        "print-settings",
+        "analytics",
+        "statement"
+      ]
+    },
+    "pages/chain/chain": {
+      "network": "all",
+      "packages": [
+        "supply"
+      ]
+    },
+    "pages/analytics/analytics": {
+      "network": "all",
+      "packages": [
+        "statement"
+      ]
+    }
+  },
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "图可开单打印",
+    "navigationBarBackgroundColor": "#EEF3F9",
+    "backgroundColor": "#F3F6FB",
+    "backgroundColorTop": "#DBE7F5",
+    "backgroundColorBottom": "#F3F6FB"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#6B7C93",
+    "selectedColor": "#2E6BB5",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "开单",
+        "iconPath": "assets/tab/bill.png",
+        "selectedIconPath": "assets/tab/bill-active.png"
+      },
+      {
+        "pagePath": "pages/products/products",
+        "text": "商品",
+        "iconPath": "assets/tab/products.png",
+        "selectedIconPath": "assets/tab/products-active.png"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "账单",
+        "iconPath": "assets/tab/orders.png",
+        "selectedIconPath": "assets/tab/orders-active.png"
+      },
+      {
+        "pagePath": "pages/chain/chain",
+        "text": "供应链",
+        "iconPath": "assets/tab/supply.png",
+        "selectedIconPath": "assets/tab/supply-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/tab/mine.png",
+        "selectedIconPath": "assets/tab/mine-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "安卓扫描附近蓝牙打印机需要定位"
+    }
+  }
+}

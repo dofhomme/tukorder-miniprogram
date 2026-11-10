@@ -1,0 +1,9 @@
+@import "./common.wxss";.ratio-grid{display:flex;flex-wrap:wrap;width:100%;margin-bottom:0}
+.ratio-col{position:relative;flex:0 0 23%;width:23%;max-width:23%;min-width:0;margin:0 2.6% 12rpx 0;box-sizing:border-box}
+.ratio-col:nth-child(4n){margin-right:0}
+.ratio-col .input{width:100%;height:72rpx;min-height:72rpx;line-height:72rpx;padding:0 12rpx;font-size:26rpx}
+.ratio-col .size-name{margin-bottom:8rpx;padding-right:32rpx}
+.ratio-x{position:absolute;right:6rpx;top:0;height:72rpx;line-height:72rpx;color:#9e9e9e;font-size:28rpx}
+.ratio-add{flex:0 0 23%;width:23%;max-width:23%;margin:0 2.6% 12rpx 0;height:72rpx;line-height:72rpx;text-align:center;color:#1e4d8c;font-size:40rpx;font-weight:600;box-sizing:border-box}
+.ratio-add:nth-child(4n){margin-right:0}
+.total{display:block;margin-top:8rpx;color:#1e4d8c;font-size:28rpx;font-weight:600}

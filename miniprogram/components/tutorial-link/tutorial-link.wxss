@@ -1,0 +1,6 @@
+.tut{display:flex;align-items:center;gap:8rpx;height:48rpx;padding:0 16rpx;border-radius:999rpx;background:#e8eef4;flex-shrink:0}
+.tut-mark{width:0;height:0;border-style:solid;border-width:8rpx 0 8rpx 14rpx;border-color:transparent transparent transparent #1e4d8c}
+.tut-t{font-size:24rpx;font-weight:600;color:#1e4d8c;line-height:1}
+.tut.off{background:#eef1f4}
+.tut.off .tut-mark{border-color:transparent transparent transparent #b7c0cb}
+.tut.off .tut-t{color:#b7c0cb}

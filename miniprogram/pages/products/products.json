@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "我的商品",
+  "usingComponents": {
+    "network-tip": "/components/network-tip/network-tip",
+    "tutorial-link": "/components/tutorial-link/tutorial-link"
+  },
+  "onReachBottomDistance": 120
+}

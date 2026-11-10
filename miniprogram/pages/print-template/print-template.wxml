@@ -1,0 +1,164 @@
+<view class="page {{rtl ? 'rtl' : ''}}">
+  <scroll-view scroll-y class="body" enhanced show-scrollbar="{{false}}">
+    <view class="doc-switch">
+      <view class="doc-tab {{docKind !== 'return' ? 'on' : ''}}" data-kind="sale" bindtap="onDocKind">{{i18n.docSale}}</view>
+      <view class="doc-tab {{docKind === 'return' ? 'on' : ''}}" data-kind="return" bindtap="onDocKind">{{i18n.docReturn}}</view>
+    </view>
+    <view class="tpl-bar">
+      <text class="tpl-bar-lab">{{activeName || templateLabel}}</text>
+      <view class="tpl-actions">
+        <view class="tpl-bar-btn tpl-switch" wx:if="{{canEdit}}" bindtap="onPickFont">
+          <image class="tpl-switch-ico" src="/assets/icons/font-t.svg" mode="aspectFit" />
+          <text>{{i18n.fontOnTemplate}}</text>
+        </view>
+        <view class="tpl-bar-btn tpl-switch" wx:if="{{canEdit}}" bindtap="onPickSize">
+          <image class="tpl-switch-ico" src="/assets/icons/font-size.svg" mode="aspectFit" />
+          <text>{{i18n.fontSizeBtn}}</text>
+        </view>
+        <view class="tpl-bar-btn tpl-switch" wx:if="{{canCopy}}" bindtap="onCopyCustom">
+          <image class="tpl-switch-ico" src="/assets/icons/save-as.svg" mode="aspectFit" />
+          <text>{{i18n.saveAs}}</text>
+        </view>
+        <view class="tpl-bar-btn tpl-switch" wx:if="{{canEdit}}" bindtap="onOpenPicker">
+          <image class="tpl-switch-ico" src="/assets/icons/tpl-switch.svg" mode="aspectFit" />
+          <text>{{i18n.changeTemplate}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="preview-card">
+      <receipt-body model="{{receiptModel}}" fontScale="{{fontScale}}" fontFamily="{{fontFamily}}" qrEdit="{{canEdit}}" paid="{{paid}}" colEdit="{{colEdit}}" colHint="{{colHint}}" spareFields="{{spareFields}}" bind:qrremove="onQrRemove" bind:qradd="onQrAdd" bind:inforemove="onInfoRemove" bind:infoadd="onInfoAdd" bind:headedit="onHeadEdit" bind:coltap="onPreviewCol" bind:colmove="onPreviewColMove" bind:coldel="onPreviewColDel" bind:colpick="onPreviewColAdd" bind:collocked="onColLocked" />
+    </view>
+    <block wx:if="{{canEdit}}">
+      <view class="block-row" wx:for="{{blockRows}}" wx:key="key">
+        <text class="block-name" data-key="{{item.key}}" bindtap="onEditBlock">{{item.label}}</text>
+        <text class="block-note" wx:if="{{item.key === 'table' && !item.custom}}">{{i18n.colsLocked}}</text>
+        <text class="block-act" wx:if="{{item.key === 'table' && !item.custom && canCopy}}" bindtap="onCopyCustom">{{i18n.saveAs}}</text>
+        <view wx:if="{{item.editable}}" class="block-pen" data-key="{{item.key}}" bindtap="onEditBlock" hover-class="tap-hover">
+          <image class="block-pen-ico" src="/assets/icons/block-pen.svg" mode="aspectFit" />
+        </view>
+        <text class="block-act" wx:if="{{item.key === 'table' && item.custom}}" data-key="table" bindtap="onEditBlock">{{i18n.editCols}}</text>
+        <switch wx:if="{{item.removable}}" class="block-sw" checked="{{item.on}}" data-key="{{item.key}}" color="#1e4d8c" bindchange="onToggleBlock" />
+      </view>
+    </block>
+    <view class="list-pad"></view>
+  </scroll-view>
+  <view class="foot" wx:if="{{canEdit}}">
+    <view class="foot-row">
+      <view class="save" bindtap="onSave" hover-class="save-hover" hover-stay-time="50" hover-start-time="0">
+        <image class="save-ico" src="/assets/icons/pe-save.svg" mode="aspectFit" />
+        <text>{{i18n.save}}</text>
+      </view>
+      <view class="preview-go" bindtap="onPreviewPrint" hover-class="save-hover" hover-stay-time="50" hover-start-time="0">{{i18n.tplPreview}}</view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{editKind}}" catchtouchmove="noop" bindtap="onCloseEdit">
+    <view class="picker-sheet edit-sheet" catchtap="noop">
+      <block wx:if="{{editKind === 'title' || editKind === 'subtitle' || editKind === 'address' || editKind === 'shopTel' || editKind === 'footer' || editKind === 'arrival'}}">
+        <text class="picker-title">{{editKind === 'title' ? i18n.blkTitle : editKind === 'subtitle' ? i18n.blkSubtitle : editKind === 'address' ? i18n.blkAddress : editKind === 'shopTel' ? i18n.blkShopTel : editKind === 'footer' ? i18n.blkFooter : i18n.hintText}}</text>
+        <textarea class="area" value="{{editText}}" maxlength="{{editKind === 'footer' ? 300 : editKind === 'shopTel' ? 32 : 80}}" bindinput="onEditInput" />
+        <view class="edit-save" bindtap="onApplyEdit">{{i18n.save}}</view>
+      </block>
+      <block wx:elif="{{editKind === 'pay'}}">
+        <text class="picker-title">{{i18n.payQr}}</text>
+        <input class="inp" value="{{t.paymentQrHintText}}" bindinput="onQrHint" />
+        <view class="qr-row">
+          <view class="qr-card">
+            <text class="qr-title wx">{{i18n.wechat}}</text>
+            <view class="qr-box" data-kind="wechat" bindtap="onPickQr"><image wx:if="{{wechatQr}}" class="qr-img" src="{{wechatQr}}" mode="aspectFit" /><text wx:else class="qr-ph">{{i18n.tapBind}}</text></view>
+            <text wx:if="{{wechatQr}}" class="qr-clear" data-kind="wechat" catchtap="onClearQr">{{i18n.clear}}</text>
+          </view>
+          <view class="qr-card">
+            <text class="qr-title ali">{{i18n.alipay}}</text>
+            <view class="qr-box" data-kind="alipay" bindtap="onPickQr"><image wx:if="{{alipayQr}}" class="qr-img" src="{{alipayQr}}" mode="aspectFit" /><text wx:else class="qr-ph">{{i18n.tapBind}}</text></view>
+            <text wx:if="{{alipayQr}}" class="qr-clear" data-kind="alipay" catchtap="onClearQr">{{i18n.clear}}</text>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{editKind === 'columns'}}">
+        <text class="picker-title">{{i18n.editCols}}</text>
+        <view class="col-list">
+          <view class="col-slot {{dragIndex === index ? 'drag' : ''}}" wx:for="{{colDraft}}" wx:key="field" style="transform: translateY({{dragIndex === index ? dragShift : (colShifts[index] || 0)}}px);">
+            <view class="col-row">
+              <view class="col-line">
+                <view class="col-grip" data-index="{{index}}" catchtouchstart="onColDragStart" catchtouchmove="onColDragMove" catchtouchend="onColDragEnd" catchtouchcancel="onColDragEnd">
+                  <image class="col-grip-ico" src="/assets/icons/col-drag.svg" mode="aspectFit" />
+                </view>
+                <input class="inp col-inp" value="{{item.label}}" data-index="{{index}}" maxlength="8" bindinput="onColLabel" />
+                <text class="qr-clear" data-index="{{index}}" bindtap="onColRemove">{{i18n.blkRemove}}</text>
+              </view>
+              <view class="col-slide">
+                <text class="col-slide-lab">{{i18n.colNarrow}}</text>
+                <slider class="col-slider" min="40" max="200" step="1" value="{{item.flex * 100}}" data-index="{{index}}" activeColor="#1e4d8c" backgroundColor="#d5e2f2" block-size="20" bindchanging="onColFlexSlide" bindchange="onColFlexSlide" />
+                <text class="col-slide-lab">{{i18n.colWide}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="add-row">
+          <text class="add-chip" wx:for="{{spareFields}}" wx:key="field" data-field="{{item.field}}" bindtap="onColAdd">{{item.label}}</text>
+        </view>
+        <view class="edit-save {{colOver || !colDraft.length ? 'off' : ''}}" bindtap="onSaveColumns">{{i18n.save}}</view>
+      </block>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{sizeVisible}}" catchtouchmove="noop" bindtap="onCloseSize">
+    <view class="picker-sheet" catchtap="noop">
+      <text class="picker-title">{{i18n.fontSizeTitle}}</text>
+      <view class="font-opt {{item.id === fontScaleId ? 'on' : ''}}" wx:for="{{sizeRows}}" wx:key="id" data-id="{{item.id}}" bindtap="onChooseSize">
+        <text class="font-sample" style="font-size: {{item.size}}rpx;">货号 数量 金额</text>
+      </view>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{fontVisible}}" catchtouchmove="noop" bindtap="onCloseFont">
+    <view class="picker-sheet" catchtap="noop">
+      <text class="picker-title">{{i18n.fontPickTitle}}</text>
+      <view class="font-opt {{item.id === fontFaceId ? 'on' : ''}}" wx:for="{{fontRows}}" wx:key="id" data-id="{{item.id}}" bindtap="onChooseFont">
+        <text class="font-sample face-{{item.id}}">{{item.label}} 货号12</text>
+      </view>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{nameVisible}}" catchtouchmove="noop" bindtap="onCloseName">
+    <view class="picker-sheet" catchtap="noop">
+      <text class="picker-title">{{i18n.saveAs}}</text>
+      <input class="inp" value="{{nameDraft}}" maxlength="12" placeholder="{{i18n.saveTplPh}}" bindinput="onNameInput" />
+      <view class="edit-save" bindtap="onConfirmSaveName">{{i18n.saveAs}}</view>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{colFlexVisible}}" catchtouchmove="noop" bindtap="onCloseColFlex">
+    <view class="picker-sheet" catchtap="noop">
+      <view class="col-flex-head">
+        <text class="picker-title">{{colFlexLabel}}</text>
+      </view>
+      <view class="col-slide sheet">
+        <text class="col-slide-lab">{{i18n.colNarrow}}</text>
+        <slider class="col-slider" min="40" max="200" step="1" value="{{colFlexValue}}" activeColor="#1e4d8c" backgroundColor="#d5e2f2" block-size="24" block-color="#1e4d8c" bindchanging="onPreviewFlexSlide" bindchange="onPreviewFlexSlide" />
+        <text class="col-slide-lab">{{i18n.colWide}}</text>
+      </view>
+      <view class="col-flex-close" bindtap="onColFlexRemove">{{i18n.colClose}}</view>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+  <view class="picker-mask" wx:if="{{pickerVisible}}" catchtouchmove="noop" bindtap="onClosePicker">
+    <view class="picker-sheet" catchtap="noop">
+      <text class="picker-title">{{i18n.pickPrintTemplate}}</text>
+      <scroll-view scroll-y class="picker-scroll">
+        <view class="picker-grid">
+          <view class="picker-card {{item.id === pickTemplate && !pickCustomId ? 'on' : ''}}" wx:for="{{templateOptions}}" wx:key="id" data-id="{{item.id}}" bindtap="onPickTemplate">
+            <view class="picker-mini"><text class="picker-mini-title">{{item.label}}</text><text class="picker-mini-scene">{{item.scene}}</text></view>
+            <view class="picker-card-foot"><text class="def" wx:if="{{item.isDefault}}">{{i18n.tplDefault}}</text><text class="picker-lab">{{item.label}}</text></view>
+          </view>
+          <view class="picker-card {{item.id === pickCustomId ? 'on' : ''}}" wx:for="{{customRows}}" wx:key="id" data-custom="{{item.id}}" bindtap="onPickTemplate">
+            <view class="picker-mini"><text class="picker-mini-title">{{item.name}}</text><text class="picker-mini-scene">{{i18n.myTemplates}}</text></view>
+            <view class="picker-card-foot"><text class="picker-lab">{{item.name}}</text><text class="qr-clear" wx:if="{{canEdit}}" data-custom="{{item.id}}" catchtap="onDeleteCustom">{{i18n.blkRemove}}</text></view>
+          </view>
+          <view class="picker-clear"></view>
+        </view>
+      </scroll-view>
+      <view class="picker-safe"></view>
+    </view>
+  </view>
+</view>

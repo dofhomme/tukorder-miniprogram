@@ -1,0 +1,86 @@
+<wxs src="../../utils/media.wxs" module="media" /><view class="od-mask" wx:if="{{visible}}" catchtouchmove="noop" bindtap="onMaskClose" hover-stay-time="50" hover-start-time="0"><view class="od-sheet" catchtap="noop"><view class="od-handle"></view><block wx:if="{{order}}"><scroll-view scroll-y class="od-body" enhanced show-scrollbar="{{false}}"><view class="hdr"><view class="hdr-left"><view class="hdr-no-row"><text class="ret-badge" wx:if="{{order.isReturn}}">退</text><text class="hdr-no">{{order.orderNo}}</text></view><text class="hdr-time">{{order.timeLabel}}</text><text class="hdr-cust" wx:if="{{order.customerName}}">
+              {{order.customerName}}{{order.customerPhone ? ' · ' + order.customerPhone : ''}}
+            </text></view><view
+            class="hdr-amt-wrap"
+            catchtap="onRefreshFromCloud"
+            hover-class="hdr-amt-hover"
+            hover-stay-time="50"
+            hover-start-time="0"
+          ><view class="hdr-sync-wrap {{refreshing ? 'spin' : ''}}"><image
+                class="hdr-sync"
+                src="/assets/icons/tools/od-sync.svg"
+                mode="aspectFit"
+              /></view><text class="hdr-amt">¥{{order.amountLabel}}</text></view></view><view class="divider"></view><view class="fulfill"><text class="fulfill-title">{{i18n.fulfillStatus}}{{canEditOrder ? '' : ' · ' + i18n.orderReadonly}}</text><view class="chip-row"><view
+              class="chip {{order.isPaid ? 'on paid' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+              bindtap="onToggleChip"
+              data-field="isPaid"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><text class="chip-lab">{{order.isReturn ? i18n.refunded : i18n.paid}}</text></view><view
+              class="chip {{order.isPickedUp ? 'on picked' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+              bindtap="onToggleChip"
+              data-field="isPickedUp"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><text class="chip-lab">{{order.isReturn ? i18n.received : i18n.picked}}</text></view><view
+              wx:if="{{!order.isReturn}}"
+              class="chip ship {{order.isShipped || trackingNos.length ? 'on shipped' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+              bindtap="onToggleShipped"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><text class="chip-ico">{{order.isShipped || trackingNos.length ? '✓' : ''}}</text><text class="chip-lab">{{shippedLabel}}</text></view><view
+              wx:if="{{!order.isReturn}}"
+              class="chip deliv {{order.isDelivered || deliveryPhotoPath ? 'on delivered' : ''}} {{canEditOrder ? '' : 'readonly'}}"
+              bindtap="onToggleDelivered"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><text class="chip-ico">{{order.isDelivered || deliveryPhotoPath ? '✓' : ''}}</text><text class="chip-lab">{{i18n.delivered}}</text></view></view><view class="trk-wrap" wx:if="{{!order.isReturn && (trackingNos.length || deliveryPhotoPath)}}"><view
+              class="deliv-thumb"
+              wx:if="{{deliveryPhotoPath}}"
+              bindtap="onPreviewDeliveryPhoto"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><image class="deliv-img" src="{{deliveryPhotoPath}}" mode="aspectFill" /></view><view class="trk-chip" wx:for="{{trackingNos}}" wx:key="*this"><text class="trk-txt">{{item}}</text><text class="trk-x" wx:if="{{canEditOrder}}" catchtap="onRemoveTracking" data-no="{{item}}">✕</text></view></view></view><view class="items"><view class="item" wx:for="{{items}}" wx:key="productCode"><view class="item-main"><text class="item-name">{{item.title}}</text><text class="item-sub">{{item.subLine}}</text></view><text class="item-amt">¥{{item.subtotalLabel}}</text></view><view class="item-empty" wx:if="{{!items.length}}"><text>无明细</text></view></view></scroll-view><view class="actions"><view class="act-row"><view
+            class="act-btn print {{printing ? 'disabled' : ''}}"
+            bindtap="onPrint"
+            hover-stay-time="50"
+            hover-start-time="0"
+          ><image class="act-ico" src="{{media.url('od-print.png')}}" mode="aspectFit" /><text class="act-txt">打印账单</text></view><view
+            class="act-btn download"
+            bindtap="onDownload"
+            hover-stay-time="50"
+            hover-start-time="0"
+          ><image class="act-ico" src="{{media.url('od-download.png')}}" mode="aspectFit" /><text class="act-txt">下载账单</text></view></view><view class="act-row"><view class="act-btn delete {{canEditOrder ? '' : 'locked'}}" bindtap="onDelete" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-delete.png')}}" mode="aspectFit" /><text class="act-txt">删除</text></view><view class="act-btn edit {{canEditOrder ? '' : 'locked'}}" bindtap="onLoadToHome" hover-stay-time="50" hover-start-time="0"><image class="act-ico" src="{{media.url('od-edit.png')}}" mode="aspectFit" /><text class="act-txt">修改</text></view></view></view></block><view class="od-loading" wx:elif="{{loading}}"><text>加载中…</text></view><view class="od-loading" wx:else><text>{{error || '未找到账单'}}</text></view></view></view><view
+  class="exp-mask"
+  wx:if="{{expVisible}}"
+  catchtouchmove="noop"
+  bindtap="onExportClose"
+  hover-stay-time="50"
+  hover-start-time="0"
+><view class="exp-dialog" catchtap="noop"><text class="exp-title">{{expTitle}}</text><scroll-view scroll-y class="exp-scroll"><view class="exp-card"><receipt-body model="{{expReceiptModel}}" fontScale="{{expFontScale}}" /></view></scroll-view><view class="exp-actions"><text class="exp-btn" bindtap="onExportClose" hover-stay-time="50" hover-start-time="0">关闭</text><view
+        class="exp-btn primary {{expSaving ? 'disabled' : ''}}"
+        bindtap="onExportSave"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >
+        {{expSaving ? '保存中…' : '保存图片'}}
+      </view></view></view></view><canvas
+  type="2d"
+  id="expCanvas"
+  class="exp-canvas"
+  style="width: 360px; height: {{expCanvasH}}px;"
+></canvas><view
+  class="deliv-mask"
+  wx:if="{{delivSheetVisible}}"
+  catchtouchmove="noop"
+  bindtap="onDelivSheetClose"
+  hover-stay-time="50"
+  hover-start-time="0"
+><view class="deliv-sheet" catchtap="noop"><view class="deliv-item" data-action="camera" bindtap="onDelivPick" hover-stay-time="50" hover-start-time="0"><view class="deliv-item-ico">📷</view><text class="deliv-item-txt">拍照记录送货</text></view><view class="deliv-item" data-action="album" bindtap="onDelivPick" hover-stay-time="50" hover-start-time="0"><view class="deliv-item-ico">🖼</view><text class="deliv-item-txt">从相册选择</text></view><view
+      class="deliv-item danger"
+      wx:if="{{deliveryPhotoPath}}"
+      data-action="clear"
+      bindtap="onDelivPick"
+      hover-stay-time="50"
+      hover-start-time="0"
+    ><view class="deliv-item-ico">🗑</view><text class="deliv-item-txt danger">清除照片</text></view><view class="deliv-cancel" bindtap="onDelivSheetClose" hover-stay-time="50" hover-start-time="0"><text>取消</text></view></view></view><bluetooth-search-sheet id="btSheetInner" />

@@ -1,0 +1,62 @@
+<view class="page">
+  <text class="group">微信小程序</text>
+  <text class="tip">三选一。免费走普通识别额度，收费走大模型，微信插件是原来的同声传译。</text>
+  <view class="row {{mp === 'free' ? 'on' : ''}}" bindtap="onPick" data-group="mp" data-mode="free">
+    <view class="meta">
+      <text class="lab">免费模式</text>
+      <text class="hint">普通实时识别，用每月免费额度。边说边出字。</text>
+    </view>
+    <text class="mark">{{mp === 'free' ? '使用中' : ''}}</text>
+  </view>
+  <view class="row {{mp === 'paid' ? 'on' : ''}}" bindtap="onPick" data-group="mp" data-mode="paid">
+    <view class="meta">
+      <text class="lab">收费API模式</text>
+      <text class="hint">腾讯云大模型实时识别，按量计费。</text>
+    </view>
+    <text class="mark">{{mp === 'paid' ? '使用中' : ''}}</text>
+  </view>
+  <view class="row {{mp === 'plugin' ? 'on' : ''}}" bindtap="onPick" data-group="mp" data-mode="plugin">
+    <view class="meta">
+      <text class="lab">微信插件模式</text>
+      <text class="hint">同声传译插件。松手后才出整句。手机和电脑没有这个插件，仍用免费模式。</text>
+    </view>
+    <text class="mark">{{mp === 'plugin' ? '使用中' : ''}}</text>
+  </view>
+
+  <text class="group">手机和电脑</text>
+  <text class="tip">二选一。这里没有微信插件。小程序选了插件时，手机和电脑也保持自己的这一档，默认是免费模式。</text>
+  <view class="row {{app === 'free' ? 'on' : ''}}" bindtap="onPick" data-group="app" data-mode="free">
+    <view class="meta">
+      <text class="lab">免费模式</text>
+      <text class="hint">普通实时识别，用每月免费额度。按住就出字，和收费一样。</text>
+    </view>
+    <text class="mark">{{app === 'free' ? '使用中' : ''}}</text>
+  </view>
+  <view class="row {{app === 'paid' ? 'on' : ''}}" bindtap="onPick" data-group="app" data-mode="paid">
+    <view class="meta">
+      <text class="lab">收费API模式</text>
+      <text class="hint">腾讯云大模型实时识别，按住就开始出字，按量计费。</text>
+    </view>
+    <text class="mark">{{app === 'paid' ? '使用中' : ''}}</text>
+  </view>
+
+  <text class="group">货号</text>
+  <text class="tip">只对照本店商品库。完全一样直接用，只有一个尾号也对上就直接用，两个以上只弹出选择，一个都没有才问是否添加。</text>
+
+  <text class="group">听写增强</text>
+  <text class="tip">热词和自主训练都由服务器决定，小程序、手机和电脑一起生效。微信插件不走腾讯识别，这两个开关对插件无效。改完后下一次按住说话才换新地址。</text>
+  <view class="row {{hotword ? 'on' : ''}}" bindtap="onToggle" data-flag="hotword">
+    <view class="meta">
+      <text class="lab">热词</text>
+      <text class="hint">{{hotword ? '已开启。使用腾讯云默认热词表。' : '已关闭。这次识别不指定热词表。'}}</text>
+    </view>
+    <text class="mark">{{hotword ? '使用中' : '关闭'}}</text>
+  </view>
+  <view class="row {{train ? 'on' : ''}}" bindtap="onToggle" data-flag="train">
+    <view class="meta">
+      <text class="lab">自主训练</text>
+      <text class="hint">{{train ? '已开启。只在收费模式挂上开单句式模型。免费模式打开也不会带，避免握手失败。' : '已关闭。收费识别也不再带自训练模型。'}}</text>
+    </view>
+    <text class="mark">{{train ? '使用中' : '关闭'}}</text>
+  </view>
+</view>

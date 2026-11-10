@@ -1,0 +1,7 @@
+var BASE = 'https://api.imageok.cn/downloads/mp-media/'
+
+function url(name) {
+  return BASE + name
+}
+
+module.exports.url = url

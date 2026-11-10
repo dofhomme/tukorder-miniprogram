@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "qr-image": "/components/qr-image/qr-image"
+  }
+}

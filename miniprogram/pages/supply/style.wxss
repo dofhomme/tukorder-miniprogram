@@ -1,0 +1,2 @@
+@import "./common.wxss";.std{display:block;margin:12rpx 0 20rpx}
+.price-seg .seg-item{font-size:26rpx}

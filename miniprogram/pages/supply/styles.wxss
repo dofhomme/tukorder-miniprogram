@@ -1,0 +1,6 @@
+@import "./common.wxss";.pin.head{display:flex;align-items:center;gap:16rpx}
+.pin.head .checks{flex:none}
+.find{flex:1;min-width:160rpx;height:64rpx;background:#fff;border:2rpx solid #dbe3ee;border-radius:999rpx;box-shadow:0 6rpx 16rpx rgba(22,58,107,0.05);padding:0 24rpx;font-size:28rpx;color:#212121;box-sizing:border-box}
+.dock-2{display:flex;gap:16rpx}
+.dock-2 .btn{flex:1}
+.btn.line{background:#fff;color:#1e4d8c;border:2rpx solid #1e4d8c}

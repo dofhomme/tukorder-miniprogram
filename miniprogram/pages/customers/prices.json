@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "历史价格",
+  "navigationBarBackgroundColor": "#F3F6FB",
+  "navigationBarTextStyle": "black",
+  "backgroundColor": "#F3F6FB",
+  "backgroundColorTop": "#F3F6FB",
+  "backgroundColorBottom": "#F3F6FB",
+  "usingComponents": {}
+}

@@ -1,0 +1,80 @@
+<view class="page {{rtl ? 'rtl' : ''}} {{loggedIn ? 'page-dock' : ''}}">
+  <view class="login-banner" wx:if="{{!loggedIn}}">
+    <text class="login-banner-t">{{i18n.pleaseLogin}}</text>
+    <text class="login-banner-d">{{i18n.billingNeedLoginD}}</text>
+    <view class="btn primary" bindtap="onGoLogin" hover-stay-time="50">{{i18n.goLoginStay}}</view>
+  </view>
+
+  <view class="status" wx:if="{{loggedIn}}">
+    <view class="status-copy">
+      <text class="status-main">{{statusLabel}}</text>
+      <text class="status-sub" wx:if="{{expireLabel}}">{{expireLabel}}</text>
+      <text class="status-sub" wx:else>{{i18n.notOpenedLocal}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <text class="card-title">{{i18n.afterSubscribe}}</text>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit1}}</text></view>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit2}}</text></view>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit3}}</text></view>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit4}}</text></view>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit5}}</text></view>
+    <view class="perk"><text class="perk-mark">✓</text><text class="perk-t">{{i18n.benefit6}}</text></view>
+  </view>
+
+  <block wx:if="{{loggedIn}}">
+    <view class="section-title">{{i18n.choosePlan}}</view>
+    <view class="plan-group" wx:for="{{groups}}" wx:key="id">
+      <view class="plan-group-head">
+        <text class="plan-group-title">{{item.title}}</text>
+        <text class="plan-group-seat">{{item.seatHint}}</text>
+      </view>
+      <view class="plans">
+        <view
+          wx:for="{{item.plans}}"
+          wx:for-item="plan"
+          wx:key="id"
+          class="plan {{selected === plan.id ? 'plan-on' : ''}}"
+          data-id="{{plan.id}}"
+          bindtap="onSelect"
+          hover-stay-time="50"
+        >
+          <text class="plan-ribbon" wx:if="{{plan.recommend}}">{{i18n.recommend}}</text>
+          <text class="plan-name">{{plan.title}}</text>
+          <view class="plan-price">
+            <text class="plan-yen">¥</text>
+            <text class="plan-num">{{plan.priceAmount}}</text>
+          </view>
+          <text class="plan-meta">{{plan.days}} 天</text>
+          <text class="plan-day" wx:if="{{plan.perDayLabel}}">{{plan.perDayLabel}}</text>
+          <text class="plan-pick">{{selected === plan.id ? '已选择' : '点击选择'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-link" bindtap="goHistory" hover-class="history-link-hover" hover-stay-time="50">
+      <view class="history-link-copy">
+        <text class="history-link-t">{{i18n.billingOrders}}</text>
+        <text class="history-link-d">{{i18n.billingHistoryHint}}</text>
+      </view>
+      <text class="history-link-go">›</text>
+    </view>
+  </block>
+
+  <view class="dock" wx:if="{{loggedIn}}">
+    <view
+      class="btn primary {{loading || uploading ? 'btn-disabled' : ''}}"
+      bindtap="onPurchase"
+      hover-stay-time="50"
+    >
+      <text wx:if="{{uploading}}">{{progressText || i18n.uploading}}</text>
+      <text wx:elif="{{loading}}">{{i18n.processing}}</text>
+      <text wx:elif="{{active}}">{{selectedCycle === 'year' ? i18n.renewYear : i18n.renewMonth}}</text>
+      <text wx:else>{{fromUpload ? i18n.openAndUpload : i18n.openAndUse}}</text>
+    </view>
+    <view wx:if="{{active && fromUpload}}" class="btn ghost" bindtap="onUploadOnly" hover-stay-time="50">
+      {{i18n.uploadLocalOnly}}
+    </view>
+  </view>
+</view>

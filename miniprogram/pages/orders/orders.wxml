@@ -1,0 +1,66 @@
+<wxs src="../../utils/media.wxs" module="media" /><view class="page {{rtl ? 'rtl' : ''}} {{agentMode ? 'agent-skin' : ''}}"><network-tip /><view class="page-head {{agentMode ? 'with-brand' : ''}}"><view class="status-spacer" style="height: {{statusBarHeight}}px;"></view><view class="capsule-gap" style="height: {{navBarHeight}}px;"></view><view class="agent-brand-row" wx:if="{{agentMode}}"><image class="agent-brand-logo" src="{{media.url('imageok-logo-agent.png')}}" mode="aspectFit" /><view class="agent-brand-info"><text class="agent-brand-title">{{i18n.agentHello}}</text><text class="agent-brand-sub" wx:if="{{dateLabel}}">{{dateLabel}}</text></view><view class="date-sync {{listSyncing ? 'spin' : ''}}" bindtap="onListSync" hover-stay-time="50" hover-start-time="0"><image class="date-sync-ico" src="/assets/icons/tools/od-sync.svg" mode="aspectFit" /></view><view class="agent-brand-edit" bindtap="onPickDatePreset" hover-stay-time="50" hover-start-time="0"><image class="agent-brand-edit-img" src="/assets/icons/edit-outlined.svg" mode="aspectFit" /></view></view></view><block wx:if="{{agentMode}}"><view class="date-custom" wx:if="{{datePreset === 'custom'}}"><picker mode="date" value="{{customFrom}}" bindchange="onCustomFrom"><view class="date-pick">{{customFrom || i18n.pickDate}}</view></picker><text class="date-sep">—</text><picker mode="date" value="{{customTo}}" bindchange="onCustomTo"><view class="date-pick">{{customTo || i18n.pickDate}}</view></picker></view><view class="agent-filt"><view
+        class="agent-filt-chip {{agentFilter === '' ? 'on' : ''}}"
+        data-k=""
+        bindtap="onAgentFilter"
+      >{{i18n.all}}</view><view
+        class="agent-filt-chip {{agentFilter === 'pending' ? 'on' : ''}}"
+        data-k="pending"
+        bindtap="onAgentFilter"
+      >{{i18n.agentInboxPending}}</view><view
+        class="agent-filt-chip {{agentFilter === 'shipped' ? 'on' : ''}}"
+        data-k="shipped"
+        bindtap="onAgentFilter"
+      >{{i18n.agentInboxTransit}}</view><view
+        class="agent-filt-chip {{agentFilter === 'rejected' ? 'on' : ''}}"
+        data-k="rejected"
+        bindtap="onAgentFilter"
+      >{{i18n.agentRejected}}</view><view class="agent-filt-chip" bindtap="onAgentReturn">{{i18n.agentReturn}}</view></view><view class="agent-list"><view wx:if="{{loading && !agentOrders.length}}" class="empty">{{i18n.loading}}</view><view wx:elif="{{!agentOrders.length}}" class="empty">{{i18n.agentNoOrders}}</view><block wx:else><view class="refresh-tip" wx:if="{{loading}}">{{i18n.loading}}</view><view
+          class="agent-card {{item.fulfillKind}}"
+          wx:for="{{agentOrders}}"
+          wx:key="orderNo"
+          data-token="{{item.token}}"
+          bindtap="onOpenAgent"
+        ><view class="agent-card-top"><text class="agent-no">{{item.shopName ? item.shopName + ' · ' : ''}}{{item.orderNo}}</text><text class="agent-flag">{{item.flagLabel}}</text></view><view class="agent-card-mid"><text>{{item.dateLabel}}</text><text class="agent-amt">¥{{item.amountLabel}}</text></view></view></block></view></block><view class="guest-empty" wx:elif="{{guestMode}}"><text class="guest-empty-t">{{i18n.orderNeedLogin}}</text><text class="guest-empty-d">{{i18n.orderNeedLoginD}}</text><button class="guest-empty-btn" bindtap="onGuestBind">{{i18n.goBind}}</button></view><block wx:else><view class="date-bar"><view class="date-hit" bindtap="onPickDatePreset" hover-class="date-hit-on" hover-stay-time="50" hover-start-time="0"><text class="date-label">{{dateLabel}}</text></view><view class="date-export" bindtap="onExportAsk" hover-class="date-hit-on" hover-stay-time="50" hover-start-time="0">导出</view><view class="date-sync {{listSyncing ? 'spin' : ''}}" bindtap="onListSync" hover-stay-time="50" hover-start-time="0"><image class="date-sync-ico" src="/assets/icons/tools/od-sync.svg" mode="aspectFit" /></view><tutorial-link scene="orders" /></view><view class="date-custom" wx:if="{{datePreset === 'custom'}}"><picker mode="date" value="{{customFrom}}" bindchange="onCustomFrom"><view class="date-pick">{{customFrom || i18n.pickDate}}</view></picker><text class="date-sep">—</text><picker mode="date" value="{{customTo}}" bindchange="onCustomTo"><view class="date-pick">{{customTo || i18n.pickDate}}</view></picker></view><view class="quick-row"><view class="quick-btn" bindtap="onOpenStats" data-tab="0" hover-class="quick-on" hover-stay-time="50" hover-start-time="0"><image class="quick-ico" src="/assets/icons/tab-dashboard.svg" mode="aspectFit" /><text class="quick-lbl">{{i18n.tabSales}}</text></view><view class="quick-btn" bindtap="onOpenStats" data-tab="1" hover-class="quick-on" hover-stay-time="50" hover-start-time="0"><image class="quick-ico" src="/assets/icons/tab-people.svg" mode="aspectFit" /><text class="quick-lbl">{{i18n.tabCustomers}}</text></view><view class="quick-btn" bindtap="onOpenStats" data-tab="2" hover-class="quick-on" hover-stay-time="50" hover-start-time="0"><image class="quick-ico" src="/assets/icons/tab-code.svg" mode="aspectFit" /><text class="quick-lbl">{{i18n.tabCodes}}</text></view><view class="quick-btn" bindtap="onOpenStats" data-tab="3" hover-class="quick-on" hover-stay-time="50" hover-start-time="0"><image class="quick-ico" src="/assets/icons/tools/reconcile.svg" mode="aspectFit" /><text class="quick-lbl">{{i18n.tabReconcile}}</text></view></view><view class="search-wrap"><view class="search-box"><text class="search-ico">🔍</text><input
+        class="search"
+        placeholder="{{searchPlaceholder}}"
+        placeholder-class="search-ph"
+        value="{{keyword}}"
+        bindinput="onKeyword"
+        bindconfirm="onSearch"
+        confirm-type="search"
+        hold-keyboard="{{true}}"
+      /><text class="search-clear" wx:if="{{keyword}}" catchtap="onClearKeyword" hover-stay-time="50" hover-start-time="0">✕</text></view></view><view class="filters"><view class="fchip" bindtap="onPickPaid" hover-stay-time="50" hover-start-time="0"><text>{{paidLabel}}</text><text class="fchev">▾</text></view><view class="fchip" bindtap="onPickFulfill" hover-stay-time="50" hover-start-time="0"><text>{{fulfillLabel}}</text><text class="fchev">▾</text></view><view class="fchip" bindtap="onPickDatePreset" hover-stay-time="50" hover-start-time="0"><text>{{datePresetLabel}}</text><text class="fchev">▾</text></view></view><view wx:if="{{loading && !groups.length}}" class="empty">{{i18n.loading}}</view><view wx:elif="{{!groups.length}}" class="empty">{{i18n.noOrders}}</view><block wx:else><view class="refresh-tip" wx:if="{{loading}}">{{i18n.loading}}</view><view class="day {{item.expanded ? 'open' : ''}}" wx:for="{{groups}}" wx:key="key"><view class="day-row" bindtap="onToggleDay" data-key="{{item.key}}" hover-stay-time="50" hover-start-time="0"><text class="day-date">{{item.dateLabel}}</text><text class="day-count">{{item.count}} {{i18n.orderUnit}}</text><text class="day-amt {{item.negative ? 'neg' : 'pos'}}">{{item.amountLabel}}</text><text class="day-arrow">{{item.expanded ? '▴' : '▾'}}</text></view><view class="day-body" wx:if="{{item.expanded}}"><view
+          class="order-row"
+          wx:for="{{item.orders}}"
+          wx:for-item="o"
+          wx:key="orderNo"
+          bindtap="onOpen"
+          data-orderno="{{o.orderNo}}"
+         hover-stay-time="50" hover-start-time="0"><view class="order-main"><view class="order-name-row"><text class="order-name">{{o.customerName}}</text><text class="ret-badge" wx:if="{{o.isReturn}}">{{i18n.returnShort}}</text></view><view class="order-sub-row"><text class="order-meta">{{o.metaLine}}</text><view class="chip-wrap"><text
+                  class="st-chip {{c.tone}}"
+                  wx:for="{{o.chips}}"
+                  wx:for-item="c"
+                  wx:key="label"
+                >{{c.label}}</text></view></view></view><text class="order-amt {{o.amountNeg ? 'neg' : ''}}">{{o.amountNeg ? '-' : ''}}¥ {{o.amountLabel}}</text></view></view></view></block><view class="load-more" wx:if="{{groups.length}}"><text wx:if="{{loadingMore}}">{{i18n.loading}}</text><text wx:elif="{{hasMore}}">{{i18n.loadMore}}</text><text wx:else>{{i18n.loadedAll}}</text></view><order-detail-sheet
+    id="odSheet"
+    bind:open="onSheetOpen"
+    bind:close="onSheetClose"
+    bind:deleted="onSheetDeleted"
+    bind:updated="onSheetUpdated"
+  /></block><view
+    class="fs-mask"
+    wx:if="{{filterVisible}}"
+    catchtouchmove="noop"
+    bindtap="onFilterClose"
+    hover-stay-time="50"
+    hover-start-time="0"
+  ><view class="fs-sheet" catchtap="noop"><text class="fs-title">{{filterTitle}}</text><view
+        class="fs-item"
+        wx:for="{{filterOptions}}"
+        wx:key="k"
+        data-k="{{item.k}}"
+        bindtap="onFilterPick"
+        hover-class="fs-item-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><text class="fs-lab">{{item.label}}</text><text class="fs-check" wx:if="{{item.k === filterCurrent}}">✓</text></view><view class="fs-safe"></view></view></view><view class="export-mask" wx:if="{{exportOn}}"><view class="export-bg" catchtouchmove="noop" bindtap="onExportClose"></view><view class="export-sheet" catchtap="noop"><text class="export-title">导出数据</text><text class="export-hint">{{exportHint}}</text><scroll-view scroll-y class="export-preview" enhanced show-scrollbar="{{true}}"><scroll-view scroll-x enable-flex class="export-x" style="height: {{exportXHeight}}rpx; flex-direction: row;" enhanced show-scrollbar="{{false}}"><view class="export-table"><view class="export-row head"><text class="export-cell" wx:for="{{exportHead}}" wx:key="index">{{item}}</text></view><view class="export-row {{index % 2 === 1 ? 'alt' : ''}}" wx:for="{{exportRows}}" wx:for-item="row" wx:key="index"><text class="export-cell" wx:for="{{row}}" wx:for-item="cell" wx:for-index="ci" wx:key="ci">{{cell}}</text></view></view></scroll-view></scroll-view><view class="export-btn" bindtap="onSendExport">发送到聊天</view><view class="export-btn ghost" bindtap="onOpenExport">打开文件</view></view></view></view>

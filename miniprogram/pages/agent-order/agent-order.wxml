@@ -1,0 +1,34 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view wx:if="{{loading}}" class="state">{{i18n.loadingCatalog}}</view><view wx:elif="{{error}}" class="state-wrap"><text class="state">{{error}}</text><view class="btn" bindtap="refresh">{{i18n.retry}}</view></view><view wx:elif="{{closed}}" class="state-wrap"><text class="title">{{i18n.shopNotOpenAgent}}</text><text class="hint">{{i18n.shopNotOpenHint}}</text></view><view wx:else class="wrap"><text class="shop">{{shopName}} · {{customerName}}</text><view class="search"><input placeholder="{{i18n.searchGoods}}" value="{{keyword}}" bindinput="onKeyword" /></view><view class="empty" wx:if="{{!shown.length}}">{{i18n.noMatchGoods}}</view><view
+      class="row"
+      wx:for="{{shown}}"
+      wx:key="code"
+      data-code="{{item.code}}"
+      bindtap="onTapProduct"
+    ><view
+        class="thumb-wrap"
+        wx:if="{{item.coverUrl}}"
+        data-code="{{item.code}}"
+        catchtap="onPreviewImage"
+      ><image class="thumb" src="{{item.coverUrl}}" mode="aspectFill" /><text class="thumb-n" wx:if="{{item.imageCount > 1}}">{{item.imageCount}}</text></view><view class="row-main"><text class="code">{{item.code}}</text><text class="name">{{item.name}}</text><text class="meta" wx:if="{{item.skuHint}}">{{item.skuHint}}</text></view><view class="price-col"><text class="base {{item.priceDiff ? 'diff' : ''}}">{{i18n.priceOriginal}} ¥{{item.basePriceLabel}}</text><text class="price">{{i18n.priceAgent}} ¥{{item.priceLabel}}</text></view></view><view class="cart" wx:if="{{cart.length}}"><view class="cline" wx:for="{{cart}}" wx:key="key"><view class="cline-t"><text>{{item.code}} {{item.spec}}</text><text class="muted">¥{{item.subLabel}}</text></view><view class="spin"><text class="spin-btn" data-key="{{item.key}}" data-dir="-1" catchtap="onCartQty">−</text><text class="spin-n">{{item.qty}}</text><text class="spin-btn" data-key="{{item.key}}" data-dir="1" catchtap="onCartQty">＋</text></view></view></view><view class="bar"><text>{{i18n.selectedCount}} {{cartCount}} {{i18n.unitPiece}} · ¥{{cartAmt}}</text><view class="btn mini {{!cartCount || submitting ? 'off' : ''}}" bindtap="onSubmit">
+        {{submitting ? i18n.submitting : i18n.submitToShop}}
+      </view></view></view><view class="mask" wx:if="{{pickOn}}" catchtap="onPickClose"><view class="sheet" catchtap="noop"><text class="title">{{pickName}}</text><scroll-view wx:if="{{pickImages.length}}" scroll-x class="pick-imgs"><image
+          wx:for="{{pickImages}}"
+          wx:key="*this"
+          class="pick-img"
+          src="{{item}}"
+          mode="aspectFill"
+          data-url="{{item}}"
+          catchtap="onPreviewPick"
+        /></scroll-view><text class="hint">{{i18n.skuColor}}</text><view class="chips"><text
+          class="chip {{pickColor === item ? 'on' : ''}}"
+          wx:for="{{pickColors}}"
+          wx:key="*this"
+          data-v="{{item}}"
+          catchtap="onPickColor"
+        >{{item}}</text></view><text class="hint">{{i18n.skuSize}}</text><view class="chips"><text
+          class="chip {{pickSize === item ? 'on' : ''}}"
+          wx:for="{{pickSizes}}"
+          wx:key="*this"
+          data-v="{{item}}"
+          catchtap="onPickSize"
+        >{{item}}</text></view><view class="spin big"><text class="spin-btn" data-dir="-1" catchtap="onPickQty">−</text><text class="spin-n">{{pickQty}}</text><text class="spin-btn" data-dir="1" catchtap="onPickQty">＋</text></view><view class="btn" bindtap="onPickAdd">{{i18n.addToCart}}</view></view></view></view>

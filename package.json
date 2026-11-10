@@ -1,0 +1,24 @@
+{
+  "name": "tukorder-miniprogram",
+  "version": "2.0.17",
+  "description": "图可开单打印微信小程序客户端",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "transpile": "node scripts/transpile-mp.js"
+  },
+  "keywords": [
+    "miniprogram",
+    "weixin",
+    "tukorder"
+  ],
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "miniprogram-api-typings": "^4.0.0",
+    "miniprogram-ci": "^2.1.31",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "gbk.js": "^0.3.0"
+  }
+}

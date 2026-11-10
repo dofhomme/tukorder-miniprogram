@@ -1,0 +1,24 @@
+<view class="page {{rtl ? 'rtl' : ''}}">
+  <view class="card" wx:if="{{linkName}}">
+    <text class="title">{{linked ? '已连接: ' : '未连接，上次: '}}</text>
+    <view class="host" data-id="{{linkId}}" bindtap="onPick" hover-class="tap-hover" hover-stay-time="50" hover-start-time="0">
+      <view class="host-main">
+        <text class="host-ip">{{linkName}}</text>
+        <text class="host-sub">电脑端设置的云打印机名称</text>
+      </view>
+      <text class="host-go">断开</text>
+    </view>
+  </view>
+  <view class="card">
+    <text class="title">{{loading ? '正在查看团队云打印…' : '云打印机'}}</text>
+    <text class="sub">连接后，云打印任务发到这台电脑</text>
+    <view wx:if="{{!loading && hint}}" class="empty">{{hint}}</view>
+    <view class="host" wx:for="{{hosts}}" wx:key="clientId" data-id="{{item.clientId}}" bindtap="onPick" hover-class="tap-hover" hover-stay-time="50" hover-start-time="0">
+      <view class="host-main">
+        <text class="host-ip">{{item.name}}</text>
+        <text class="host-sub" wx:if="{{item.printerName && item.printerName !== item.name}}">{{item.printerName}}</text>
+      </view>
+      <text class="host-go">连接</text>
+    </view>
+  </view>
+</view>

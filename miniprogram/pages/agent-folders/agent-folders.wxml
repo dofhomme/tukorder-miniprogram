@@ -1,0 +1,14 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><view wx:if="{{loading}}" class="state">{{i18n.loading}}</view><block wx:elif="{{folder}}"><view class="head"><text class="h">{{folder.title}}</text><text class="sub">{{items.length}} {{i18n.unitPiece}}</text></view><view class="empty" wx:if="{{!items.length}}">{{i18n.folderEmpty}}</view><view class="grid" wx:else><view class="card" wx:for="{{items}}" wx:key="code"><image
+          class="cover"
+          src="{{item.coverUrl}}"
+          mode="aspectFill"
+          wx:if="{{item.coverUrl}}"
+          data-url="{{item.coverUrl}}"
+          bindtap="onPreview"
+        /><view class="cover-ph" wx:else>{{item.code}}</view><text class="code">{{item.code}}</text><text class="rm" data-code="{{item.code}}" catchtap="onRemoveItem">{{i18n.removeFromFolder}}</text></view></view><view class="bar"><view class="btn ghost" bindtap="onShareFolder">{{i18n.shareFolder}}</view><view class="btn" bindtap="onFolderToCart">{{folder.kind === 'wish' ? i18n.wishToPending : i18n.folderToCart}}</view></view><view class="danger" wx:if="{{folder.kind !== 'wish'}}" bindtap="onDeleteFolder">{{i18n.deleteFolder}}</view></block><block wx:else><view class="hint">{{i18n.lookFolderHint}}</view><view class="empty" wx:if="{{!folders.length}}">{{i18n.noFolders}}</view><view class="list"><view
+        class="row {{item.kind === 'wish' ? 'wish' : ''}}"
+        wx:for="{{folders}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="onOpenFolder"
+      ><view class="row-t"><text class="row-h">{{item.kind === 'wish' ? i18n.wishList : item.title}}</text><text class="row-n">{{item.itemCount || 0}}</text></view><text class="chev">›</text></view></view><view class="bar"><view class="btn" bindtap="onStartCreate">{{i18n.newFolder}}</view></view></block><view class="mask" wx:if="{{creating}}" catchtap="onCancelCreate"><view class="sheet" catchtap="noop"><text class="title">{{i18n.newFolder}}</text><input class="ipt" placeholder="{{i18n.folderTitle}}" value="{{newTitle}}" bindinput="onTitleInput" maxlength="32" /><view class="btn" bindtap="onCreate">{{i18n.confirm}}</view></view></view></view>

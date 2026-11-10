@@ -1,0 +1,19 @@
+<view class="hc-mask" wx:if="{{show}}" catchtouchmove="noop">
+  <view class="hc-card">
+    <text class="hc-prompt">{{prompt}}</text>
+    <view class="hc-stage" catchtap="onTap">
+      <image class="hc-img" src="{{image}}" mode="widthFix" bindload="onImgLoad" />
+      <view
+        class="hc-dot"
+        wx:for="{{dots}}"
+        wx:key="index"
+        style="left:{{item.left}};top:{{item.top}};"
+      >{{index + 1}}</view>
+    </view>
+    <text class="hc-err">{{err}}</text>
+    <view class="hc-actions">
+      <view class="hc-btn" catchtap="onRetry">换一张</view>
+      <view class="hc-btn" catchtap="onCancel">取消</view>
+    </view>
+  </view>
+</view>

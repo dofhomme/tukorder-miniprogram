@@ -1,0 +1,97 @@
+<view class="page {{rtl ? 'rtl' : ''}}"><scroll-view class="body" scroll-y enhanced show-scrollbar="{{false}}"><view class="banner" wx:if="{{isHandled}}"><text class="banner-ico">✓</text><text class="banner-txt">{{i18n.lockedProcessed}}</text></view><view class="form"><view
+        class="field outlined {{isHandled ? '' : 'tap'}}"
+        bindtap="onOpenTrackingScan"
+        hover-class="{{isHandled ? '' : 'tap-hover'}}"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><image class="prefix" src="/assets/icons/rp-barcode.svg" mode="aspectFit" /><view class="field-body"><text class="flabel">{{i18n.expressNo}} <text class="req">*</text></text><text class="finput {{trackingNo ? '' : 'ph'}}">{{trackingNo || i18n.scanTrackingHint}}</text></view></view><view class="field outlined"><image class="prefix" src="/assets/icons/rp-truck.svg" mode="aspectFit" /><view class="field-body"><text class="flabel">{{i18n.expressType}}</text><picker
+            mode="selector"
+            range="{{carriers}}"
+            value="{{carrierIndex}}"
+            disabled="{{isHandled}}"
+            bindchange="onCarrierPick"
+          ><view class="finput picker {{carrier ? '' : 'ph'}}">
+              {{carrier || i18n.pickCarrier}}
+            </view></picker><input
+            class="finput custom"
+            value="{{carrier}}"
+            placeholder="{{i18n.customInput}}"
+            placeholder-class="ph"
+            disabled="{{isHandled}}"
+            bindinput="onCarrier"
+          /></view></view><view class="field outlined"><image class="prefix" src="/assets/icons/rp-box.svg" mode="aspectFit" /><view class="field-body"><text class="flabel">{{i18n.parcelCount}}</text><input
+            class="finput"
+            type="number"
+            value="{{packageCount}}"
+            disabled="{{isHandled}}"
+            bindinput="onCount"
+          /></view></view><view class="items-card"><view class="items-head"><image class="prefix sm" src="/assets/icons/rp-list.svg" mode="aspectFit" /><text class="items-title">{{i18n.codeQtyDetail}}</text><view
+            class="add-line"
+            wx:if="{{!isHandled}}"
+            bindtap="onAddItem"
+            hover-class="tap-hover"
+            hover-stay-time="50"
+            hover-start-time="0"
+          >{{i18n.addLine}}</view></view><view class="col-head" wx:if="{{!isHandled}}"><text class="ch code">{{i18n.colCode}}</text><text class="ch name">{{i18n.productNameOpt}}</text><text class="ch qty">{{i18n.pieceCount}}</text><view class="ch del"></view></view><block wx:if="{{!isHandled}}"><view class="item-row" wx:for="{{items}}" wx:key="key"><input
+              class="cell code"
+              value="{{item.code}}"
+              placeholder="{{i18n.colCode}}"
+              data-i="{{index}}"
+              data-f="code"
+              bindinput="onItemField"
+            /><input
+              class="cell name"
+              value="{{item.name}}"
+              placeholder="{{i18n.colName}}"
+              data-i="{{index}}"
+              data-f="name"
+              bindinput="onItemField"
+            /><input
+              class="cell qty"
+              type="number"
+              value="{{item.qty}}"
+              placeholder="{{i18n.pieceCount}}"
+              data-i="{{index}}"
+              data-f="qty"
+              bindinput="onItemField"
+            /><view
+              class="item-del"
+              data-i="{{index}}"
+              bindtap="onRemoveItem"
+              hover-class="tap-hover"
+              hover-stay-time="50"
+              hover-start-time="0"
+            ><image class="del-img" src="/assets/icons/rp-remove.svg" mode="aspectFit" /></view></view></block><block wx:else><view class="item-line" wx:for="{{items}}" wx:key="key"><text>{{item.code}}</text><text class="dim" wx:if="{{item.name}}">{{item.name}}</text><text class="qty-t">×{{item.qty}}</text></view></block></view><view class="field outlined block"><view class="field-body full"><text class="flabel">{{i18n.remark}}</text><textarea
+            class="farea"
+            value="{{remark}}"
+            placeholder="{{i18n.remarkReturnPh}}"
+            placeholder-class="ph"
+            disabled="{{isHandled}}"
+            maxlength="200"
+            auto-height
+            bindinput="onRemark"
+          /></view></view><view class="meta" wx:if="{{metaTime}}"><text class="meta-line">{{i18n.registeredAt}}：{{metaTime}}</text><text class="meta-line" wx:if="{{metaWho}}">{{i18n.registeredBy}}：{{metaWho}}</text></view></view><view class="body-pad"></view></scroll-view><view class="footer"><block wx:if="{{isHandled}}"><view
+        class="fbtn outline"
+        bindtap="onBack"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.back}}</view><view
+        class="fbtn outline danger"
+        bindtap="onDelete"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      >{{i18n.delete}}</view></block><block wx:else><view
+        class="fbtn outline save"
+        bindtap="onSave"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><image class="fico" src="/assets/icons/rp-save.svg" mode="aspectFit" /><text>{{saving ? i18n.saving : i18n.save}}</text></view><view
+        class="fbtn handled"
+        bindtap="onSaveHandled"
+        hover-class="tap-hover"
+        hover-stay-time="50"
+        hover-start-time="0"
+      ><image class="fico" src="/assets/icons/rp-check.svg" mode="aspectFit" /><text>{{i18n.markProcessed}}</text></view></block></view></view>
